@@ -9,13 +9,13 @@ import { cn } from "@/lib/utils";
 const GLOBE_CONFIG = {
   width: 800,
   height: 800,
-  onRender: () => { },
+  onRender: () => {},
   devicePixelRatio: 2,
   phi: 0,
   theta: 0.3,
   dark: 0,
   diffuse: 0.4,
-  mapSamples: 40000,
+  mapSamples: 16000,
   mapBrightness: 1.2,
   baseColor: [1, 1, 1],
   markerColor: [251 / 255, 100 / 255, 21 / 255],
@@ -31,8 +31,6 @@ const GLOBE_CONFIG = {
     { location: [40.7128, -74.006], size: 0.1 },
     { location: [34.6937, 135.5022], size: 0.05 },
     { location: [41.0082, 28.9784], size: 0.06 },
-    { location: [42.534, -5.560328], size: 0.06 },
-
   ],
 };
 
