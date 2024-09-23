@@ -37,22 +37,17 @@ export default function Home() {
 
         </div>
         <div className="absolute left-1/2 transform -translate-x-1/2">
-          <Image src="/kuriboh.png" alt="logo" width={60} height={60} />
+          <Image src="/logo.svg" alt="logo" width={60} height={60} />
         </div>
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-4">
-          <p>EY</p>
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-4 align-middle ">
 
-          <ShimmerButton className="shadow-md h-max" >
-            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-black dark:text-white lg:text-lg">
-              Log in
-            </span>
-          </ShimmerButton>
+          <button className="shadow-[inset_0_0_0_2px_#616467] text-black text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration- h-10 w-40">
+            Register
+          </button>
 
-          <ShimmerButton className="shadow-md h-max" >
-            <span className="whitespace-pre-wrap text-center text-sm font-medium leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 lg:text-lg">
-              Register
-            </span>
-          </ShimmerButton>
+          <button className="shadow-[inset_0_0_0_2px_#616467] text-white text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-black hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200 h-10 w-40">
+            Log in
+          </button>
 
         </div>
 
@@ -63,17 +58,18 @@ export default function Home() {
 
 
 
-      <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
+      <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  ">
+        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium font-bold tracking-tighter text-black dark:text-white">
+          Support the projects<br /> you love<br />
+          and bring them to life!
+        </p>
+        <DotPattern
+          className={cn(
+            "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+          )}
+        />
+      </div>
 
-
-
-      <DotPattern
-        className={cn(
-          "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-        )}
-
-        width={25}
-      />
 
     </main >
 
