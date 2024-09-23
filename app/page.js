@@ -26,6 +26,8 @@ import ShimmerButton from "@/components/magicui/shimmer-button";
 
 
 
+
+
 export default function Home() {
   return (
     <main >
@@ -40,7 +42,6 @@ export default function Home() {
           <Image src="/logo.svg" alt="logo" width={60} height={60} />
         </div>
         <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center space-x-4 align-middle ">
-
           <button className="shadow-[inset_0_0_0_2px_#616467] text-black text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration- h-10 w-40">
             Register
           </button>
@@ -48,26 +49,30 @@ export default function Home() {
           <button className="shadow-[inset_0_0_0_2px_#616467] text-white text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-black hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200 h-10 w-40">
             Log in
           </button>
-
         </div>
-
-
-
       </div>
 
 
 
 
-      <div className="relative flex h-[500px] w-full flex-col items-center justify-center overflow-hidden rounded-lg  ">
-        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-medium font-bold tracking-tighter text-black dark:text-white">
-          Support the projects<br /> you love<br />
-          and bring them to life!
+      <div className="relative flex h-[500px] flex-col items-center justify-center overflow-hidden  bg-transparent ">
+        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tighter text-black dark:text-white bg-white">
+          <span className="bg-clip-text bg-gradient-to-br from-black to-white dark:from-white dark:to-black">
+            Support the projects<br /> you love<br />
+            and bring them to life!
+          </span>
         </p>
-        <DotPattern
-          className={cn(
-            "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
-          )}
-        />
+
+        <div className="absolute inset-0">
+          <DotPattern
+            width={40}
+            height={40}
+            cr={2}
+            className={cn(
+              "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
+            )}
+          />
+        </div>
       </div>
 
 
