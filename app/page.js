@@ -1,25 +1,10 @@
 "use client";
 import Image from "next/image";
-import Globe from "@/components/magicui/globe";
 import DotPattern from "@/components/magicui/dot-pattern";
 import { cn } from "@/lib/utils";
 import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
-import NavBarAcernity from "@/components/ui/navbarAcernity"
-import { NavigationMenuDemo } from "@/components/navigation-menu";
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle
-} from "@/components/ui/navigation-menu"
-import Link from "next/link"
-
-import { MenubarDemo } from "@/components/menubar-demo";
-import ShimmerButton from "@/components/magicui/shimmer-button";
+import SparklesText from "@/components/magicui/sparkles-text";
+import { BentoDemo } from "@/components/BentoGridDemo";
 
 
 
@@ -32,7 +17,7 @@ export default function Home() {
   return (
     <main >
 
-      <div className="absolute inset-0 z-10 h-16 border-b-[0.5px] border-slate-700 bg-white ">
+      <div className="absolute inset-0 z-10 h-16 border-b-[0.5px] border-slate-300 bg-white ">
         <div className="absolute left-4 transform align-middle">
 
 
@@ -55,24 +40,34 @@ export default function Home() {
 
 
 
-      <div className="relative flex h-[500px] flex-col items-center justify-center overflow-hidden  bg-transparent ">
-        <p className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tighter text-black dark:text-white bg-white">
-          <span className="bg-clip-text bg-gradient-to-br from-black to-white dark:from-white dark:to-black">
-            Support the projects<br /> you love<br />
-            and bring them to life!
-          </span>
-        </p>
+      <div className="relative flex h-[500px] flex-col items-center justify-center overflow-hidden  ">
+        <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tighter text-black dark:text-white bg-white rounded-full px-5 py-5    from-white">
+          <span className="text-lg bg-black ">
 
-        <div className="absolute inset-0">
-          <DotPattern
-            width={40}
-            height={40}
-            cr={2}
-            className={cn(
-              "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)]",
-            )}
-          />
+
+            <SparklesText
+              text={`Bring your favourite\nprojects to life`}
+              colors={{ first: '#2a44f8', second: '#ffff00' }}
+              sparklesCount={8}
+
+            />
+          </span>
         </div>
+      </div>
+
+      <div className="absolute inset-0">
+        <DotPattern
+          width={30}
+          height={30}
+          cr={2}
+          className={cn(
+            "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)] -z-10 -top-[13  0px]",
+          )}
+        />
+      </div>
+
+      <div className="mx-20 mb-10 bg-white">
+        <BentoDemo />
       </div>
 
 
