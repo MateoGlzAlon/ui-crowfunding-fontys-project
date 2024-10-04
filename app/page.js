@@ -1,11 +1,9 @@
 "use client";
-import Image from "next/image";
 import React, { useState } from "react";
-import { BentoDemo } from "@/components/BentoGridDemo";
 import HighlightedProjectsList from "@/components/HighlightedProjectsList";
-
 import Navbar from "@/components/Navbar";
 import DotPatternAndTitle from "@/components/DotPattern-title";
+import NewProjectsList from "@/components/NewProjectsList";
 
 
 export default function Home() {
@@ -17,6 +15,13 @@ export default function Home() {
       <DotPatternAndTitle />
 
       <HighlightedProjectsList />
+
+      <NewProjectsList />
+
+
+
+
+
 
 
 

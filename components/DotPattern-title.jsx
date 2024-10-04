@@ -21,11 +21,11 @@ function DotPatternAndTitle() {
 
             <div className="absolute inset-0 ">
                 <DotPattern
-                    width={30}
-                    height={30}
+                    width={40}
+                    height={40}
                     cr={2}
                     className={cn(
-                        "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)] -z-10 -top-[13  0px]",
+                        "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)] -z-10 -top-[290px]",
                     )}
                 />
             </div>

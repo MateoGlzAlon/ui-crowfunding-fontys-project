@@ -3,7 +3,7 @@ import ProjectsList from './ProjectsList';
 
 
 // Sample usage of the component
-const HighlightedProjectsList = () => {
+const NewProjectsList = () => {
     const projects = [
         {
             id: 1,
@@ -43,9 +43,9 @@ const HighlightedProjectsList = () => {
     ];
 
     return (
-        <ProjectsList projects={projects} title="Highlighted Fundraising Projects" />
+        <ProjectsList projects={projects} title="New Projects" />
     );
 };
 
-export default HighlightedProjectsList;
+export default NewProjectsList;
 
