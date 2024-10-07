@@ -1,32 +1,29 @@
-import Image from "next/image";
+import Image from "next/image"
+import Link from "next/link"
 
+import { DATA } from "@/app/data"
 
-function Navbar() {
+import { Button } from "@/components/ui/button"
+
+export default function Navbar() {
     return (
-        <div className="inset-0 z-[9999] h-16 border-b-[0.5px] border-slate-300 bg-white fixed">
-            <div className="mx-20">
-                <div className="absolute transform align-middle left-8">
-
-
-
+        <nav className="fixed inset-x-0 top-0 z-50 h-16 border-b border-slate-500 bg-white">
+            <div className="container flex h-full items-center justify-between">
+                <div className="flex items-center space-x-4">
+                    <Link href="/" className="flex items-center space-x-2">
+                        <Image src={DATA.logo} alt="Logo" width={40} height={40} />
+                        <span className="text-xl font-bold">{DATA.projectName}</span>
+                    </Link>
                 </div>
-                <div className="absolute left-1/2 transform -translate-x-1/2">
-                    <a href="/">
-                        <Image src="/logo.svg" alt="logo" width={60} height={60} />
-                    </a>
-                </div>
-                <div className="absolute right-8 top-1/2 transform -translate-y-1/2 flex items-center space-x-4 align-middle ">
-                    <button className="shadow-[inset_0_0_0_2px_#616467] text-black text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-transparent hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration- h-10 w-40">
+                <div className="flex items-center space-x-4">
+                    <Button variant="outline" className="font-semibold w-32 border-black">
                         Register
-                    </button>
-
-                    <button className="shadow-[inset_0_0_0_2px_#616467] text-white text-sm px-6 py-2 rounded-full tracking-widest uppercase font-bold bg-black hover:bg-[#616467] hover:text-white dark:text-neutral-200 transition duration-200 h-10 w-40">
+                    </Button>
+                    <Button variant="default" className="font-semibold w-32">
                         Log in
-                    </button>
+                    </Button>
                 </div>
             </div>
-        </div>
+        </nav>
     )
 }
-
-export default Navbar
