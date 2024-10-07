@@ -9,7 +9,7 @@ const ProjectsList = ({ projects, title }) => {
                         <a
                             key={project.id}
                             href={`/projects/${project.id}`}
-                            className="block bg-white p-3 m-0 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105"
+                            className="block bg-white p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105"
                         >
                             <img
                                 src={project.image}

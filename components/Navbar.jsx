@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function Navbar() {
     return (
-        <div className="absolute inset-0 z-10 h-16 border-b-[0.5px] border-slate-300 bg-white">
+        <div className="inset-0 z-[9999] h-16 border-b-[0.5px] border-slate-300 bg-white fixed">
             <div className="mx-20">
                 <div className="absolute transform align-middle left-8">
 
