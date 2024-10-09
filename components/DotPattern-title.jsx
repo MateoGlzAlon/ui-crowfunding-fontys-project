@@ -10,7 +10,7 @@ function DotPatternAndTitle() {
     return (
         <div>
             <div className="relative flex h-[500px] flex-col items-center justify-center overflow-hidden  ">
-                <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tighter text-black dark:text-white bg-white rounded-full px-8 py-9   from-white">
+                <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-tighter text-black dark:text-white bg-white rounded-full px-8 py-9 from-white">
                     <span className="text-lg bg-black  ">
                         <SparklesText
                             text={DATA.heroTitle}

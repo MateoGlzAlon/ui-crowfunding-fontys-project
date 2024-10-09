@@ -1,49 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ProjectsList from './ProjectsList';
+import axios from 'axios';
+import { DATA } from '@/app/data';
 
 
 // Sample usage of the component
 const HighlightedProjectsList = () => {
-    const projects = [
-        {
-            id: 1,
-            name: 'Community Garden Project',
-            fundingGoal: 10000,
-            fundsRaised: 7500,
-            image: 'garden-1.jpg'
-        },
-        {
-            id: 2,
-            name: 'School Library Fundraiser',
-            fundingGoal: 5000,
-            fundsRaised: 3500,
-            image: 'library-2.jpg'
-        },
-        {
-            id: 3,
-            name: 'Clean Water Initiative',
-            fundingGoal: 20000,
-            fundsRaised: 30000,
-            image: 'water-3.jpg'
-        },
-        {
-            id: 4,
-            name: 'Animal Shelter Renovation',
-            fundingGoal: 15000,
-            fundsRaised: 12000,
-            image: 'animal-4.jpeg'
-        },
-        {
-            id: 5,
-            name: 'Renewable Energy Campaign',
-            fundingGoal: 25000,
-            fundsRaised: 18000,
-            image: 'energy-5.jpeg'
-        }
-    ];
+
+    const [projects2, setProjects2] = useState([]);
+
+    useEffect(() => {
+        getHighlightedProjects();
+    }, []);
+
+
+
+    function getHighlightedProjects() {
+        axios
+            .get(`${DATA.origin}/projects/highlighted`)
+            .then((res) => {
+                setProjects2(res.data); // Update state with fetched data
+            })
+            .catch((error) => {
+                console.error("Error fetching projects:", error);
+            });
+    }
+
+
+
+    console.log(projects2);
 
     return (
-        <ProjectsList projects={projects} title="Highlighted Fundraising Projects" />
+        <ProjectsList projects={projects2} title="Highlighted Fundraising Projects" />
     );
 };
 
