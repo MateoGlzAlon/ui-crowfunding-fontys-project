@@ -1,6 +1,7 @@
 "use client";
 import CreateDemoprojects from "@/components/createDemoProjects";
 import CreateDemoUsers from "@/components/createDemoUsers";
+import Base64Transformer from "@/components/Base64Transformer"
 
 const { default: PageFrame } = require("@/components/PageFrame");
 
@@ -14,8 +15,9 @@ function Demo() {
                 <CreateDemoUsers />
 
                 <CreateDemoprojects />
-            </div>
 
+                <Base64Transformer />
+            </div>
         </PageFrame>
     );
 }

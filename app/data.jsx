@@ -4,5 +4,5 @@ export const DATA = {
     logoBlack: "/logoBlack.svg",
     logoWhite: "/logoWhite.svg",
     heroTitle: "Bring your favourite\nprojects to life",
-    origin: "http://localhost:8080"
+    origin: "http://localhost:8080",
 }   

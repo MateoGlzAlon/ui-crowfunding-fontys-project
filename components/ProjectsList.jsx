@@ -1,4 +1,28 @@
-const ProjectsList = ({ projects, title }) => {
+import { format } from 'date-fns';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import { DATA } from '@/app/data';
+
+const ProjectsList = ({ title, endpoint }) => {
+
+    const [projects, setProjects] = useState([]);
+
+    useEffect(() => {
+        getProjects();
+    });
+
+    function getProjects() {
+        axios.get(`${DATA.origin}/projects/${endpoint}`)
+            .then((res) => {
+                setProjects(res.data); // Update state with fetched data
+            })
+            .catch((error) => {
+                console.error(`Error fetching projects in (${endpoint}):`, error);
+            });
+    }
+
+
+
     return (
         <div className="mb-10 bg-white ">
             <div className="container ">
@@ -9,14 +33,13 @@ const ProjectsList = ({ projects, title }) => {
                         <a
                             key={project.id}
                             href={`/projects/${project.id}`}
-                            className="block bg-white p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105"
+                            className="block bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100 rounded-lg"
                         >
                             <img
-                                src={project.images[0]}
+                                src={project.images[0].startsWith('data:') ? project.images[0] : `${project.images[0]}`}
                                 alt={project.name}
-                                className="w-full h-48 object-cover rounded-lg"
-                            />
-                            <p>{project.dateCreated} hola</p>
+                                className="w-full h-48 object-cover rounded-lg  overflow-hidden" /> {/* border-slate-500 border-[0.5px] */}
+                            <p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>
                             <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
                                 <div
                                     className="bg-green-500 h-2.5 rounded-full"
