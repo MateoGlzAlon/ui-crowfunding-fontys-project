@@ -20,8 +20,12 @@ export default function Navbar() {
                         <span className="text-xl font-bold">{DATA.projectName}</span>
                     </Link>
 
-                    <button type="button" onClick={() => router.push('/demos')} className="border-2 border-black rounded-lg p-2 my-5">
+                    <button type="button" onClick={() => router.push('/demos')} className="border-2 border-black rounded-lg p-2 m-5">
                         DEMOS
+                    </button>
+
+                    <button type="button" onClick={() => router.push('/demos')} className="border-2 border-black rounded-lg p-2 m-5">
+                        INDIVIDUAL PAGE
                     </button>
                 </div>
                 <div className="flex items-center space-x-4">

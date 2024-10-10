@@ -21,7 +21,6 @@ function CreateDemoProjects() {
             });
     }
 
-
     // Fetch specific project by ID
     function getSpecificProject() {
         if (projectId) {
