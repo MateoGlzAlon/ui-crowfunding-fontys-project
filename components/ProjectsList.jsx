@@ -29,7 +29,7 @@ const ProjectsList = ({ title, endpoint }) => {
     return (
         <div className="mb-10 bg-white">
             <div className="container">
-                <h2 className="text-3xl font-bold mb-6 mt-10">{title}</h2>
+                <h2 className="text-3xl font-bold mb-6 ">{title}</h2>
 
                 <div className="flex flex-wrap justify-start">
                     {projects.map((project) => (

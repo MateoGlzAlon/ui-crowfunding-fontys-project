@@ -12,7 +12,7 @@ export default function Navbar() {
     const router = useRouter()
 
     return (
-        <nav className="fixed inset-x-0 top-0 z-50 h-16 border-b border-slate-500 bg-white">
+        <nav className="fixed inset-x-0 z-50 h-16 border-b border-slate-500 bg-white">
             <div className="container flex h-full items-center justify-between">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="flex items-center space-x-2">
@@ -24,8 +24,8 @@ export default function Navbar() {
                         DEMOS
                     </button>
 
-                    <button type="button" onClick={() => router.push('/demos')} className="border-2 border-black rounded-lg p-2 m-5">
-                        INDIVIDUAL PAGE
+                    <button type="button" onClick={() => router.push('https://docs-raisehub.vercel.app/intro')} className="border-2 border-black rounded-lg p-2 m-5">
+                        DOCS
                     </button>
                 </div>
                 <div className="flex items-center space-x-4">

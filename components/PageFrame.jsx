@@ -7,7 +7,7 @@ function PageFrame({ children }) {
         <main>
             <Navbar />
 
-            <div className="mx-6 t">
+            <div className="mx-6 pt-16">
                 {children}
             </div>
         </main>

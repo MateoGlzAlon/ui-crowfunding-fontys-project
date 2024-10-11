@@ -1,4 +1,4 @@
-import React, { useState } from "react"; // Import React and useState first
+import React, { useState } from "react";
 import axios from 'axios';
 import { DATA } from "@/app/data";
 
@@ -7,7 +7,6 @@ function CreateDemoProjects() {
     const [projectId, setProjectId] = useState(''); // State to hold the project ID from input
     const [error, setError] = useState(null); // State to hold error messages
 
-    // Fetch all projects
     function getAllProjects() {
         setError(null); // Reset error state before fetching
         axios
