@@ -6,33 +6,29 @@ import { DATA } from "@/app/data";
 
 
 function DotPatternAndTitle() {
-
     return (
-        <div>
-            <div className="relative flex h-[500px] flex-col items-center justify-center overflow-hidden  ">
-                <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-normal text-black dark:text-white bg-white rounded-full px-12 py-10 from-white">
-                    <span className="text-lg bg-black  ">
-                        <SparklesText
-                            text={DATA.heroTitle}
-                            colors={{ first: '#2a44f8', second: '#ffff00' }}
-                            sparklesCount={8}
-                        />
-                    </span>
+        <div className="relative py-2">
+            <div className="relative flex h-[500px] flex-col items-center justify-center overflow-visible">
+                <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-normal text-black dark:text-white bg-white rounded-full px-12 py-10">
+                    <SparklesText
+                        text={DATA.heroTitle}
+                        colors={{ first: '#2a44f8', second: '#ffff00' }}
+                        sparklesCount={8}
+                    />
                 </div>
-            </div>
 
-            <div className="">
+                {/* Ensure DotPattern is contained within the height of its parent */}
                 <DotPattern
                     width={40}
                     height={40}
                     cr={2}
                     className={cn(
-                        "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)] -z-10 -top-[200px]",
+                        "[mask-image:radial-gradient(700px_circle_at_center,white,transparent)] absolute inset-0 z-0"
                     )}
                 />
             </div>
         </div>
-    )
+    );
 }
 
-export default DotPatternAndTitle
+export default DotPatternAndTitle;
