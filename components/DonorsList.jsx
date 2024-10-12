@@ -73,7 +73,7 @@ export function DonorsList({ className, projectId }) {
     return (
         <div
             className={cn(
-                "relative flex h-[500px] w-full flex-col p-6 overflow-hidden rounded-lg border bg-background",
+                "relative flex h-[500px] w-full flex-col p-6 overflow-hidden rounded-lg bg-background",
                 className
             )}
         >
