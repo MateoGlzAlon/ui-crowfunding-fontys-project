@@ -11,7 +11,7 @@ import { DATA } from "@/app/data"
 
 
 
-const Notification = ({ backerEmail, amountFunded, icon, color, paymentDate, paymentId }) => {
+const Notification = ({ backerEmail, amountFunded, paymentDate, paymentId }) => {
     return (
         <figure
             className={cn(
@@ -27,11 +27,8 @@ const Notification = ({ backerEmail, amountFunded, icon, color, paymentDate, pay
             <div className="flex flex-row items-center gap-3">
                 <div
                     className="flex size-10 items-center justify-center rounded-2xl"
-                    style={{
-                        backgroundColor: color
-                    }}
                 >
-                    <img src="/logoColor.svg" alt="icon" />
+                    <img src="https://placehold.co/600x400?text=Icon" alt="icon" className="object-cover" />
                 </div>
                 <div className="flex flex-col overflow-hidden">
                     <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium dark:text-white ">

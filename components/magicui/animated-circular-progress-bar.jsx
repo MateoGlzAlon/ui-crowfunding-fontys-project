@@ -10,7 +10,7 @@ export default function AnimatedCircularProgressBar({
 }) {
   const circumference = 2 * Math.PI * 45;
   const percentPx = circumference / 100;
-  const currentPercent = ((value - min) / (max - min)) * 100;
+  const currentPercent = Number(((value - min) / (max - min)) * 100).toFixed(2);
 
   return (
     (<div
@@ -21,7 +21,7 @@ export default function AnimatedCircularProgressBar({
         "--percent-to-px": `${percentPx}px`,
         "--gap-percent": "5",
         "--offset-factor": "0",
-        "--transition-length": "1s",
+        "--transition-length": "3s",
         "--transition-step": "200ms",
         "--delay": "0s",
         "--percent-to-deg": "3.6deg",
