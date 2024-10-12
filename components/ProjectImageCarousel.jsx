@@ -28,7 +28,7 @@ function ProjectImageCarousel({ projectImages }) {
             {projectImages.map((image, id) => (
                 <div
                     key={id}
-                    className="flex items-center justify-center h-[600px] w-full overflow-hidden"
+                    className="flex items-center justify-center h-[500px] w-full overflow-hidden"
                 >
                     <img
                         src={image}

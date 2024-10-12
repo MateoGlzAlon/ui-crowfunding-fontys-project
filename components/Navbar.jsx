@@ -29,10 +29,10 @@ export default function Navbar() {
                     </button>
                 </div>
                 <div className="flex items-center space-x-4">
-                    <Button variant="outline" className="font-semibold w-32 border-black">
+                    <Button variant="outline" onClick={() => router.push('/register')} className="font-semibold w-32 border-black">
                         Register
                     </Button>
-                    <Button variant="default" className="font-semibold w-32">
+                    <Button variant="default" onClick={() => router.push('/login')} className="font-semibold w-32">
                         Log in
                     </Button>
                 </div>

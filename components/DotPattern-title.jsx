@@ -8,7 +8,7 @@ import { DATA } from "@/app/data";
 function DotPatternAndTitle() {
     return (
         <div className="relative py-2">
-            <div className="relative flex h-[500px] flex-col items-center justify-center overflow-visible">
+            <div className="relative flex h-[400px] flex-col items-center justify-center overflow-visible">
                 <div className="z-10 whitespace-pre-wrap text-center text-5xl font-bold tracking-normal text-black dark:text-white bg-white rounded-full px-12 py-10">
                     <SparklesText
                         text={DATA.heroTitle}

@@ -49,13 +49,12 @@ function CreateDemoProjects() {
                 "location": "Downtown Area",
                 "type": "Environment",
                 "dateCreated": "2024-09-15T10:00:00",
-                "fundingGoal": 10000,
-                "fundsRaised": 7500,
+                "fundingGoal": 12000,
                 "userEmail": "matthewstone@example.com",
                 "images": [
                     "https://placehold.co/600x400?text=p1.1",
                     "https://placehold.co/600x400?text=p1.2",
-                    "https://placehold.co/600x400?text=p1.3"
+                    "/garden-1.jpg"
                 ],
             },
             {
@@ -66,7 +65,6 @@ function CreateDemoProjects() {
                 "type": "Education",
                 "dateCreated": "2024-09-20T11:30:00",
                 "fundingGoal": 5000,
-                "fundsRaised": 3500,
                 "userEmail": "emilyjohnson@example.com",
                 "images": [
                     "https://placehold.co/600x400?text=p2.1",
@@ -82,7 +80,6 @@ function CreateDemoProjects() {
                 "type": "Health",
                 "dateCreated": "2024-09-25T14:15:00",
                 "fundingGoal": 20000,
-                "fundsRaised": 30000,
                 "userEmail": "michaelbrown@example.com",
                 "images": [
                     "https://placehold.co/600x400?text=p3.1",
@@ -98,13 +95,12 @@ function CreateDemoProjects() {
                 "type": "Animal Welfare",
                 "dateCreated": "2024-09-30T09:45:00",
                 "fundingGoal": 15000,
-                "fundsRaised": 12000,
                 "userEmail": "sophiadavis@example.com",
                 "images": [
                     "https://placehold.co/600x400?text=p4.1",
                     "https://placehold.co/800x400?text=p4.2",
                     "https://placehold.co/400x800?text=p4.3",
-                    "garden-1.jpg"
+                    "/garden-1.jpg"
                 ],
             },
             {
@@ -115,7 +111,7 @@ function CreateDemoProjects() {
                 "type": "Energy",
                 "dateCreated": "2024-10-05T12:00:00",
                 "fundingGoal": 25000,
-                "fundsRaised": 18000,
+                "moneyRaised": 18000,
                 "userEmail": "jameswilson@example.com",
                 "images": [
                     "https://placehold.co/600x400?text=p5.1",

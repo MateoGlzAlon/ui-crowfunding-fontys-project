@@ -5,12 +5,12 @@ import { useInView, useMotionValue, useSpring } from "framer-motion";
 
 import { cn } from "@/lib/utils";
 
-export default function NumberTicker({
+export default function xNumberTicker({
   value,
   direction = "up",
   delay = 0,
   className,
-  decimalPlaces = 2
+  decimalPlaces = 0
 }) {
   const ref = useRef(null);
   const motionValue = useMotionValue(direction === "down" ? value : 0);

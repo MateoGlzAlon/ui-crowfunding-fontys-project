@@ -52,14 +52,14 @@ const ProjectDetails = ({ params }) => {
         <PageFrame>
 
             <div className='px-6'>
-                <div className=' border-pink-800 border-2'>
+                <div className=''>
                     <div className="font-bold text-4xl tracking-wide py-10 px-16">
                         {project.name}
                     </div>
 
-                    <div className="flex flex-wrap lg:flex-nowrap h-[600px] ">
+                    <div className="flex flex-wrap lg:flex-nowrap h-[500px] ">
                         <div className="flex-shrink-0 lg:w-2/3 items-center align-middle px-10 ">
-                            <ProjectImageCarousel projectImages={project.images} className="h-full w-auto " />
+                            <ProjectImageCarousel projectImages={project.images} imageHeight={"h-[500px]"} className="h-full w-auto " />
                         </div>
 
                         <div className="flex flex-col items-center justify-center flex-grow w-full lg:w-1/3 border shadow-lg rounded-3xl px-4">
