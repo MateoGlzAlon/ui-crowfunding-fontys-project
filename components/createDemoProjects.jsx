@@ -53,9 +53,9 @@ function CreateDemoProjects() {
                 "fundsRaised": 7500,
                 "userEmail": "matthewstone@example.com",
                 "images": [
-                    "garden-1.jpg",
-                    "garden-2.jpg",
-                    "garden-3.jpg"
+                    "https://placehold.co/600x400?text=p1.1",
+                    "https://placehold.co/600x400?text=p1.2",
+                    "https://placehold.co/600x400?text=p1.3"
                 ],
             },
             {
@@ -69,9 +69,9 @@ function CreateDemoProjects() {
                 "fundsRaised": 3500,
                 "userEmail": "emilyjohnson@example.com",
                 "images": [
-                    "library-2.jpg",
-                    "garden-2.jpg",
-                    "garden-3.jpg"
+                    "https://placehold.co/600x400?text=p2.1",
+                    "https://placehold.co/600x400?text=p2.2",
+                    "https://placehold.co/600x400?text=p2.3"
                 ],
             },
             {
@@ -85,9 +85,9 @@ function CreateDemoProjects() {
                 "fundsRaised": 30000,
                 "userEmail": "michaelbrown@example.com",
                 "images": [
-                    "water-3.jpg",
-                    "garden-2.jpg",
-                    "garden-3.jpg"
+                    "https://placehold.co/600x400?text=p3.1",
+                    "https://placehold.co/600x400?text=p3.2",
+                    "https://placehold.co/600x400?text=p3.3"
                 ],
             },
             {
@@ -101,9 +101,10 @@ function CreateDemoProjects() {
                 "fundsRaised": 12000,
                 "userEmail": "sophiadavis@example.com",
                 "images": [
-                    "animal-4.jpeg",
-                    "garden-2.jpg",
-                    "garden-3.jpg"
+                    "https://placehold.co/600x400?text=p4.1",
+                    "https://placehold.co/800x400?text=p4.2",
+                    "https://placehold.co/400x800?text=p4.3",
+                    "garden-1.jpg"
                 ],
             },
             {
@@ -117,9 +118,9 @@ function CreateDemoProjects() {
                 "fundsRaised": 18000,
                 "userEmail": "jameswilson@example.com",
                 "images": [
-                    "energy-5.jpeg",
-                    "garden-2.jpg",
-                    "garden-3.jpg"
+                    "https://placehold.co/600x400?text=p5.1",
+                    "https://placehold.co/600x400?text=p5.2",
+                    "/garden-1.jpg"
                 ],
             }
         ];
