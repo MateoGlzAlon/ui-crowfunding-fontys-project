@@ -1,5 +1,8 @@
 import { cn } from "@/lib/utils";
 
+import NumberTicker from "@/components/magicui/number-ticker";
+
+
 export default function AnimatedCircularProgressBar({
   max = 100,
   min = 0,
@@ -88,10 +91,14 @@ export default function AnimatedCircularProgressBar({
             }
           } />
       </svg>
+
+
       <span
         data-current-value={currentPercent}
-        className="duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto size-fit ease-linear animate-in fade-in">
-        {currentPercent}%
+        className="duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto size-fit ease-linear animate-in fade-in text-xl">
+
+        <NumberTicker value={currentPercent} decimalPlaces={2} />%
+
       </span>
     </div>)
   );
