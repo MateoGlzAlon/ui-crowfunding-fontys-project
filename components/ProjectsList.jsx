@@ -4,23 +4,24 @@ import axios from 'axios';
 import { DATA } from '@/app/data';
 import { useRouter } from 'next/navigation'
 
+import fetchProjectListData from '@/components/fetchComponents/fetchProjectListData';
+
 const ProjectsList = ({ title, endpoint }) => {
     const [projects, setProjects] = useState([]);
     const router = useRouter(); // Initialize the router
 
     useEffect(() => {
-        getProjects();
-    }, []); // Add an empty dependency array to run useEffect only once
+        const fetchData = async () => {
+            console.log(`Fetching projects from endpoint: ${endpoint}`);
+            const data = await fetchProjectListData(endpoint);
+            setProjects(data);
+        };
 
-    function getProjects() {
-        axios.get(`${DATA.origin}/projects/${endpoint}`)
-            .then((res) => {
-                setProjects(res.data); // Update state with fetched data
-            })
-            .catch((error) => {
-                console.error(`Error fetching projects in (${endpoint}):`, error);
-            });
-    }
+        fetchData();
+    }, []);
+
+
+
 
     function handleProjectClick(id) {
         router.push(`/projects/${id}`); // Use router.push to navigate programmatically
@@ -32,7 +33,7 @@ const ProjectsList = ({ title, endpoint }) => {
                 <h2 className="text-3xl font-bold mb-6 ">{title}</h2>
 
                 <div className="flex flex-wrap justify-start">
-                    {projects.map((project) => (
+                    {Array.isArray(projects) && projects.map((project) => (
                         <div
                             key={project.id}
                             onClick={() => router.push(`/projects/${project.id}`)}

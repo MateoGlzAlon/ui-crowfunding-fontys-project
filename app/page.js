@@ -18,17 +18,15 @@ export default function Home() {
     <main>
 
       <PageFrame>
-        {console.log(1)}
+
         <DotPatternAndTitle />
-        {console.log(2)}
+
         <HighlightedProjectsList />
-        {console.log(3)}
+
         <NewProjectsList />
-        {console.log(4)}
+
       </PageFrame>
-      {console.log(5)}
+
     </main>
-
-
   );
 }
