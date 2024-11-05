@@ -2,7 +2,6 @@ import axios from 'axios';
 
 import { DATA } from '@/app/data';
 
-
 export default async function fetchProjectData(projectId) {
     if (projectId) {
         try {

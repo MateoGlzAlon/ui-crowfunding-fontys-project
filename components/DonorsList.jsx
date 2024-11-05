@@ -6,12 +6,12 @@ import { AnimatedList } from "@/components/magicui/animated-list";
 import { format } from 'date-fns';
 import fetchDonationsListData from "./fetchComponents/fetchDonationsListData";
 
-const Notification = ({ backerEmail, amountFunded, paymentDate, paymentId }) => (
+const Notification = ({ backerName, amount, paymentDate }) => (
     <figure
         className={cn(
             "relative mx-auto min-h-fit w-full max-w-[400px] cursor-pointer overflow-hidden rounded-2xl p-2",
             "transition-all duration-1000 ease-in-out hover:scale-[103%]",
-            "bg-white shadow-sm dark:bg-transparent dark:backdrop-blur-md dark:border dark:border-opacity-10"
+            "bg-white shadow-md dark:bg-transparent dark:backdrop-blur-md dark:border dark:border-opacity-10"
         )}
     >
         <div className="flex items-center gap-3">
@@ -20,9 +20,9 @@ const Notification = ({ backerEmail, amountFunded, paymentDate, paymentId }) => 
             </div>
             <div className="flex flex-col overflow-hidden">
                 <figcaption className="text-base font-medium dark:text-white">
-                    <span>{amountFunded}€</span>
+                    <span>{amount}€</span>
                     <span className="mx-1">·</span>
-                    <span>id: {paymentId} - {backerEmail}</span>
+                    <span>{backerName}</span>
                 </figcaption>
                 <p className="text-sm font-normal dark:text-white/60">
                     {format(new Date(paymentDate), 'dd/MM/yyyy')}

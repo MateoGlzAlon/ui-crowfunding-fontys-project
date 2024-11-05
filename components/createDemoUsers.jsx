@@ -73,7 +73,6 @@ function CreateDemoUsers() {
 
         const allResponses = []; // Array to hold all responses
 
-
         for (const user of fakeRepo) {
             try {
                 const res = await axios.post(`${DATA.origin}/users`, user); // Post each user individually

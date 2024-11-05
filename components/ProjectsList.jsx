@@ -21,8 +21,6 @@ const ProjectsList = ({ title, endpoint }) => {
     }, []);
 
 
-
-
     function handleProjectClick(id) {
         router.push(`/projects/${id}`); // Use router.push to navigate programmatically
     }

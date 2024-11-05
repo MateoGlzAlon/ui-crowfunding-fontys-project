@@ -43,7 +43,6 @@ function CreateDemoProjects() {
     async function createFakeProjects() {
         const fakeRepo = [
             {
-                "id": 1,
                 "name": "Community Garden Project",
                 "description": "A project aimed at creating a sustainable community garden to promote local agriculture.",
                 "location": "Downtown Area",
@@ -51,14 +50,9 @@ function CreateDemoProjects() {
                 "dateCreated": "2024-09-15T10:00:00",
                 "fundingGoal": 12000,
                 "userEmail": "matthewstone@example.com",
-                "images": [
-                    "https://placehold.co/600x400?text=p1.1",
-                    "https://placehold.co/600x400?text=p1.2",
-                    "/garden-1.jpg"
-                ],
+
             },
             {
-                "id": 2,
                 "name": "School Library Fundraiser",
                 "description": "Raising funds to renovate and expand the school library's resources.",
                 "location": "Springfield High School",
@@ -66,14 +60,9 @@ function CreateDemoProjects() {
                 "dateCreated": "2024-09-20T11:30:00",
                 "fundingGoal": 5000,
                 "userEmail": "emilyjohnson@example.com",
-                "images": [
-                    "https://placehold.co/600x400?text=p2.1",
-                    "https://placehold.co/600x400?text=p2.2",
-                    "https://placehold.co/600x400?text=p2.3"
-                ],
+
             },
             {
-                "id": 3,
                 "name": "Clean Water Initiative",
                 "description": "Providing access to clean drinking water in underserved communities.",
                 "location": "Various Locations",
@@ -81,14 +70,9 @@ function CreateDemoProjects() {
                 "dateCreated": "2024-09-25T14:15:00",
                 "fundingGoal": 20000,
                 "userEmail": "michaelbrown@example.com",
-                "images": [
-                    "https://placehold.co/600x400?text=p3.1",
-                    "https://placehold.co/600x400?text=p3.2",
-                    "https://placehold.co/600x400?text=p3.3"
-                ],
+
             },
             {
-                "id": 4,
                 "name": "Animal Shelter Renovation",
                 "description": "Renovating the local animal shelter to improve the living conditions for rescued animals.",
                 "location": "Animal Shelter, City Center",
@@ -96,15 +80,9 @@ function CreateDemoProjects() {
                 "dateCreated": "2024-09-30T09:45:00",
                 "fundingGoal": 15000,
                 "userEmail": "sophiadavis@example.com",
-                "images": [
-                    "https://placehold.co/600x400?text=p4.1",
-                    "https://placehold.co/800x400?text=p4.2",
-                    "https://placehold.co/400x800?text=p4.3",
-                    "/garden-1.jpg"
-                ],
+
             },
             {
-                "id": 5,
                 "name": "Renewable Energy Campaign",
                 "description": "Promoting the use of renewable energy sources in our community.",
                 "location": "Citywide",
@@ -113,11 +91,7 @@ function CreateDemoProjects() {
                 "fundingGoal": 25000,
                 "moneyRaised": 18000,
                 "userEmail": "jameswilson@example.com",
-                "images": [
-                    "https://placehold.co/600x400?text=p5.1",
-                    "https://placehold.co/600x400?text=p5.2",
-                    "/garden-1.jpg"
-                ],
+
             }
         ];
 

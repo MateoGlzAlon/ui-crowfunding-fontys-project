@@ -4,7 +4,7 @@ import { DATA } from '@/app/data';
 
 async function fetchDonationsListData(projectId) {
     try {
-        const response = await axios.get(`${DATA.origin}/payments/projects/${projectId}`);
+        const response = await axios.get(`${DATA.origin}/payments/projects/notifications/${projectId}`);
         return (response.data);
     } catch (error) {
         console.error("Failed to fetch project donations:", error);

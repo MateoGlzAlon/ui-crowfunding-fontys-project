@@ -35,6 +35,9 @@ export default function Navbar() {
                     <Button variant="default" onClick={() => router.push('/login')} className="font-semibold w-32">
                         Log in
                     </Button>
+                    <Button onClick={() => router.push('/createProject')} className="font-semibold w-32">
+                        Create project
+                    </Button>
                 </div>
             </div>
         </nav>
