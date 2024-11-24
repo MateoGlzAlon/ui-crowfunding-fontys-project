@@ -4,6 +4,8 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button'; // Using your existing Button component
 import Image from 'next/image';
 
+import registerUserPOST from '@/components/fetchComponents/registerUserPOST';
+
 export default function RegisterPage() {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -11,6 +13,12 @@ export default function RegisterPage() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
+
+    function handleRegister(name, email, password) {
+
+        registerUserPOST(name, email, password);
+
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,6 +35,8 @@ export default function RegisterPage() {
         // Handle registration logic here (e.g., create user)
         console.log("Name:", name, "Email:", email, "Password:", password);
 
+        handleRegister(name, email, password);
+
         // After successful registration, redirect to the login page
         router.push('/login');
     };
@@ -38,11 +48,12 @@ export default function RegisterPage() {
                 <Image
                     src="/logoColor.svg" // Replace with your image path
                     alt="RaiseHub Logo"
+                    onClick={() => router.push('/')}
                     width={400}
                     height={400}
-                    className="mb-6"
+                    className="mb-6 cursor-pointer"
                 />
-                <h1 className="text-4xl font-extrabold text-gray-900">
+                <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push('/')} >
                     RaiseHub
                 </h1>
                 <p className="mt-4 text-lg text-gray-600">Join the community and bring your favorite projects to life!</p>

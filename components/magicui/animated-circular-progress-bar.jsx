@@ -17,7 +17,7 @@ export default function AnimatedCircularProgressBar({
 
   return (
     (<div
-      className={cn("relative m-auto size-28 text-2xl font-semibold", className)}
+      className={cn("relative m-auto w-full h-auto text-2xl font-semibold", className)}
       style={{
         "--circle-size": "100px",
         "--circumference": circumference,
@@ -95,7 +95,7 @@ export default function AnimatedCircularProgressBar({
 
       <span
         data-current-value={currentPercent}
-        className="duration-[var(--transition-length)] delay-[var(--delay)] absolute inset-0 m-auto size-fit ease-linear animate-in fade-in text-xl">
+        className="duration-&lsqb;var(--transition-length)&rsqb delay-&lsqb;var(--delay)&rsqb absolute inset-0 m-auto size-fit ease-linear animate-in fade-in text-xl">
 
         <NumberTicker value={currentPercent} decimalPlaces={2} />%
 

@@ -1,6 +1,7 @@
 import React, { useState } from "react"; // Import React and useState first
 import axios from 'axios';
 import { DATA } from "@/app/data";
+import TokenManager from "@/app/apis/TokenManager";
 
 
 function CreateDemoPayments() {
@@ -12,7 +13,11 @@ function CreateDemoPayments() {
     function getAllPayments() {
         setError(null); // Reset error state before fetching
         axios
-            .get(`${DATA.origin}/payments`)
+            .get(`${DATA.origin}/payments`,
+                {
+                    headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                }
+            )
             .then((res) => {
                 setPaymentData(res.data); // Update state with fetched data
             })
@@ -27,7 +32,11 @@ function CreateDemoPayments() {
         if (paymentId) {
             setError(null); // Reset error state before fetching
             axios
-                .get(`${DATA.origin}/payments/${paymentId}`)
+                .get(`${DATA.origin}/payments/${paymentId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                )
                 .then((res) => {
                     setPaymentData(res.data);
                 })
@@ -111,7 +120,11 @@ function CreateDemoPayments() {
 
         for (const payment of fakeRepo) {
             try {
-                const res = await axios.post(`${DATA.origin}/payments`, payment); // Post each payment individually
+                const res = await axios.post(`${DATA.origin}/payments`, payment,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                ); // Post each payment individually
                 allResponses.push(res.data); // Push response to allResponses
             } catch (error) {
                 console.error("Error creating payment:", error);
@@ -127,7 +140,11 @@ function CreateDemoPayments() {
     function deleteSpecificPayment() {
         if (paymentId) {
             axios
-                .delete(`${DATA.origin}/payments/${paymentId}`)
+                .delete(`${DATA.origin}/payments/${paymentId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                )
                 .then((res) => {
                     setPaymentData(res.data);
                 })

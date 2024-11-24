@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { DATA } from "@/app/data";
+import TokenManager from "@/app/apis/TokenManager";
 
 function CreateDemoProjectImages() {
     const [projectData, setProjectData] = useState(null); // State to hold the project data
@@ -10,7 +11,11 @@ function CreateDemoProjectImages() {
     function getAllProjectImages() {
         setError(null); // Reset error state before fetching
         axios
-            .get(`${DATA.origin}/projects/images`)
+            .get(`${DATA.origin}/projects/images`,
+                {
+                    headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                }
+            )
             .then((res) => {
                 setProjectData(res.data); // Update state with fetched data
             })
@@ -25,7 +30,11 @@ function CreateDemoProjectImages() {
         if (projectId) {
             setError(null); // Reset error state before fetching
             axios
-                .get(`${DATA.origin}/projects/images/${projectId}`)
+                .get(`${DATA.origin}/projects/images/${projectId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                )
                 .then((res) => {
                     setProjectData(res.data);
                 })
@@ -137,7 +146,11 @@ function CreateDemoProjectImages() {
 
         for (const project of fakeRepo) {
             try {
-                const res = await axios.post(`${DATA.origin}/projects/images`, project); // Post each project individually
+                const res = await axios.post(`${DATA.origin}/projects/images`, project,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                ); // Post each project individually
                 allResponses.push(res.data); // Push response to allResponses
             } catch (error) {
                 console.error("Error creating project:", error);
@@ -152,7 +165,11 @@ function CreateDemoProjectImages() {
 
     function deleteSpecificProjectImage() {
         if (projectId) {
-            axios.delete(`${DATA.origin}/projects/images/${projectId}`)
+            axios.delete(`${DATA.origin}/projects/images/${projectId}`,
+                {
+                    headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                }
+            )
                 .then((res) => {
                     setProjectData(res.data);
                 })

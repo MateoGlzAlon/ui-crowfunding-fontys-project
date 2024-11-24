@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedList } from "@/components/magicui/animated-list";
 import { format } from 'date-fns';
-import fetchDonationsListData from "./fetchComponents/fetchDonationsListData";
+import fetchDonationsListData from "@/components/fetchComponents/fetchDonationsListData";
 
 const Notification = ({ backerName, amount, paymentDate }) => (
     <figure
         className={cn(
-            "relative mx-auto min-h-fit w-full max-w-[400px] cursor-pointer overflow-hidden rounded-2xl p-2",
-            "transition-all duration-1000 ease-in-out hover:scale-[103%]",
-            "bg-white shadow-md dark:bg-transparent dark:backdrop-blur-md dark:border dark:border-opacity-10"
+            "relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl p-2 border-[1px]",
+            "transition-all duration-1000 ease-in-out hover:bg-gray-200",
+            "bg-white dark:bg-transparent dark:backdrop-blur-md dark:border dark:border-opacity-10"
         )}
     >
         <div className="flex items-center gap-3">
@@ -47,7 +47,7 @@ export function DonorsList({ className, projectId }) {
     }, [projectId]);
 
     return (
-        <div className={cn("relative flex h-[500px] w-full flex-col p-6 overflow-hidden rounded-lg bg-background", className)}>
+        <div className={cn("relative flex h-full w-full flex-col overflow-hidden rounded-lg bg-background", className)}>
             <AnimatedList>
                 {donations.map((item, idx) => (
                     <Notification {...item} key={idx} />

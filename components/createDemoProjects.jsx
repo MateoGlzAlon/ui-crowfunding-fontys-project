@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from 'axios';
 import { DATA } from "@/app/data";
+import TokenManager from "@/app/apis/TokenManager";
 
 function CreateDemoProjects() {
     const [projectData, setProjectData] = useState(null); // State to hold the project data
@@ -9,8 +10,11 @@ function CreateDemoProjects() {
 
     function getAllProjects() {
         setError(null); // Reset error state before fetching
-        axios
-            .get(`${DATA.origin}/projects`)
+        axios.get(`${DATA.origin}/projects`,
+            {
+                headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+            }
+        )
             .then((res) => {
                 setProjectData(res.data); // Update state with fetched data
             })
@@ -25,7 +29,11 @@ function CreateDemoProjects() {
         if (projectId) {
             setError(null); // Reset error state before fetching
             axios
-                .get(`${DATA.origin}/projects/${projectId}`)
+                .get(`${DATA.origin}/projects/${projectId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                )
                 .then((res) => {
                     setProjectData(res.data);
                 })
@@ -99,7 +107,12 @@ function CreateDemoProjects() {
 
         for (const project of fakeRepo) {
             try {
-                const res = await axios.post(`${DATA.origin}/projects`, project); // Post each project individually
+                const res = await axios.post(`${DATA.origin}/projects`,
+                    project,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                ); // Post each project individually
                 allResponses.push(res.data); // Push response to allResponses
             } catch (error) {
                 console.error("Error creating project:", error);
@@ -114,7 +127,11 @@ function CreateDemoProjects() {
 
     function deleteSpecificProject() {
         if (projectId) {
-            axios.delete(`${DATA.origin}/projects/${projectId}`)
+            axios.delete(`${DATA.origin}/projects/${projectId}`,
+                {
+                    headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                }
+            )
                 .then((res) => {
                     setProjectData(res.data);
                 })

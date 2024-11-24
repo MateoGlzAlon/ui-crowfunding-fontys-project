@@ -3,19 +3,36 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button'; // Using your existing Button component
 import Image from 'next/image'; // For the placeholder image
+import AuthAPI from '@/app/apis/AuthAPI';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
     const router = useRouter();
+
+
+    async function handleLogIn(username, password) {
+        console.log("Logging in with username:", username, "and password:", password);
+
+        console.log(await AuthAPI.login(username, password));
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // Handle login logic here (e.g., authenticate user)
-        console.log("Email:", email, "Password:", password);
+        console.log("Username:", username, "Password:", password);
+
+        const loginSuccessful = handleLogIn(username, password);
 
         // For now, we simulate a successful login and navigate to the homepage
-        router.push('/');
+
+        if (loginSuccessful !== undefined) {
+            router.push('/');
+        } else {
+            console.log("Login failed");
+            console.log(loginSuccessful);
+        }
     };
 
     return (
@@ -27,9 +44,10 @@ export default function LoginPage() {
                     alt="RaiseHub"
                     width={400}
                     height={400}
-                    className="mb-6"
+                    onClick={() => router.push('/')}
+                    className="mb-6 cursor-pointer"
                 />
-                <h1 className="text-4xl font-extrabold text-gray-900">
+                <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push('/')}>
                     RaiseHub
                 </h1>
                 <p className="mt-4 text-lg text-gray-600">Join the community and bring your favorite projects to life!</p>
@@ -52,13 +70,13 @@ export default function LoginPage() {
                                 </label>
                                 <div className="mt-1">
                                     <input
-                                        id="email"
-                                        name="email"
+                                        id="username"
+                                        name="username"
                                         type="email"
                                         autoComplete="email"
                                         required
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                         className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                     />
                                 </div>

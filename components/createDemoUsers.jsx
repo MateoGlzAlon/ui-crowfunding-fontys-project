@@ -1,7 +1,7 @@
 import React, { useState } from "react"; // Import React and useState first
 import axios from 'axios';
 import { DATA } from "@/app/data";
-
+import TokenManager from "@/app/apis/TokenManager";
 
 function CreateDemoUsers() {
     const [userData, setUserData] = useState(null); // State to hold the user data
@@ -12,7 +12,9 @@ function CreateDemoUsers() {
     function getAllUsers() {
         setError(null); // Reset error state before fetching
         axios
-            .get(`${DATA.origin}/users`)
+            .get(`${DATA.origin}/users`, {
+                headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+            })
             .then((res) => {
                 setUserData(res.data); // Update state with fetched data
             })
@@ -27,7 +29,11 @@ function CreateDemoUsers() {
         if (userId) {
             setError(null); // Reset error state before fetching
             axios
-                .get(`${DATA.origin}/users/${userId}`)
+                .get(`${DATA.origin}/users/${userId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }
+                )
                 .then((res) => {
                     setUserData(res.data);
                 })
@@ -47,27 +53,38 @@ function CreateDemoUsers() {
             {
                 "name": "Matthew Stone",
                 "email": "matthewstone@example.com",
-                "password": "pass_1"
+                "password": "pass_1",
+                "role": "user"
             },
             {
                 "name": "Emily Johnson",
                 "email": "emilyjohnson@example.com",
-                "password": "pass_2"
+                "password": "pass_2",
+                "role": "user"
             },
             {
                 "name": "Michael Brown",
                 "email": "michaelbrown@example.com",
-                "password": "pass_3"
+                "password": "pass_3",
+                "role": "user"
             },
             {
                 "name": "Sophia Davis",
                 "email": "sophiadavis@example.com",
-                "password": "pass_4"
+                "password": "pass_4",
+                "role": "user"
             },
             {
                 "name": "James Wilson",
                 "email": "jameswilson@example.com",
-                "password": "pass_5"
+                "password": "pass_5",
+                "role": "user"
+            },
+            {
+                "name": "The Admin",
+                "email": "admin@example.com",
+                "password": "pass_6",
+                "role": "admin"
             }
         ];
 
@@ -75,7 +92,11 @@ function CreateDemoUsers() {
 
         for (const user of fakeRepo) {
             try {
-                const res = await axios.post(`${DATA.origin}/users`, user); // Post each user individually
+                const res = await axios.post(`${DATA.origin}/users`,
+                    user,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    }); // Post each user individually
                 allResponses.push(res.data); // Push response to allResponses
             } catch (error) {
                 console.error("Error creating user:", error);
@@ -91,7 +112,10 @@ function CreateDemoUsers() {
     function deleteSpecificUser() {
         if (userId) {
             axios
-                .delete(`${DATA.origin}/users/${userId}`)
+                .delete(`${DATA.origin}/users/${userId}`,
+                    {
+                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
+                    })
                 .then((res) => {
                     setUserData(res.data);
                 })

@@ -8,6 +8,7 @@ import ProjectImageCarousel from '@/components/ProjectImageCarousel';
 import { ProjectProgressBar } from '@/components/ProjectProgressBar';
 import NumberTicker from "@/components/magicui/number-ticker";
 import fetchProjectData from '@/components/fetchComponents/fetchProjectData';
+import PaymentButton from '@/components/PaymentButton';
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;
@@ -58,7 +59,7 @@ const ProjectDetails = ({ params }) => {
         );
     }
 
-    const project = { ...projectData, moneyRaised: 8932.2567 }; // Example project value for display purposes
+    const project = projectData; // Example project value for display purposes
 
     return (
         <PageFrame>
@@ -84,13 +85,32 @@ const ProjectDetails = ({ params }) => {
                                 <p className="text-2xl font-thin">{project.fundingGoal} € goal</p>
                             </div>
                         </div>
+                        <PaymentButton />
+
                         <DonorsList projectId={projectId} />
                     </div>
                 </div>
 
                 <div className="px-16">
-                    <p className="text-3xl font-bold tracking-wide py-10">About</p>
-                    <p className="text-2xl font-thin">{project.description}</p>
+
+                    <div className='w-2/3'>
+                        <div className='border-y-4 border-gray-200 mr-10 my-6 py-4 flex items-center gap-4'>
+                            <div className='w-1/5 flex items-center justify-center'>
+                                <img src="https://picsum.photos/id/58/200/300" className='h-20 w-20 object-cover rounded-3xl' />
+                            </div>
+                            <div className='w-4/5 flex items-center justify-start '>
+                                <p className='text-xl'>Project was created by {project.userEmail}</p>
+                            </div>
+                        </div>
+
+
+                        <p className="text-3xl font-bold tracking-wide py-10">About</p>
+                        <p className="text-2xl font-light">{project.description}</p>
+                    </div>
+
+
+
+
                 </div>
             </div>
         </PageFrame>

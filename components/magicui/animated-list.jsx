@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 export const AnimatedList = React.memo(({
   className,
   children,
-  delay = 2000
+  delay = 5000
 }) => {
   const [index, setIndex] = useState(0);
   const childrenArray = React.Children.toArray(children);
