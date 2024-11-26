@@ -54,37 +54,43 @@ function CreateDemoUsers() {
                 "name": "Matthew Stone",
                 "email": "matthewstone@example.com",
                 "password": "pass_1",
-                "role": "user"
+                "role": "user",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             },
             {
                 "name": "Emily Johnson",
                 "email": "emilyjohnson@example.com",
                 "password": "pass_2",
-                "role": "user"
+                "role": "user",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             },
             {
                 "name": "Michael Brown",
                 "email": "michaelbrown@example.com",
                 "password": "pass_3",
-                "role": "user"
+                "role": "user",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             },
             {
                 "name": "Sophia Davis",
                 "email": "sophiadavis@example.com",
                 "password": "pass_4",
-                "role": "user"
+                "role": "user",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             },
             {
                 "name": "James Wilson",
                 "email": "jameswilson@example.com",
                 "password": "pass_5",
-                "role": "user"
+                "role": "user",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             },
             {
                 "name": "The Admin",
                 "email": "admin@example.com",
                 "password": "pass_6",
-                "role": "admin"
+                "role": "admin",
+                "profilePicture": "https://avatar.iran.liara.run/public"
             }
         ];
 
@@ -94,9 +100,7 @@ function CreateDemoUsers() {
             try {
                 const res = await axios.post(`${DATA.origin}/users`,
                     user,
-                    {
-                        headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
-                    }); // Post each user individually
+                ); // Post each user individually
                 allResponses.push(res.data); // Push response to allResponses
             } catch (error) {
                 console.error("Error creating user:", error);

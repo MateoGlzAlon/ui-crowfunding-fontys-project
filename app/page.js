@@ -6,6 +6,7 @@ import NewProjectsList from "@/components/NewProjectsList";
 import { useRouter } from 'next/navigation'
 
 import PageFrame from "@/components/PageFrame";
+import ProjectFilterTable from "@/components/ProjectsFIlterTable";
 
 
 export default function Home() {
@@ -24,6 +25,8 @@ export default function Home() {
         <HighlightedProjectsList />
 
         <NewProjectsList />
+
+        <ProjectFilterTable />
 
       </PageFrame>
 

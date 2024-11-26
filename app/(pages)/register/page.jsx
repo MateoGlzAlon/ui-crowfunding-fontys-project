@@ -16,7 +16,7 @@ export default function RegisterPage() {
 
     function handleRegister(name, email, password) {
 
-        registerUserPOST(name, email, password);
+        registerUserPOST(name, email, password, `https://avatar.iran.liara.run/public/boy?username=${name}`);
 
     }
 

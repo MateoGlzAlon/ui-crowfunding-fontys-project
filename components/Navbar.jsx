@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 
 export default function Navbar() {
     const [tokenLogin, setTokenLogin] = useState(""); // State for token
-    const [claims, setClaims] = useState(null); // State for claims
+    const [claims, setClaims] = useState(null); // State for claims 
     const router = useRouter();
 
     // Function to check and set the login token and claims
@@ -63,6 +63,14 @@ export default function Navbar() {
                         type="text"
                         value={tokenLogin || ""} // Display tokenLogin state
                         placeholder="Token login"
+                        readOnly // Make the input readonly
+                        className="border-2 border-gray-300 rounded-lg p-2"
+                    />
+
+                    <input
+                        type="text"
+                        value={claims?.roles?.[0] || ""} // Display the first role
+                        placeholder="Role"
                         readOnly // Make the input readonly
                         className="border-2 border-gray-300 rounded-lg p-2"
                     />

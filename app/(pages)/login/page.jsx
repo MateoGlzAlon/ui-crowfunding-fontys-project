@@ -25,8 +25,6 @@ export default function LoginPage() {
 
         const loginSuccessful = handleLogIn(username, password);
 
-        // For now, we simulate a successful login and navigate to the homepage
-
         if (loginSuccessful !== undefined) {
             router.push('/');
         } else {

@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { DATA } from '@/app/data';
+import createProjectPOST from '@/components/fetchComponents/createProjectPOST';
 
 function CreateProjectPage() {
     const [formData, setFormData] = useState({
@@ -11,8 +12,14 @@ function CreateProjectPage() {
         type: '',
         dateCreated: '',
         fundingGoal: '',
-        userEmail: 'sophiadavis@example.com',
-        images: [],
+        userEmail: '',
+        userEmail: "admin@example.com",
+        images: [
+            "https://placehold.co/600x400?text=new.1",
+            "https://placehold.co/600x400?text=new.2",
+            "https://placehold.co/600x400?text=new.3"
+        ]
+
     });
 
     const handleChange = (e) => {
@@ -34,20 +41,9 @@ function CreateProjectPage() {
         const updatedFormData = { ...formData, dateCreated: new Date().toISOString() };
 
         try {
-            const res = await axios.post(`${DATA.origin}/projects`, updatedFormData);
-            const projectId = res.data.id;
 
-            await Promise.all(
-                formData.images.map((image, index) =>
-                    axios.post(`${DATA.origin}/projects/images`, {
-                        projectId,
-                        imageURL: image,
-                        imageOrder: index + 1,
-                    })
-                )
-            );
+            const res = await createProjectPOST(updatedFormData);
 
-            console.log('Project created successfully:', res.data);
         } catch (error) {
             console.error('Error creating project with data:', updatedFormData, error);
         }
