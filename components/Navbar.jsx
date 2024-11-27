@@ -1,28 +1,33 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 import { DATA } from "@/app/data";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import TokenManager from "@/app/apis/TokenManager";
-import { useState, useEffect } from "react";
+import ProfileButton from "@/components/profileButton";
 
 export default function Navbar() {
     const [tokenLogin, setTokenLogin] = useState(""); // State for token
-    const [claims, setClaims] = useState(null); // State for claims 
+    const [claims, setClaims] = useState(null); // State for claims
     const router = useRouter();
 
     // Function to check and set the login token and claims
-    function checkLoginToken() {
+    const checkLoginToken = () => {
         const token = TokenManager.getAccessToken(); // Retrieve the token
-        setTokenLogin(token || ""); // Set the token in state
         const decodedClaims = TokenManager.getClaims(); // Retrieve claims
-        setClaims(decodedClaims); // Set claims in state
-    }
+        setTokenLogin(token || ""); // Set the token in state
+        setClaims(decodedClaims || null); // Set claims in state
+    };
 
     // Fetch token and claims on component mount
     useEffect(() => {
-        checkLoginToken();
+        checkLoginToken(); // Initial check
+        const interval = setInterval(() => {
+            checkLoginToken(); // Periodic check for updates
+        }, 1000); // Check every second
+        return () => clearInterval(interval); // Cleanup interval on unmount
     }, []);
 
     return (
@@ -34,21 +39,18 @@ export default function Navbar() {
                         <span className="text-xl font-bold">{DATA.projectName}</span>
                     </Link>
 
-                    <button
-                        type="button"
-                        onClick={() => router.push("/demos")}
-                        className="border-2 border-black rounded-lg p-2 m-5"
-                    >
-                        DEMOS
-                    </button>
+                    <Link href="/demos">
+                        <button className="border-2 border-black rounded-lg p-2 m-5">DEMOS</button>
+                    </Link>
 
-                    <button
-                        type="button"
-                        onClick={() => router.push("https://docs-raisehub.vercel.app/intro")}
+                    <a
+                        href="https://docs-raisehub.vercel.app/intro"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="border-2 border-black rounded-lg p-2 m-5"
                     >
                         DOCS
-                    </button>
+                    </a>
 
                     <button
                         type="button"
@@ -58,7 +60,6 @@ export default function Navbar() {
                         TOKEN
                     </button>
 
-                    {/* Input field to display the token */}
                     <input
                         type="text"
                         value={tokenLogin || ""} // Display tokenLogin state
@@ -76,21 +77,21 @@ export default function Navbar() {
                     />
                 </div>
                 <div className="flex items-center space-x-4">
-                    {claims ? (<>
-                        <Button
-                            onClick={() => router.push("/createProject")}
-                            className="font-semibold w-32"
-                        >
-                            Create project
-                        </Button>
+                    {claims ? (
 
-                        <Button
-                            onClick={() => router.push("/profile")}
-                            className="font-semibold w-32 rounded-full"
-                        >
-                            Profile
-                        </Button>
-                    </>
+
+                        <>
+
+                            <Button
+                                onClick={() => router.push("/createProject")}
+                                className="font-semibold w-32"
+                            >
+                                Create project
+                            </Button>
+
+                            <ProfileButton />
+
+                        </>
                     ) : (
                         <>
                             <Button

@@ -56,7 +56,11 @@ export default function Profile() {
         <div className="max-w-7xl mx-auto p-6 bg-white shadow-lg rounded-lg mt-10">
             {/* Profile Header */}
             <div className="flex items-center border-b pb-6">
-                <div className="w-24 h-24 rounded-full bg-gray-300 flex-shrink-0"></div>
+                <div className="w-24 h-24 rounded-full bg-gray-300 flex-shrink-0">
+
+                    <img src={user.profilePicture} />
+
+                </div>
                 <div className="ml-6">
                     <h1 className="text-2xl font-bold text-gray-800">
                         {isEditing ? (
@@ -80,6 +84,7 @@ export default function Profile() {
                         )}
                     </p>
                     <p className="text-gray-600">
+                        {/* TO-DO */}
                         Member since: {user.memberSince || "Unknown"}
                     </p>
                 </div>
@@ -102,7 +107,9 @@ export default function Profile() {
                                 key={project.id}
                                 className="flex items-center border rounded-lg p-4 bg-gray-50"
                             >
-                                <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4"></div>
+                                <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">
+                                    <img src={project.images[0]} className="h-full object-cover" />
+                                </div>
                                 <div className="flex-grow">
                                     <h3 className="text-lg font-semibold text-gray-800">
                                         {project.name}

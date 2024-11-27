@@ -52,7 +52,7 @@ function CreateDemoUsers() {
         const fakeRepo = [
             {
                 "name": "Matthew Stone",
-                "email": "matthewstone@example.com",
+                "email": "user@example.com",
                 "password": "pass_1",
                 "role": "user",
                 "profilePicture": "https://avatar.iran.liara.run/public"
