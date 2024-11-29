@@ -140,6 +140,42 @@ function CreateDemoProjectImages() {
                 "imageURL": "https://placehold.co/600x400?text=p5.3",
                 "imageOrder": 3
             },
+
+            /*  */
+
+            {
+                "projectId": 6,
+                "imageURL": "https://placehold.co/600x400?text=p6.1",
+                "imageOrder": 1
+            },
+            {
+                "projectId": 6,
+                "imageURL": "https://placehold.co/600x400?text=p6.2",
+                "imageOrder": 2
+            },
+            {
+                "projectId": 6,
+                "imageURL": "https://placehold.co/600x400?text=p6.3",
+                "imageOrder": 3
+            },
+
+            /*  */
+
+            {
+                "projectId": 7,
+                "imageURL": "https://placehold.co/600x400?text=p7.1",
+                "imageOrder": 1
+            },
+            {
+                "projectId": 7,
+                "imageURL": "https://placehold.co/600x400?text=p7.2",
+                "imageOrder": 2
+            },
+            {
+                "projectId": 7,
+                "imageURL": "https://placehold.co/600x400?text=p7.3",
+                "imageOrder": 3
+            },
         ];
 
         const allResponses = []; // Array to hold all responses

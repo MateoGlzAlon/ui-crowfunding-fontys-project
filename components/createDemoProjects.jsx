@@ -57,7 +57,7 @@ function CreateDemoProjects() {
                 "type": "Environment",
                 "dateCreated": "2024-09-15T10:00:00",
                 "fundingGoal": 12000,
-                "userEmail": "matthewstone@example.com",
+                "userEmail": "user@example.com",
             },
             {
                 "name": "School Library Fundraiser",
@@ -93,9 +93,28 @@ function CreateDemoProjects() {
                 "type": "Energy",
                 "dateCreated": "2024-10-05T12:00:00",
                 "fundingGoal": 25000,
-                "moneyRaised": 18000,
                 "userEmail": "jameswilson@example.com",
+            },
+            {
+                "name": "Urban Gardening Initiative",
+                "description": "This initiative seeks to transform underutilized urban spaces into thriving community gardens. The project will create green spaces in vacant lots, rooftops, and public parks, providing residents with the opportunity to grow their own fruits and vegetables, fostering a sense of community, and promoting environmental sustainability. Workshops on urban farming, composting, and sustainable agriculture will be organized to educate participants about cultivating healthy, organic produce. In addition to improving food security, the initiative aims to address urban heat islands and enhance air quality. Collaborations with local schools will incorporate gardening into educational curriculums, instilling environmental consciousness in young minds. The project's ultimate goal is to create a network of urban gardens that supply fresh produce to the community while promoting healthy lifestyles and environmental stewardship.",
+                "location": "Downtown District",
+                "type": "Community Development",
+                "dateCreated": "2024-09-20T09:30:00",
+                "fundingGoal": 15000,
+                "userEmail": "user@example.com",
+            },
+            {
+                "name": "Youth Tech Empowerment Program",
+                "description": "This program is designed to bridge the digital divide by equipping underprivileged youth with essential technological skills. The project will provide free access to laptops, software, and internet connectivity, ensuring students have the tools needed to succeed in an increasingly tech-driven world. Through coding bootcamps, robotics workshops, and digital literacy courses, participants will gain hands-on experience in cutting-edge technologies such as artificial intelligence, web development, and data science. The program also aims to offer mentorship opportunities with industry professionals and internships at local tech companies, paving the way for future career opportunities. By empowering young minds with tech skills, this initiative envisions a more inclusive and digitally proficient community.",
+                "location": "Eastside Neighborhood",
+                "type": "Education",
+                "dateCreated": "2024-11-10T15:45:00",
+                "fundingGoal": 30000,
+                "userEmail": "user@example.com",
             }
+
+
         ];
 
 

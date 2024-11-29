@@ -52,29 +52,7 @@ export default function Navbar() {
                         DOCS
                     </a>
 
-                    <button
-                        type="button"
-                        onClick={checkLoginToken} // Call function to update token and claims
-                        className="border-2 border-black rounded-lg p-2 m-5"
-                    >
-                        TOKEN
-                    </button>
 
-                    <input
-                        type="text"
-                        value={tokenLogin || ""} // Display tokenLogin state
-                        placeholder="Token login"
-                        readOnly // Make the input readonly
-                        className="border-2 border-gray-300 rounded-lg p-2"
-                    />
-
-                    <input
-                        type="text"
-                        value={claims?.roles?.[0] || ""} // Display the first role
-                        placeholder="Role"
-                        readOnly // Make the input readonly
-                        className="border-2 border-gray-300 rounded-lg p-2"
-                    />
                 </div>
                 <div className="flex items-center space-x-4">
                     {claims ? (

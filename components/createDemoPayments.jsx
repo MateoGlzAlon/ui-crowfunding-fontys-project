@@ -55,13 +55,13 @@ function CreateDemoPayments() {
         const fakeRepo = [
             {
                 "projectId": "1",
-                "backerEmail": "emilyjohnson@example.com",
+                "backerEmail": "user@example.com",
                 "amountFunded": 50.0,
                 "paymentDate": "2024-09-25T14:15:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "emilyjohnson@example.com",
+                "backerEmail": "user@example.com",
                 "amountFunded": 75.5,
                 "paymentDate": "2024-09-26T10:30:00"
             },
