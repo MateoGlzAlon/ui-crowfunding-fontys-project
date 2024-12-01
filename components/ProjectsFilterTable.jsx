@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import getAllProjectsGET from "@/components/fetchComponents/getAllProjectsGET";
 import { useRouter } from "next/navigation";
+import { DATA } from "@/app/data";
+import { FilterDropdown } from "./FilterDropdown";
 
 export default function ProjectFilterTable() {
     const [projects, setProjects] = useState([]);
@@ -25,9 +27,11 @@ export default function ProjectFilterTable() {
                 size: 6, // Number of projects per page
             });
 
+            console.log("data es: ", data)
+
             if (data) {
-                setProjects(data.content || data); // If API returns paginated content
-                setTotalPages(data.totalPages || 1); // If API returns total pages
+                setProjects(data.content || data); // Assuming the API returns a "content" key for projects
+                setTotalPages(data.totalPages || 1); // Assuming the API returns a "totalPages" key
             }
         };
 
@@ -91,10 +95,15 @@ export default function ProjectFilterTable() {
                         onChange={(e) => handleFilterChange(setType, e.target.value || null)}
                     >
                         <option value="">Filter by Type</option>
-                        <option value="Education">Education</option>
-                        <option value="Environment">Environment</option>
-                        <option value="Animal Welfare">Animal Welfare</option>
+
+                        {(DATA.projectTypes || []).map((type) => (
+                            <option key={type} value={type}>
+                                {type}
+                            </option>
+                        ))}
+
                     </select>
+                    <FilterDropdown />
                 </div>
 
                 {/* Projects Grid */}
