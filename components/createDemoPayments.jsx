@@ -55,61 +55,61 @@ function CreateDemoPayments() {
         const fakeRepo = [
             {
                 "projectId": "1",
-                "backerEmail": "emilyjohnson@example.com",
+                "backerId": "2",
                 "amountFunded": 50.0,
                 "paymentDate": "2024-09-25T14:15:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "emilyjohnson@example.com",
+                "backerId": "2",
                 "amountFunded": 75.5,
                 "paymentDate": "2024-09-26T10:30:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "michaelbrown@example.com",
+                "backerId": "3",
                 "amountFunded": 100.0,
                 "paymentDate": "2024-09-27T09:45:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "michaelbrown@example.com",
+                "backerId": "3",
                 "amountFunded": 150.0,
                 "paymentDate": "2024-09-28T11:00:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "sophiadavis@example.com",
+                "backerId": "4",
                 "amountFunded": 200.0,
                 "paymentDate": "2024-09-29T12:15:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "jameswilson@example.com",
+                "backerId": "5",
                 "amountFunded": 80.0,
                 "paymentDate": "2024-09-30T13:30:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "sophiadavis@example.com",
+                "backerId": "4",
                 "amountFunded": 60.0,
                 "paymentDate": "2024-10-01T14:45:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "jameswilson@example.com",
+                "backerId": "5",
                 "amountFunded": 90.0,
                 "paymentDate": "2024-10-02T15:00:00"
             },
             {
                 "projectId": "1",
-                "backerEmail": "jameswilson@example.com",
+                "backerId": "5",
                 "amountFunded": 110.0,
                 "paymentDate": "2024-10-03T16:20:00"
             },
             {
                 "projectId": "2",
-                "backerEmail": "jameswilson@example.com",
+                "backerId": "5",
                 "amountFunded": 125.0,
                 "paymentDate": "2024-10-04T17:40:00"
             }

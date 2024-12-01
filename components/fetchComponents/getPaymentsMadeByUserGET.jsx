@@ -8,7 +8,7 @@ export default async function getPaymentsMadeByUserGET() {
 
     console.log("Userid es:  " + userId)
 
-    const response = await axios.get(`${DATA.origin}/payments/users/${userId}`,
+    const response = await axios.get(`${DATA.origin}/payments/profile/${userId}`,
         {
             headers: { Authorization: `Bearer ${TokenManager.getAccessToken()}` }
         }

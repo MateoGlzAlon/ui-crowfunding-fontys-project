@@ -1,11 +1,30 @@
 import axios from 'axios';
-
 import { DATA } from '@/app/data';
 
-async function getAllProjectsGET() {
+async function getAllProjectsGET({
+    type = null,
+    minPercentageFunded = null,
+    maxPercentageFunded = null,
+    sortBy = "dateCreated",
+    page = 0,
+    size = 6,
+} = {}) {
     try {
-        const response = await axios.get(`${DATA.origin}/projects`);
-        return (response.data);
+        // Build query string dynamically
+        const queryParams = new URLSearchParams({
+            ...(type && { type }),
+            ...(minPercentageFunded && { minPercentageFunded }),
+            ...(maxPercentageFunded && { maxPercentageFunded }),
+            sortBy,
+            page,
+            size,
+        }).toString();
+
+        const response = await axios.get(`${DATA.origin}/projects/filters/pagination?${queryParams}`);
+
+        console.log("filter xd is: ", response.data)
+
+        return response.data;
     } catch (error) {
         console.error("Failed to get all projects: ", error);
         return null;

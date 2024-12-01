@@ -75,17 +75,17 @@ const ProjectDetails = ({ params }) => {
 
                     <div className="flex flex-col items-center justify-center lg:w-1/3 border shadow-lg rounded-3xl px-4">
                         <div className="w-full flex p-4">
-                            <div className="w-1/3">
+                            <div className="w-1/3 flex flex-col items-center justify-center">
                                 <ProjectProgressBar moneyRaised={project.moneyRaised} fundingGoal={project.fundingGoal} />
                             </div>
-                            <div className="w-2/3 text-center">
+                            <div className="w-2/3 text-center flex flex-col items-center justify-center">
                                 <p className="text-2xl font-bold">
                                     <NumberTicker value={project.moneyRaised} />€ raised
                                 </p>
                                 <p className="text-2xl font-thin">{project.fundingGoal} € goal</p>
                             </div>
                         </div>
-                        <PaymentButton />
+                        <PaymentButton projectId={projectId} />
 
                         <DonorsList projectId={projectId} />
                     </div>
@@ -105,7 +105,7 @@ const ProjectDetails = ({ params }) => {
 
 
                         <p className="text-3xl font-bold tracking-wide py-10">About</p>
-                        <p className="text-2xl font-light">{project.description}</p>
+                        <p className="text-2xl font-light text-justify">{project.description}</p>
                     </div>
 
 
