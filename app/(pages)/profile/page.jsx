@@ -8,13 +8,20 @@ import getPaymentsMadeByUserGET from "@/components/fetchComponents/getPaymentsMa
 import { format } from 'date-fns';
 import PageFrame from "@/components/PageFrame";
 
-
 export default function Profile() {
     const [isEditing, setIsEditing] = useState(false);
     const [projects, setProjects] = useState([]);
     const [payments, setPayments] = useState([]);
     const [user, setUser] = useState(null);
-    const userId = TokenManager.getClaims()?.userId;
+    const [userId, setUserId] = useState(null); // Defer userId initialization
+
+    // Retrieve userId on the client side
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const claims = TokenManager.getClaims();
+            setUserId(claims?.userId || null);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -48,7 +55,7 @@ export default function Profile() {
                 {/* Profile Header */}
                 <div className="flex items-center border-b pb-6">
                     <div className="w-24 h-24 rounded-full bg-gray-300 flex-shrink-0 overflow-hidden">
-                        <img src={user.profilePicture || "/placeholder.jpg"} alt="Profile" />
+                        <img src={user.profilePicture || "/profilePlaceholder.jpg"} alt="Profile" />
                     </div>
                     <div className="ml-6">
                         <h1 className="text-2xl font-bold text-gray-800">
@@ -134,10 +141,9 @@ export default function Profile() {
                                         key={payment.id}
                                         className="flex items-center border rounded-lg p-4 bg-gray-50"
                                     >
-
                                         <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">
                                             <img
-                                                src={payment.projectCoverImage}
+                                                src={payment.projectCoverImage || "/placeholder.jpg"}
                                                 className="h-full object-cover"
                                                 alt="Project"
                                             />
@@ -148,6 +154,8 @@ export default function Profile() {
                                             </h3>
                                             <p className="text-gray-600">
                                                 <strong>Owner: </strong> {payment.projectOwnerName}
+                                            </p>
+                                            <p className="text-gray-600">
                                                 {format(new Date(payment.paymentDate), 'dd/MM/yyyy')}
                                             </p>
                                             <p className="text-gray-600">{payment.description}</p>
