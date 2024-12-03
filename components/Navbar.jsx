@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { DATA } from "@/app/data";
 import { Button } from "@/components/ui/button";
 import TokenManager from "@/app/apis/TokenManager";
-import ProfileButton from "@/components/profileButton";
+import ProfileButton from "@/components/ProfileButton";
 
 export default function Navbar() {
     const [tokenLogin, setTokenLogin] = useState(""); // State for token

@@ -6,14 +6,10 @@ import NewProjectsList from "@/components/NewProjectsList";
 import { useRouter } from 'next/navigation'
 
 import PageFrame from "@/components/PageFrame";
-import ProjectFilterTable from "@/components/ProjectsFIlterTable";
+import ProjectFilterTable from "@/components/ProjectsFilterTable";
 
 
 export default function Home() {
-
-  const router = useRouter()
-
-
 
   return (
     <main>

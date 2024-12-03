@@ -3,7 +3,7 @@ import CreateDemoprojects from "@/components/createDemoProjects";
 import CreateDemoUsers from "@/components/createDemoUsers";
 import CreateDemoPayments from "@/components/createDemoPayments";
 import CreateDemoProjectImages from "@/components/createDemoProjectImages";
-import Tests3db from "@/components/tests3db";
+import Tests3db from "@/components/Tests3db";
 
 const { default: PageFrame } = require("@/components/PageFrame");
 

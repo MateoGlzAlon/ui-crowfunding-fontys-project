@@ -4,8 +4,13 @@ import axios from 'axios';
 import { DATA } from '@/app/data';
 import createProjectPOST from '@/components/fetchComponents/createProjectPOST';
 import PageFrame from '@/components/PageFrame';
+import { useRouter } from 'next/navigation'
+
 
 function CreateProjectPage() {
+
+    const router = useRouter()
+
     const [formData, setFormData] = useState({
         name: 'namenew',
         description: 'descnew',
@@ -42,6 +47,7 @@ function CreateProjectPage() {
 
             const res = await createProjectPOST(updatedFormData, images);
 
+            router.push(`/projects/${res}`);
         } catch (error) {
             console.error('Error creating project with data:', updatedFormData, error);
         }

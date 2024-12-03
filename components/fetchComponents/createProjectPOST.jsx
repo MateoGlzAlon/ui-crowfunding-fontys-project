@@ -39,7 +39,7 @@ export default async function createProjectPOST(projectData, files) {
             console.log("imageUrl es: ", imageURL);
             console.log("imageOrder es: ", imageOrder);
 
-            return axios.post(`${DATA.origin}/projects/images`, {
+            axios.post(`${DATA.origin}/projects/images`, {
                 projectId: projectId,
                 imageURL: imageURL[0], // This should be a single string URL
                 imageOrder: imageOrder,
@@ -52,4 +52,6 @@ export default async function createProjectPOST(projectData, files) {
     );
 
     console.log("The project created was: ", response.data);
+
+    return projectId;
 }
