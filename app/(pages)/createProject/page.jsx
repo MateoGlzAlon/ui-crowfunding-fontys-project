@@ -7,21 +7,18 @@ import PageFrame from '@/components/PageFrame';
 
 function CreateProjectPage() {
     const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        location: '',
-        type: '',
+        name: 'namenew',
+        description: 'descnew',
+        location: 'loc',
+        type: 'Education',
         dateCreated: '',
-        fundingGoal: '',
-        userEmail: '',
+        fundingGoal: '100',
+        //TO-DO
+        //userEmail: '',
         userEmail: "admin@example.com",
-        images: [
-            "https://placehold.co/600x400?text=new.1",
-            "https://placehold.co/600x400?text=new.2",
-            "https://placehold.co/600x400?text=new.3"
-        ]
-
     });
+
+    const [images, setImages] = useState([])
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -34,7 +31,7 @@ function CreateProjectPage() {
             alert('You can upload up to 3 images only.');
             return;
         }
-        setFormData((prevData) => ({ ...prevData, images: files.map((file) => file.name) }));
+        setImages(files);
     };
 
     const handleSubmit = async (e) => {
@@ -43,7 +40,7 @@ function CreateProjectPage() {
 
         try {
 
-            const res = await createProjectPOST(updatedFormData);
+            const res = await createProjectPOST(updatedFormData, images);
 
         } catch (error) {
             console.error('Error creating project with data:', updatedFormData, error);

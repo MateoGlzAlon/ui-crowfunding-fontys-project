@@ -2,7 +2,6 @@
 
 import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
-import { DATA } from "@/app/data"
 import crypto from "crypto"
 
 const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex")
@@ -23,11 +22,7 @@ const acceptedTypes = [
 
 const maxFileSize = 1024 * 1024 * 5; //5MB
 
-
-
 export default async function getSignedURLAction(fileType, fileSize, checksum) {
-
-
 
     if (!acceptedTypes.includes(fileType)) {
         return { failure: "Invalid file type" }
@@ -45,9 +40,7 @@ export default async function getSignedURLAction(fileType, fileSize, checksum) {
         ChecksumSHA256: checksum,
     })
 
-    const signedURL = await getSignedUrl(s3, putObjectCommand, {
-        expiresIn: 60,
-    })
+    const signedURL = await getSignedUrl(s3, putObjectCommand, { expiresIn: 60 })
 
     return {
         success: {

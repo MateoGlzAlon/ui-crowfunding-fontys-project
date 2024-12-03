@@ -26,7 +26,12 @@ export const uploadFile = async (file) => {
             throw new Error(`Failed to fetch signed URL: ${signedURLResult.failure}`);
         }
 
+        console.log("signedURLResult es: ", signedURLResult)
+
         const url = signedURLResult.success.url;
+
+        console.log("url es", url)
+
 
         // Upload the file to S3 using the signed URL
         await axios.put(url, file, {
@@ -35,7 +40,7 @@ export const uploadFile = async (file) => {
             },
         });
 
-        return { success: true, message: 'File uploaded successfully!' };
+        return { success: true, message: 'File uploaded successfully!', url: url.split("?"[0]) };
     } catch (error) {
         if (axios.isAxiosError(error)) {
             throw new Error(`File upload failed: ${error.response?.data?.message || error.message}`);
