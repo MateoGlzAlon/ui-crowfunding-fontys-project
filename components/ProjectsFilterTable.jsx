@@ -73,8 +73,11 @@ export default function ProjectFilterTable() {
                         value={sortBy}
                         onChange={(e) => handleFilterChange(setSortBy, e.target.value)}
                     >
-                        <option value="dateCreated">Date Created</option>
-                        <option value="percentageFunded">Percentage Funded</option>
+                        <option value="dateCreatedDesc">Date Created(new first)</option>
+                        <option value="dateCreatedAsc">Date Created(old first)</option>
+
+                        <option value="percentageFundedDesc">Percentage Funded(highest first)</option>
+                        <option value="percentageFundedAsc">Percentage Funded(lowest first)</option>
                     </select>
                     <select
                         className="p-2 border border-gray-300 rounded-md shadow-sm"
@@ -89,6 +92,7 @@ export default function ProjectFilterTable() {
                         <option value="25-50">25-50%</option>
                         <option value="50-75">50-75%</option>
                         <option value="75-100">75-100%</option>
+                        <option value="100-99999999">Fully funded</option>
                     </select>
                     <select
                         className="p-2 border border-gray-300 rounded-md shadow-sm"
@@ -103,7 +107,6 @@ export default function ProjectFilterTable() {
                         ))}
 
                     </select>
-                    <FilterDropdown />
                 </div>
 
                 {/* Projects Grid */}

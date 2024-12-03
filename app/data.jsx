@@ -5,8 +5,7 @@ export const DATA = {
     logoWhite: "/logoWhite.svg",
     heroTitle: "Bring your favourite\nprojects to life",
     origin: "http://localhost:8080",
-    //origin: "https://handy-finally-shrimp.ngrok-free.app", //BE ngrok
-
+    // origin: "https://handy-finally-shrimp.ngrok-free.app", //BE ngrok
     projectTypes: [
         "Education",
         "Environment",
@@ -14,5 +13,5 @@ export const DATA = {
         "Health",
         "Human Rights",
         "Sustainability",
-    ]
+    ],
 }

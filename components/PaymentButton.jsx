@@ -92,7 +92,7 @@ export default function PaymentButton({ projectId }) {
             </div>
 
             {modalVisible && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
+                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-[9999]">
                     <div className="bg-white rounded-lg shadow-lg p-6 w-96 text-center">
                         <p className="text-lg font-medium mb-6">{modalContent?.message}</p>
                         <div className="flex justify-center space-x-4">
