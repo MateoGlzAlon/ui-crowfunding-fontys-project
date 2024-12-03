@@ -1,9 +1,11 @@
 "use server";
 
-import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { S3Client, PutObjectCommand } from "@aws-sdk/client-s3"
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { DATA } from "@/app/data"
+import crypto from "crypto"
 
+const generateFileName = (bytes = 32) => crypto.randomBytes(bytes).toString("hex")
 const s3 = new S3Client({
     region: process.env.AWS_BUCKET_REGION,
     credentials: {
@@ -21,6 +23,8 @@ const acceptedTypes = [
 
 const maxFileSize = 1024 * 1024 * 5; //5MB
 
+
+
 export default async function getSignedURLAction(fileType, fileSize, checksum) {
 
 
@@ -35,7 +39,7 @@ export default async function getSignedURLAction(fileType, fileSize, checksum) {
 
     const putObjectCommand = new PutObjectCommand({
         Bucket: process.env.AWS_BUCKET_NAME,
-        Key: "test-file3",
+        Key: generateFileName(),
         ContentType: fileType,
         ContentLength: fileSize,
         ChecksumSHA256: checksum,
