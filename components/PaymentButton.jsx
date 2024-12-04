@@ -1,14 +1,37 @@
+"use client";
 import { useState } from "react";
 import createPaymentPOST from "@/components/fetchComponents/createPaymentPOST.jsx";
 import TokenManager from "@/app/apis/TokenManager";
+import { useRouter } from "next/navigation";
 
 export default function PaymentButton({ projectId }) {
     const [moneyAmount, setMoneyAmount] = useState("");
     const [modalVisible, setModalVisible] = useState(false);
     const [modalContent, setModalContent] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
+    const router = useRouter();
 
     const handlePayment = () => {
+        const claims = TokenManager.getClaims();
+
+        if (!claims) {
+            setModalContent({
+                message: "You need to be logged in to make a payment.",
+                buttons: [
+                    {
+                        text: "Go to Login",
+                        action: () => {
+                            setModalVisible(false);
+                            router.push("/login");
+                        },
+                    },
+                    { text: "Close", action: () => setModalVisible(false) },
+                ],
+            });
+            setModalVisible(true);
+            return;
+        }
+
         if (!moneyAmount || parseFloat(moneyAmount) <= 0) {
             setModalContent({
                 message: "Please enter a valid amount.",
@@ -31,9 +54,29 @@ export default function PaymentButton({ projectId }) {
     const confirmPayment = async () => {
         setIsProcessing(true);
 
+        const claims = TokenManager.getClaims();
+
+        if (!claims) {
+            setModalContent({
+                message: "Session expired. Please log in again.",
+                buttons: [
+                    {
+                        text: "Go to Login",
+                        action: () => {
+                            setModalVisible(false);
+                            router.push("/login");
+                        },
+                    },
+                ],
+            });
+            setModalVisible(true);
+            setIsProcessing(false);
+            return;
+        }
+
         const paymentData = {
             projectId,
-            backerId: TokenManager.getClaims().userId,
+            backerId: claims.userId,
             amountFunded: moneyAmount,
             paymentDate: new Date(),
         };
@@ -44,13 +87,15 @@ export default function PaymentButton({ projectId }) {
             if (response.status === 200) {
                 setModalContent({
                     message: "Payment successful! Thank you for your support.",
-                    buttons: [{
-                        text: "Close",
-                        action: () => {
-                            setModalVisible(false);
-                            window.location.reload();
+                    buttons: [
+                        {
+                            text: "Close",
+                            action: () => {
+                                setModalVisible(false);
+                                window.location.reload();
+                            },
                         },
-                    }],
+                    ],
                 });
                 setMoneyAmount("");
             } else {
@@ -92,7 +137,7 @@ export default function PaymentButton({ projectId }) {
             </div>
 
             {modalVisible && (
-                <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-50 z-[9999]">
+                <div className=" fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-[9999] h-screen">
                     <div className="bg-white rounded-lg shadow-lg p-6 w-96 text-center">
                         <p className="text-lg font-medium mb-6">{modalContent?.message}</p>
                         <div className="flex justify-center space-x-4">

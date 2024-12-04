@@ -12,15 +12,15 @@ function CreateProjectPage() {
     const router = useRouter()
 
     const [formData, setFormData] = useState({
-        name: 'namenew',
-        description: 'descnew',
-        location: 'loc',
-        type: 'Education',
+        name: '',
+        description: '',
+        location: '',
+        type: '',
         dateCreated: '',
-        fundingGoal: '100',
-        //TO-DO
+        fundingGoal: '',
+        //TO-DO: use userId
         //userEmail: '',
-        userEmail: "admin@example.com",
+        userEmail: "user@example.com",
     });
 
     const [images, setImages] = useState([])

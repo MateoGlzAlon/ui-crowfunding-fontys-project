@@ -37,13 +37,14 @@ const ProjectsList = ({ title, endpoint }) => {
                             onClick={() => router.push(`/projects/${project.id}`)}
                             className="block cursor-pointer bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100 rounded-lg"
                         >
-                            <img
-                                src={project.imageCover}
-                                alt={project.name}
-                                className="w-full h-48 object-cover rounded-lg overflow-hidden"
-                            />
-                            <p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>
-                            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
+                            <div className="w-full h-48 overflow-hidden rounded-lg">
+                                <img
+                                    src={project.imageCover}
+                                    alt={project.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            {/*<p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>*/}                            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
                                 <div
                                     className="bg-green-500 h-2.5 rounded-full"
                                     style={{

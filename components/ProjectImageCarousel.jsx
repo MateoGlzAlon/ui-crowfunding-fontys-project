@@ -32,7 +32,7 @@ function ProjectImageCarousel({ projectImages }) {
                     <img
                         src={image}
                         alt={`Project image ${id + 1}`}
-                        className='w-full h-full object-cover rounded-3xl'
+                        className='w-full h-full object-contain border-2 rounded-2xl'
                     />
                 </div>
             ))}

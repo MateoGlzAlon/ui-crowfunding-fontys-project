@@ -31,7 +31,7 @@ export default function Navbar() {
     }, []);
 
     return (
-        <nav className="fixed inset-x-0 z-[9999] h-16 border-b border-slate-500 bg-white mb-12">
+        <nav className="fixed inset-x-0 z-[9998] h-16 border-b border-slate-500 bg-white mb-12">
             <div className="container flex h-full items-center justify-between">
                 <div className="flex items-center space-x-4">
                     <Link href="/" className="flex items-center space-x-2">
