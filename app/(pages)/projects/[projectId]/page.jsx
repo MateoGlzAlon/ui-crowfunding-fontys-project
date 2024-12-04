@@ -69,11 +69,11 @@ const ProjectDetails = ({ params }) => {
                 </div>
 
                 <div className="flex flex-wrap lg:flex-nowrap h-[500px]">
-                    <div className="flex-shrink-0 lg:w-2/3 px-10">
+                    <div className="flex-shrink-0 lg:w-2/3 px-10 ">
                         <ProjectImageCarousel projectImages={project.images} />
                     </div>
 
-                    <div className="flex flex-col items-center justify-center lg:w-1/3 border shadow-lg rounded-3xl px-4">
+                    <div className="flex flex-col items-center justify-center lg:w-1/3 border-2 rounded-3xl px-4">
                         <div className="w-full flex p-4">
                             <div className="w-1/3 flex flex-col items-center justify-center">
                                 <ProjectProgressBar moneyRaised={project.moneyRaised} fundingGoal={project.fundingGoal} />
