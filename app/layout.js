@@ -1,6 +1,7 @@
-import localFont from "next/font/local";
 import "./globals.css";
 import { DATA } from "@/app/data";
+import { Toaster } from "@/components/ui/toaster";
+import { WebSocketProvider } from "@/components/WebSocketContext";
 
 export const metadata = {
   title: DATA.projectName,
@@ -10,8 +11,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+
       <body>
-        {children}
+        <WebSocketProvider>
+          {children}
+          <Toaster />
+        </WebSocketProvider>
+
       </body>
     </html>
   );

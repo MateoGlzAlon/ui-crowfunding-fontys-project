@@ -9,12 +9,18 @@ import { ProjectProgressBar } from '@/components/ProjectProgressBar';
 import NumberTicker from "@/components/magicui/number-ticker";
 import fetchProjectData from '@/components/fetchComponents/fetchProjectData';
 import PaymentButton from '@/components/PaymentButton';
+import { ToastComponent } from '@/components/ToastComponent';
+import { useWebSocket } from "@/components/WebSocketContext"
+import ChatComponent from '@/components/ChatComponent';
+
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;
     const router = useRouter();
     const [projectData, setProjectData] = useState(null);
     const [loading, setLoading] = useState(true); // Track loading state
+    const { setupStompClient } = useWebSocket();
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,6 +31,8 @@ const ProjectDetails = ({ params }) => {
         };
 
         if (projectId) fetchData();
+        setupStompClient(projectId);
+
     }, [projectId]);
 
     if (loading) {
@@ -62,58 +70,61 @@ const ProjectDetails = ({ params }) => {
     const project = projectData; // Example project value for display purposes
 
     return (
-        <PageFrame>
-            <div className="px-6">
-                <div className="font-bold text-4xl tracking-wide py-10 px-16">
-                    {project.name}
-                </div>
-
-                <div className="flex flex-wrap lg:flex-nowrap h-[500px]">
-                    <div className="flex-shrink-0 lg:w-2/3 px-10 ">
-                        <ProjectImageCarousel projectImages={project.images} />
+        <>
+            <PageFrame>
+                <div className="px-6">
+                    <div className="font-bold text-4xl tracking-wide py-10 px-16">
+                        {project.name}
                     </div>
 
-                    <div className="flex flex-col items-center justify-center lg:w-1/3 border-2 rounded-3xl px-4">
-                        <div className="w-full flex p-4">
-                            <div className="w-1/3 flex flex-col items-center justify-center">
-                                <ProjectProgressBar moneyRaised={project.moneyRaised} fundingGoal={project.fundingGoal} />
-                            </div>
-                            <div className="w-2/3 text-center flex flex-col items-center justify-center">
-                                <p className="text-2xl font-bold">
-                                    <NumberTicker value={project.moneyRaised} />€ raised
-                                </p>
-                                <p className="text-2xl font-thin">{project.fundingGoal} € goal</p>
-                            </div>
-                        </div>
-                        <PaymentButton projectId={projectId} />
-
-                        <DonorsList projectId={projectId} />
-                    </div>
-                </div>
-
-                <div className="px-16">
-
-                    <div className='w-2/3'>
-                        <div className='border-y-4 border-gray-200 mr-10 my-6 py-4 flex items-center gap-4'>
-                            <div className='w-1/5 flex items-center justify-center'>
-                                <img src="https://picsum.photos/id/58/200/300" className='h-20 w-20 object-cover rounded-3xl' />
-                            </div>
-                            <div className='w-4/5 flex items-center justify-start '>
-                                <p className='text-xl'>Project was created by {project.userEmail}</p>
-                            </div>
+                    <div className="flex flex-wrap lg:flex-nowrap h-[500px]">
+                        <div className="flex-shrink-0 lg:w-2/3 px-10 ">
+                            <ProjectImageCarousel projectImages={project.images} />
                         </div>
 
+                        <div className="flex flex-col items-center justify-center lg:w-1/3 border-2 rounded-3xl px-4">
+                            <div className="w-full flex p-4">
+                                <div className="w-1/3 flex flex-col items-center justify-center">
+                                    <ProjectProgressBar moneyRaised={project.moneyRaised} fundingGoal={project.fundingGoal} />
+                                </div>
+                                <div className="w-2/3 text-center flex flex-col items-center justify-center">
+                                    <p className="text-2xl font-bold">
+                                        <NumberTicker value={project.moneyRaised} />€ raised
+                                    </p>
+                                    <p className="text-2xl font-thin">{project.fundingGoal} € goal</p>
+                                </div>
+                            </div>
+                            <PaymentButton projectId={projectId} />
 
-                        <p className="text-3xl font-bold tracking-wide py-10">About</p>
-                        <p className="text-2xl font-light text-justify">{project.description}</p>
+                            <DonorsList projectId={projectId} />
+                        </div>
                     </div>
 
+                    <div className="px-16 flex">
+
+                        <div className='w-2/3'>
+                            <div className='border-y-4 border-gray-200 mr-10 my-6 py-4 flex items-center gap-4'>
+                                <div className='w-1/5 flex items-center justify-center'>
+                                    <img src="https://picsum.photos/id/58/200/300" className='h-20 w-20 object-cover rounded-3xl' />
+                                </div>
+                                <div className='w-4/5 flex items-center justify-start '>
+                                    <p className='text-xl'>Project was created by {project.userEmail}</p>
+                                </div>
+                            </div>
 
 
+                            <p className="text-3xl font-bold tracking-wide py-10">About</p>
+                            <p className="text-2xl font-light text-justify">{project.description}</p>
+                        </div>
 
+                        <div className='w-1/3'>
+                        </div>
+
+
+                    </div>
                 </div>
-            </div>
-        </PageFrame>
+            </PageFrame>
+        </>
     );
 };
 

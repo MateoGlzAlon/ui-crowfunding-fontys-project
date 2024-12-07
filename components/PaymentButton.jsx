@@ -3,6 +3,9 @@ import { useState } from "react";
 import createPaymentPOST from "@/components/fetchComponents/createPaymentPOST.jsx";
 import TokenManager from "@/app/apis/TokenManager";
 import { useRouter } from "next/navigation";
+import { useWebSocket } from "@/components/WebSocketContext"
+
+
 
 export default function PaymentButton({ projectId }) {
     const [moneyAmount, setMoneyAmount] = useState("");
@@ -10,6 +13,8 @@ export default function PaymentButton({ projectId }) {
     const [modalContent, setModalContent] = useState(null);
     const [isProcessing, setIsProcessing] = useState(false);
     const router = useRouter();
+    const { sendMessage } = useWebSocket();
+
 
     const handlePayment = () => {
         const claims = TokenManager.getClaims();
@@ -92,11 +97,22 @@ export default function PaymentButton({ projectId }) {
                             text: "Close",
                             action: () => {
                                 setModalVisible(false);
-                                window.location.reload();
+                                //TO-DO
+                                //window.location.reload();
                             },
                         },
                     ],
                 });
+
+                const notificationInfo = {
+                    to: projectId,
+                    title: "💸 - Payment received",
+                    description: `A backer has contributed ${moneyAmount} to this project`
+                }
+
+                console.log("notificationInfo es: ", notificationInfo);
+                sendMessage(notificationInfo);
+
                 setMoneyAmount("");
             } else {
                 setModalContent({
