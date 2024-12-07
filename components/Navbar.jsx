@@ -8,6 +8,8 @@ import { Button } from "@/components/ui/button";
 import TokenManager from "@/app/apis/TokenManager";
 import ProfileButton from "@/components/ProfileButton";
 
+import SearchBar from "./SearchBar";
+
 export default function Navbar() {
     const [tokenLogin, setTokenLogin] = useState(""); // State for token
     const [claims, setClaims] = useState(null); // State for claims
@@ -33,7 +35,7 @@ export default function Navbar() {
     return (
         <nav className="fixed inset-x-0 z-[9998] h-16 border-b border-slate-500 bg-white mb-12">
             <div className="container flex h-full items-center justify-between">
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center justify-start space-x-4  w-1/3  h-14">
                     <Link href="/" className="flex items-center space-x-2">
                         <Image src={DATA.logoColor} alt="Logo" width={40} height={40} />
                         <span className="text-xl font-bold">{DATA.projectName}</span>
@@ -54,7 +56,12 @@ export default function Navbar() {
 
 
                 </div>
-                <div className="flex items-center space-x-4">
+                <div className="flex w-1/3 h-14 items-center">
+
+                    <SearchBar />
+
+                </div>
+                <div className="flex items-center justify-end space-x-4 w-1/3  h-14">
                     {claims ? (
 
 
