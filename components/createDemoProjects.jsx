@@ -57,7 +57,7 @@ function CreateDemoProjects() {
                 "type": "Environment",
                 "dateCreated": "2024-09-15T10:00:00",
                 "fundingGoal": 12000,
-                "userEmail": "matthewstone@example.com",
+                "userId": "1",
             },
             {
                 "name": "School Library Fundraiser",
@@ -66,7 +66,7 @@ function CreateDemoProjects() {
                 "type": "Education",
                 "dateCreated": "2024-09-20T11:30:00",
                 "fundingGoal": 5000,
-                "userEmail": "emilyjohnson@example.com",
+                "userId": "1",
             },
             {
                 "name": "Clean Water Initiative",
@@ -75,7 +75,7 @@ function CreateDemoProjects() {
                 "type": "Health",
                 "dateCreated": "2024-09-25T14:15:00",
                 "fundingGoal": 20000,
-                "userEmail": "michaelbrown@example.com",
+                "userId": "2",
             },
             {
                 "name": "Animal Shelter Renovation",
@@ -84,7 +84,7 @@ function CreateDemoProjects() {
                 "type": "Animal Welfare",
                 "dateCreated": "2024-09-30T09:45:00",
                 "fundingGoal": 15000,
-                "userEmail": "sophiadavis@example.com",
+                "userId": "3",
             },
             {
                 "name": "Renewable Energy Campaign",
@@ -94,7 +94,7 @@ function CreateDemoProjects() {
                 "dateCreated": "2024-10-05T12:00:00",
                 "fundingGoal": 25000,
                 "moneyRaised": 18000,
-                "userEmail": "jameswilson@example.com",
+                "userId": "4",
             }
         ];
 

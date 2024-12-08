@@ -142,6 +142,96 @@ function CreateDemoProjectImages() {
             },
         ];
 
+
+
+        //====================================================================================================
+
+
+
+
+        /* async function createFakeProjectImages() {
+            const fakeRepo = [
+
+                {
+                    "projectId": 1,
+                    "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/ab80cfba291a4f724b216b5dbb9a939e8232eb8ed4a7ed0a857e5981354471bb",
+                    "imageOrder": 1
+                },
+                {
+                    "projectId": 1,
+                    "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/a3673f2826eab36d3206738541ead61a49d159cf15959d6669510c1cf8de4e8e",
+                    "imageOrder": 2
+
+                },
+                {
+                    "projectId": 1,
+                    "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/91373be4e3a8bf65bef2d2a49a6e0f951863d245ad1fb72f6fb2562c7a11bc39",
+                    "imageOrder": 3
+
+                },
+
+
+                {
+                    "projectId": 2,
+                    "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/c485febc089a4822ea092449d198fb53af0f7d2671da6f8dbfaf107bd186acdb",
+                    "imageOrder": 1
+                },
+                {
+                    "projectId": 2,
+                    "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/2a59cb5f12487428218e661f6e7ccb924c55739e9272557c1421fe4bf8209b2b",
+                    "imageOrder": 2
+                },
+            
+
+               
+
+        {
+            "projectId": 3,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/38ea7e4a74f92034016142cf65eb0a02d3a2fbede1510dc89ec194e3fe63b6a4",
+                    "imageOrder": 1
+        },
+        {
+            "projectId": 3,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/99c84fd61c320663e3296a438cf90d3ba9880010066ccbef58b900bfdaa10917",
+                    "imageOrder": 2
+        },
+        {
+            "projectId": 3,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/bd27d00c2c0e5d564f3bbec83439dd96f9be4030ed0bbe7bf97baa4170660d5f",
+                    "imageOrder": 3
+        },
+
+
+        {
+            "projectId": 4,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/c6e654a107cf423b19c1d461cdb46d35ab6d6e965afd4d5d258e9ca910bcb222",
+                    "imageOrder": 1
+        },
+        {
+            "projectId": 4,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/36c27a8394e02873f3c62ca095fcee3ca60cc35bef33f8223fab81fad879e8b6",
+                    "imageOrder": 2
+        },
+        
+
+        {
+            "projectId": 5,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/08054d703386c7d22b101ec623adb9a607fc9a030f9ce145bdec31f192539c16",
+                    "imageOrder": 1
+        },
+        {
+            "projectId": 5,
+                "imageURL": "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/3c41b4e469f1fa3f3ca874755e77e5655114bbe1fe18d01c4e514c48f4f88fbf",
+                    "imageOrder": 2
+        },
+
+      
+            ];
+    }*/
+
+        //==================================================================================================================
+
+
         const allResponses = []; // Array to hold all responses
 
         for (const project of fakeRepo) {

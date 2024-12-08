@@ -41,9 +41,9 @@ export default function Navbar() {
                         <span className="text-xl font-bold">{DATA.projectName}</span>
                     </Link>
 
-                    <Link href="/demos">
+                    {/*   <Link href="/demos">
                         <button className="border-2 border-black rounded-lg p-2 m-5">DEMOS</button>
-                    </Link>
+                    </Link> */}
 
                     <a
                         href="https://docs-raisehub.vercel.app/intro"

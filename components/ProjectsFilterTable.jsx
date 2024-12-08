@@ -7,7 +7,7 @@ import { FilterDropdown } from "./FilterDropdown";
 export default function ProjectFilterTable() {
     const [projects, setProjects] = useState([]);
     const [type, setType] = useState(null);
-    const [sortBy, setSortBy] = useState("dateCreated");
+    const [sortBy, setSortBy] = useState("percentageFundedDesc");
     const [minPercentageFunded, setMinPercentageFunded] = useState(0);
     const [maxPercentageFunded, setMaxPercentageFunded] = useState(100);
     const [currentPage, setCurrentPage] = useState(1);

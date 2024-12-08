@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DATA } from "@/app/data";
 
-export default async function (fullName, email, password, role = "user", profilePicture) {
+export default async function registerUserPOST(fullName, email, password, role, profilePicture) {
 
     const response = await axios.post(`${DATA.origin}/users`, {
 

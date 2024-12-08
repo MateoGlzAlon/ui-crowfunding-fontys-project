@@ -5,6 +5,7 @@ import { DATA } from '@/app/data';
 import createProjectPOST from '@/components/fetchComponents/createProjectPOST';
 import PageFrame from '@/components/PageFrame';
 import { useRouter } from 'next/navigation'
+import TokenManager from '@/app/apis/TokenManager';
 
 
 function CreateProjectPage() {
@@ -19,8 +20,7 @@ function CreateProjectPage() {
         dateCreated: '',
         fundingGoal: '',
         //TO-DO: use userId
-        //userEmail: '',
-        userEmail: "user@example.com",
+        userId: '',
     });
 
     const [images, setImages] = useState([])
@@ -41,7 +41,8 @@ function CreateProjectPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const updatedFormData = { ...formData, dateCreated: new Date().toISOString() };
+        const updatedFormData = { ...formData, dateCreated: new Date().toISOString(), userId: TokenManager.getClaims().userId };
+
 
         try {
 
