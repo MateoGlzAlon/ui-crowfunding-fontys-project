@@ -2,10 +2,13 @@
 
 import TokenManager from "@/app/apis/TokenManager";
 import { useState, useEffect, useRef } from "react";
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
+import getProfilePictureGET from "@/components/fetchComponents/getProfilePictureGET";
 
 export default function ProfileButton() {
     const [isOpen, setIsOpen] = useState(false);
+    const [profilePicture, setProfilePicture] = useState("https://avatar.iran.liara.run/public");
+    const userId = TokenManager.getClaims().userId;
     const dropdownRef = useRef(null);
     const router = useRouter();
 
@@ -20,10 +23,25 @@ export default function ProfileButton() {
     // Handle Log Out
     const handleLogout = () => {
         TokenManager.clear(); // Clear the token or claims
+        router.push("/login"); // Redirect to login after logging out
     };
 
-    // Close dropdown when clicking outside
+    // Fetch Profile Picture
     useEffect(() => {
+        const fetchProfilePicture = async () => {
+            try {
+                const picture = await getProfilePictureGET(userId);
+                if (picture) {
+                    setProfilePicture(picture);
+                }
+            } catch (error) {
+                console.error("Error fetching profile picture:", error);
+            }
+        };
+
+        fetchProfilePicture();
+
+        // Close dropdown when clicking outside
         const handleClickOutside = (event) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
                 closeDropdown();
@@ -34,20 +52,20 @@ export default function ProfileButton() {
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
         };
-    }, []);
+    }, [userId]);
 
     return (
-        <div className="relative inline-block " ref={dropdownRef}>
+        <div className="relative inline-block" ref={dropdownRef}>
             {/* Profile Avatar */}
             <button
                 onClick={toggleDropdown}
-                className="flex items-center space-x-2 focus:outline-none "
+                className="flex items-center space-x-2 focus:outline-none"
                 aria-expanded={isOpen}
             >
                 <img
-                    src="https://avatar.iran.liara.run/public"
+                    src={profilePicture}
                     alt="User Avatar"
-                    className="w-10 h-10 rounded-full border border-gray-300 dark:border-gray-700"
+                    className="w-10 h-10 rounded-full object-cover border border-gray-300 dark:border-gray-700"
                 />
             </button>
 
@@ -66,7 +84,7 @@ export default function ProfileButton() {
                         <li>
                             <button
                                 className="flex items-center w-full px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                                onClick={handleLogout} // Call the logout handler here
+                                onClick={handleLogout}
                             >
                                 Log out
                             </button>
