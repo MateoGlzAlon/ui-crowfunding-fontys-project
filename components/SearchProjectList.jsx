@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getAllProjectsGET from "@/components/fetchComponents/getAllProjectsGET";
+import getAllProjectsGET from "@/components/fetchComponents/GET/getAllProjectsGET";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DATA } from "@/app/data";
 
@@ -105,7 +105,7 @@ export default function SearchProjectList() {
                     {projects.map((project) => (
                         <div
                             key={project.id}
-                            className="flex items-start p-4 border rounded-lg hover:shadow-lg transition-transform"
+                            className="flex items-start p-4 border rounded-lg hover:bg-gray-100 hover:scale-[103%] transition-transform hover:cursor-pointer"
                             onClick={() => router.push(`/projects/${project.id}`)}
                         >
                             <div className="w-32 h-32 rounded-md overflow-hidden flex-shrink-0 mr-4">

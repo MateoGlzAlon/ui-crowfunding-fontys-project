@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { AnimatedList } from "@/components/magicui/animated-list";
 import { format } from 'date-fns';
-import fetchDonationsListData from "@/components/fetchComponents/fetchDonationsListData";
+import fetchDonationsListData from "@/components/fetchComponents/GET/fetchDonationsListData";
 
 const Notification = ({ backerName, amount, paymentDate }) => (
     <figure

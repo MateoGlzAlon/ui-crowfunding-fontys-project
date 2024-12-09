@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import getAllProjectsGET from "@/components/fetchComponents/getAllProjectsGET";
+import getAllProjectsGET from "@/components/fetchComponents/GET/getAllProjectsGET";
 import { useRouter } from "next/navigation";
 import { DATA } from "@/app/data";
 import { FilterDropdown } from "./FilterDropdown";

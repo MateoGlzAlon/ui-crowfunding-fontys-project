@@ -9,11 +9,28 @@ import TokenManager from "@/app/apis/TokenManager";
 import ProfileButton from "@/components/ProfileButton";
 
 import SearchBar from "./SearchBar";
+import { useWebSocket } from "@/components/WebSocketContext";
+
 
 export default function Navbar() {
     const [tokenLogin, setTokenLogin] = useState(""); // State for token
     const [claims, setClaims] = useState(null); // State for claims
     const router = useRouter();
+    const { sendMessage } = useWebSocket();
+
+
+    function handleSendMessage() {
+
+        const notificationInfo = {
+            to: 3,
+            title: "Someone contributed to your project",
+            description: `A backer has contributed 50€ to this project`
+        }
+
+        console.log("notificationInfo es: ", notificationInfo);
+        sendMessage(notificationInfo);
+
+    }
 
     // Function to check and set the login token and claims
     const checkLoginToken = () => {
@@ -45,6 +62,7 @@ export default function Navbar() {
                         <button className="border-2 border-black rounded-lg p-2 m-5">DEMOS</button>
                     </Link> */}
 
+
                     <a
                         href="https://docs-raisehub.vercel.app/intro"
                         target="_blank"
@@ -63,7 +81,6 @@ export default function Navbar() {
                 </div>
                 <div className="flex items-center justify-end space-x-4 w-1/3  h-14">
                     {claims ? (
-
 
                         <>
 

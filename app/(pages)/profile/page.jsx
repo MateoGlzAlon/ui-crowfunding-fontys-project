@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState, useRef } from "react";
-import getProjectsCreatedByUserGET from "@/components/fetchComponents/getProjectsCreatedByUserGET";
+import getProjectsCreatedByUserGET from "@/components/fetchComponents/GET/getProjectsCreatedByUserGET";
 import TokenManager from "@/app/apis/TokenManager";
-import getSpecificUserById from "@/components/fetchComponents/getSpecificUserByIdGET";
-import getPaymentsMadeByUserGET from "@/components/fetchComponents/getPaymentsMadeByUserGET";
+import getSpecificUserById from "@/components/fetchComponents/GET/getSpecificUserByIdGET";
+import getPaymentsMadeByUserGET from "@/components/fetchComponents/GET/getPaymentsMadeByUserGET";
 import { format } from "date-fns";
 import PageFrame from "@/components/PageFrame";
 import { useRouter } from 'next/navigation';
 import { uploadFile } from "@/components/UploadImage";
-import updateProfilePicturePUT from "@/components/fetchComponents/updateProfilePicturePUT";
+import updateProfilePicture from "@/components/fetchComponents/POST/updateProfilePicturePOST";
 
 
 export default function Profile() {
@@ -72,7 +72,7 @@ export default function Profile() {
 
                 console.log("userId es33: ", userId);
 
-                await updateProfilePicturePUT(userId, uploadedFile.url);
+                await updateProfilePicture(userId, uploadedFile.url);
             } else {
                 console.warn(`File upload failed for file: ${file.name}`);
             }

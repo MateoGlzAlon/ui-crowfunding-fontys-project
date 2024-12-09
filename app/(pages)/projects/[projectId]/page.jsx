@@ -7,12 +7,13 @@ import { DonorsList } from '@/components/DonorsList';
 import ProjectImageCarousel from '@/components/ProjectImageCarousel';
 import { ProjectProgressBar } from '@/components/ProjectProgressBar';
 import NumberTicker from "@/components/magicui/number-ticker";
-import fetchProjectData from '@/components/fetchComponents/fetchProjectData';
+import fetchProjectData from '@/components/fetchComponents/GET/fetchProjectData';
 import PaymentButton from '@/components/PaymentButton';
 import { useWebSocket } from "@/components/WebSocketContext";
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;
+    console.log("projectId es: ", projectId);
     const router = useRouter();
     const [project, setProject] = useState(null); // Correct project state
     const [loading, setLoading] = useState(true);
@@ -29,8 +30,6 @@ const ProjectDetails = ({ params }) => {
 
                 setProject(data);
 
-                // Setup WebSocket
-                setupStompClient(projectId);
             } catch (error) {
                 console.error("Error loading project data:", error);
                 router.push("/404"); // Redirect to 404 if the project is not found

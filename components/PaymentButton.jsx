@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import createPaymentPOST from "@/components/fetchComponents/createPaymentPOST.jsx";
+import createPaymentPOST from "@/components/fetchComponents/POST/createPaymentPOST.jsx";
 import TokenManager from "@/app/apis/TokenManager";
 import { useRouter } from "next/navigation";
 import { useWebSocket } from "@/components/WebSocketContext"
@@ -107,7 +107,7 @@ export default function PaymentButton({ projectId }) {
                 const notificationInfo = {
                     to: projectId,
                     title: "💸 - Payment received",
-                    description: `A backer has contributed ${moneyAmount} to this project`
+                    description: `A backer has contributed ${moneyAmount} to one of your projects`
                 }
 
                 console.log("notificationInfo es: ", notificationInfo);

@@ -1,35 +1,52 @@
 "use client";
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button'; // Using your existing Button component
-import Image from 'next/image'; // For the placeholder image
-import AuthAPI from '@/app/apis/AuthAPI';
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button"; // Using your existing Button component
+import Image from "next/image"; // For the placeholder image
+import AuthAPI from "@/app/apis/AuthAPI";
+import { useWebSocket } from "@/components/WebSocketContext";
+import getProjectIdsOwnedByUserGET from "@/components/fetchComponents/GET/getProjectIdsOwnedByUserGET";
 
 export default function LoginPage() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const { setupStompClient } = useWebSocket();
     const router = useRouter();
 
+    const handleLogIn = async (username, password) => {
+        try {
+            console.log("Logging in with username:", username);
+            const response = await AuthAPI.login(username, password);
+            return response;
+        } catch (error) {
+            console.error("Login failed:", error.message);
+            return null;
+        }
+    };
 
-    async function handleLogIn(username, password) {
-        console.log("Logging in with username:", username, "and password:", password);
-
-        console.log(await AuthAPI.login(username, password));
-    }
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle login logic here (e.g., authenticate user)
-        console.log("Username:", username, "Password:", password);
+        try {
+            console.log("Submitting login form...");
+            const loginResponse = await handleLogIn(username, password);
 
-        const loginSuccessful = handleLogIn(username, password);
+            if (loginResponse) {
+                console.log("Login successful:", loginResponse);
 
-        if (loginSuccessful !== undefined) {
-            router.push('/');
-        } else {
-            console.log("Login failed");
-            console.log(loginSuccessful);
+                // Fetch the user's project IDs
+                const projectIds = await getProjectIdsOwnedByUserGET(username);
+
+                // Set up the WebSocket connection
+                setupStompClient(projectIds);
+
+                // Navigate to the homepage
+                router.push("/");
+            } else {
+                console.error("Login failed. Please check your credentials.");
+            }
+        } catch (error) {
+            console.error("Error during login submission:", error.message);
         }
     };
 
@@ -42,13 +59,15 @@ export default function LoginPage() {
                     alt="RaiseHub"
                     width={400}
                     height={400}
-                    onClick={() => router.push('/')}
+                    onClick={() => router.push("/")}
                     className="mb-6 cursor-pointer"
                 />
-                <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push('/')}>
+                <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push("/")}>
                     RaiseHub
                 </h1>
-                <p className="mt-4 text-lg text-gray-600">Join the community and bring your favorite projects to life!</p>
+                <p className="mt-4 text-lg text-gray-600">
+                    Join the community and bring your favorite projects to life!
+                </p>
             </div>
 
             {/* Right Section with Login Form */}
@@ -127,7 +146,7 @@ export default function LoginPage() {
                                 <Button
                                     variant="outline"
                                     className="w-full"
-                                    onClick={() => router.push('/register')}
+                                    onClick={() => router.push("/register")}
                                 >
                                     Create a new account
                                 </Button>

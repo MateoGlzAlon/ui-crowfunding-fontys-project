@@ -4,7 +4,7 @@ import axios from 'axios';
 import { DATA } from '@/app/data';
 import { useRouter } from 'next/navigation'
 
-import fetchProjectListData from '@/components/fetchComponents/fetchProjectListData';
+import fetchProjectListData from '@/components/fetchComponents/GET/fetchProjectListData';
 
 const ProjectsList = ({ title, endpoint }) => {
     const [projects, setProjects] = useState([]);

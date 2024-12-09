@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button'; // Using your existing Button component
 import Image from 'next/image';
 
-import registerUserPOST from '@/components/fetchComponents/registerUserPOST';
+import registerUserPOST from '@/components/fetchComponents/POST/registerUserPOST';
 
 export default function RegisterPage() {
     const [name, setName] = useState('');

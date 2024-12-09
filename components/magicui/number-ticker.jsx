@@ -11,7 +11,6 @@ export default function xNumberTicker({
   delay = 0,
   className,
   decimalPlaces = 2, // Assuming percentages need two decimal places
-  isPercentage = false, // Add a prop to indicate percentage display
 }) {
   const ref = useRef(null);
   const motionValue = useMotionValue(direction === "down" ? value : 0);
@@ -35,10 +34,10 @@ export default function xNumberTicker({
         ref.current.textContent = Intl.NumberFormat("en-US", {
           minimumFractionDigits: decimalPlaces,
           maximumFractionDigits: decimalPlaces,
-        }).format(Number(latest.toFixed(decimalPlaces))) + (isPercentage ? "%" : "");
+        }).format(Number(latest.toFixed(decimalPlaces)));
       }
     });
-  }, [springValue, decimalPlaces, isPercentage]);
+  }, [springValue, decimalPlaces]);
 
   return (
     <span
@@ -48,7 +47,7 @@ export default function xNumberTicker({
       )}
       ref={ref}
     >
-      {value === 0 && (isPercentage ? "0%" : "0")}
+      {value === 0 && "0"}
     </span>
   );
 }

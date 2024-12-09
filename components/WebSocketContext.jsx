@@ -13,9 +13,9 @@ export const WebSocketProvider = ({ children }) => {
 
     const { toast } = useToast()
 
-    const setupStompClient = (projectId) => {
+    const setupStompClient = (projectIds) => {
 
-        console.log("Jefe, el id es ", projectId)
+        console.log("Jefe, el id es ", projectIds)
         const client = new Client({
             brokerURL: 'ws://localhost:8080/ws',
             reconnectDelay: 5000,
@@ -23,11 +23,13 @@ export const WebSocketProvider = ({ children }) => {
             heartbeatOutgoing: 4000,
         });
 
-        client.onConnect = () => {
-            client.subscribe(`/projectws/${projectId}`, (data) => {
-                onPaymentReceived(data);
-            });
-        };
+        projectIds.forEach((projectId) => {
+            client.onConnect = () => {
+                client.subscribe(`/projectws/${projectId}`, (data) => {
+                    onPaymentReceived(data);
+                });
+            };
+        })
 
         client.activate();
         setStompClient(client);

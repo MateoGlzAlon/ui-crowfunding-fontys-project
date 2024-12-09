@@ -3,7 +3,7 @@
 import TokenManager from "@/app/apis/TokenManager";
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from 'next/navigation';
-import getProfilePictureGET from "@/components/fetchComponents/getProfilePictureGET";
+import getProfilePictureGET from "@/components/fetchComponents/GET/getProfilePictureGET";
 
 export default function ProfileButton() {
     const [isOpen, setIsOpen] = useState(false);
