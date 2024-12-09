@@ -10,7 +10,8 @@ export default function xNumberTicker({
   direction = "up",
   delay = 0,
   className,
-  decimalPlaces = 0
+  decimalPlaces = 2, // Assuming percentages need two decimal places
+  isPercentage = false, // Add a prop to indicate percentage display
 }) {
   const ref = useRef(null);
   const motionValue = useMotionValue(direction === "down" ? value : 0);
@@ -21,28 +22,33 @@ export default function xNumberTicker({
   const isInView = useInView(ref, { once: true, margin: "0px" });
 
   useEffect(() => {
-    isInView &&
+    if (isInView) {
       setTimeout(() => {
         motionValue.set(direction === "down" ? 0 : value);
       }, delay * 1000);
+    }
   }, [motionValue, isInView, delay, value, direction]);
 
-  useEffect(() =>
+  useEffect(() => {
     springValue.on("change", (latest) => {
       if (ref.current) {
         ref.current.textContent = Intl.NumberFormat("en-US", {
           minimumFractionDigits: decimalPlaces,
           maximumFractionDigits: decimalPlaces,
-        }).format(Number(latest.toFixed(decimalPlaces)));
+        }).format(Number(latest.toFixed(decimalPlaces))) + (isPercentage ? "%" : "");
       }
-    }), [springValue, decimalPlaces]);
+    });
+  }, [springValue, decimalPlaces, isPercentage]);
 
   return (
-    (<span
+    <span
       className={cn(
         "inline-block tabular-nums text-black dark:text-white tracking-wider",
         className
       )}
-      ref={ref} />)
+      ref={ref}
+    >
+      {value === 0 && (isPercentage ? "0%" : "0")}
+    </span>
   );
 }

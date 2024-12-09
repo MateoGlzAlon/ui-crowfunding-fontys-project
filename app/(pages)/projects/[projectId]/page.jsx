@@ -10,14 +10,12 @@ import NumberTicker from "@/components/magicui/number-ticker";
 import fetchProjectData from '@/components/fetchComponents/fetchProjectData';
 import PaymentButton from '@/components/PaymentButton';
 import { useWebSocket } from "@/components/WebSocketContext";
-import getProfilePictureGET from '@/components/fetchComponents/getProfilePictureGET';
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;
     const router = useRouter();
     const [project, setProject] = useState(null); // Correct project state
     const [loading, setLoading] = useState(true);
-    const [ownerProfilePicture, setOwnerProfilePicture] = useState(null);
     const { setupStompClient } = useWebSocket();
 
     useEffect(() => {
@@ -30,10 +28,6 @@ const ProjectDetails = ({ params }) => {
                 if (!data) throw new Error("Project not found");
 
                 setProject(data);
-
-                // Fetch project owner's profile picture
-                const picture = await getProfilePictureGET(data.userId);
-                setOwnerProfilePicture(picture || "https://avatar.iran.liara.run/public");
 
                 // Setup WebSocket
                 setupStompClient(projectId);
@@ -102,7 +96,7 @@ const ProjectDetails = ({ params }) => {
                             </div>
                             <div className="w-2/3 text-center flex flex-col items-center justify-center">
                                 <p className="text-2xl font-bold">
-                                    <NumberTicker value={project.moneyRaised} />€ raised
+                                    <NumberTicker value={project.moneyRaised} /> € raised
                                 </p>
                                 <p className="text-2xl font-thin">
                                     {project.fundingGoal} € goal
@@ -119,14 +113,14 @@ const ProjectDetails = ({ params }) => {
                         <div className="border-y-4 border-gray-200 mr-10 my-6 py-4 flex items-center gap-4">
                             <div className="w-1/5 flex items-center justify-center">
                                 <img
-                                    src={ownerProfilePicture}
+                                    src={project.ownerProfilePicture}
                                     alt="Owner Profile"
                                     className="h-20 w-20 object-cover rounded-3xl"
                                 />
                             </div>
                             <div className="w-4/5 flex items-center justify-start">
                                 <p className="text-xl">
-                                    Project was created by {project.userEmail}
+                                    Project was created by {project.ownerName}
                                 </p>
                             </div>
                         </div>

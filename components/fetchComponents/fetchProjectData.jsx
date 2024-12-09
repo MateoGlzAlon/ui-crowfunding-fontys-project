@@ -5,7 +5,7 @@ import { DATA } from '@/app/data';
 export default async function fetchProjectData(projectId) {
     if (projectId) {
         try {
-            const response = await axios.get(`${DATA.origin}/projects/${projectId}`);
+            const response = await axios.get(`${DATA.origin}/projects/details/${projectId}`);
             console.log("hola", response.data);
             return response.data;
         } catch (error) {

@@ -97,7 +97,7 @@ export default function AnimatedCircularProgressBar({
         data-current-value={currentPercent}
         className="duration-&lsqb;var(--transition-length)&rsqb delay-&lsqb;var(--delay)&rsqb absolute inset-0 m-auto size-fit ease-linear animate-in fade-in text-xl">
 
-        <NumberTicker value={currentPercent} decimalPlaces={2} />%
+        <NumberTicker value={currentPercent} decimalPlaces={2} isPercentage={true} />%
 
       </span>
     </div>)

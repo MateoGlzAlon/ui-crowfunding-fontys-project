@@ -7,8 +7,9 @@ const SearchBar = () => {
 
     const handleSearch = (e) => {
         e.preventDefault(); // Prevent default form submission
+        // Ensure query is not empty
         if (query.trim()) {
-            console.log("Search query:", query);
+            router.push(`/search?name=${encodeURIComponent(query)}`);
         }
     };
 

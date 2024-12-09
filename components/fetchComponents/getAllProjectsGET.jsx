@@ -8,6 +8,7 @@ async function getAllProjectsGET({
     sortBy = "dateCreated",
     page = 0,
     size = 6,
+    name = ""
 } = {}) {
     try {
         // Build query string dynamically
@@ -18,6 +19,7 @@ async function getAllProjectsGET({
             sortBy,
             page,
             size,
+            name
         }).toString();
 
         const response = await axios.get(`${DATA.origin}/projects/filters/pagination?${queryParams}`);
