@@ -1,20 +1,18 @@
 "use client";
-import CreateDemoprojects from "@/components/toBeRemoved/createDemoProjects";
-import CreateDemoUsers from "@/components/toBeRemoved/createDemoUsers";
-import CreateDemoPayments from "@/components/toBeRemoved/createDemoPayments";
-import CreateDemoProjectImages from "@/components/toBeRemoved/createDemoProjectImages";
-import Tests3db from "@/components/toBeRemoved/Tests3db";
+
+import { Suspense } from "react";
 import PageFrame from "@/components/generalComponents/navbar/PageFrame";
 import SearchProjectList from "@/components/pageComponents/search/SearchProjectList";
 
-
-
-function Demo() {
-
+function SearchProjectPage() {
     return (
         <PageFrame>
-            <SearchProjectList />
+            {/* Wrapping SearchProjectList in a Suspense boundary */}
+            <Suspense fallback={<div>Loading projects...</div>}>
+                <SearchProjectList />
+            </Suspense>
         </PageFrame>
     );
 }
-export default Demo;
+
+export default SearchProjectPage;
