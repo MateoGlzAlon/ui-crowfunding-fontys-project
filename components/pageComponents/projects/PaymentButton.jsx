@@ -3,7 +3,7 @@ import { useState } from "react";
 import createPaymentPOST from "@/components/fetchComponents/POST/createPaymentPOST.jsx";
 import TokenManager from "@/app/apis/TokenManager";
 import { useRouter } from "next/navigation";
-import { useWebSocket } from "@/components/WebSocketContext"
+import { useWebSocket } from "@/components/generalComponents/WebSocketContext"
 
 
 

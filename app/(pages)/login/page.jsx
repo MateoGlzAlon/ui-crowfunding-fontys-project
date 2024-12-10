@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button"; // Using your existing Button component
 import Image from "next/image"; // For the placeholder image
 import AuthAPI from "@/app/apis/AuthAPI";
-import { useWebSocket } from "@/components/WebSocketContext";
+import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 import getProjectIdsOwnedByUserGET from "@/components/fetchComponents/GET/getProjectIdsOwnedByUserGET";
+import PageFrame from "@/components/generalComponents/navbar/PageFrame";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
@@ -51,6 +52,7 @@ export default function LoginPage() {
     };
 
     return (
+
         <div className="min-h-screen flex bg-white">
             {/* Left Section with Image and Text */}
             <div className="flex flex-col justify-center items-center w-1/2 bg-gray-100 p-8">
@@ -117,13 +119,6 @@ export default function LoginPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-between">
-                                <div className="text-sm">
-                                    <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                        Forgot your password?
-                                    </a>
-                                </div>
-                            </div>
 
                             <div>
                                 <Button type="submit" variant="default" className="w-full">

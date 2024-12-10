@@ -1,11 +1,11 @@
 "use client";
-import CreateDemoprojects from "@/components/createDemoProjects";
-import CreateDemoUsers from "@/components/createDemoUsers";
-import CreateDemoPayments from "@/components/createDemoPayments";
-import CreateDemoProjectImages from "@/components/createDemoProjectImages";
-import Tests3db from "@/components/Tests3db";
+import CreateDemoprojects from "@/components/toBeRemoved/createDemoProjects";
+import CreateDemoUsers from "@/components/toBeRemoved/createDemoUsers";
+import CreateDemoPayments from "@/components/toBeRemoved/createDemoPayments";
+import CreateDemoProjectImages from "@/components/toBeRemoved/createDemoProjectImages";
+import Tests3db from "@/components/toBeRemoved/Tests3db";
 
-const { default: PageFrame } = require("@/components/PageFrame");
+const { default: PageFrame } = require("@/components/generalComponents/navbar/PageFrame");
 
 
 

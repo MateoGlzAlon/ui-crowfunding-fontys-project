@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { uploadFile } from '@/components/UploadImage'; // Adjust path as needed
+import { uploadFile } from '@/components/awsComponents/UploadImage'; // Adjust path as needed
 
 export default function Tests3db() {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -16,6 +16,10 @@ export default function Tests3db() {
 
         if (file) {
             const reader = new FileReader();
+/*************  ✨ Codeium Command ⭐  *************/
+        // When the file is loaded, set the preview state to the result
+        // The result is a data URL representing the file contents
+/******  0285707e-5bdb-4486-9ce4-1e264dbcfedc  *******/
             reader.onloadend = () => {
                 setPreview(reader.result);
             };

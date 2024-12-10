@@ -1,7 +1,7 @@
 import axios from "axios";
 import { DATA } from "@/app/data";
 import TokenManager from "@/app/apis/TokenManager";
-import { uploadFile } from "../../UploadImage";
+import { uploadFile } from "../../awsComponents/UploadImage";
 
 export default async function createProjectPOST(projectData, files) {
     const fileURLs = [];

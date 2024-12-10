@@ -1,7 +1,7 @@
 import "./globals.css";
 import { DATA } from "@/app/data";
 import { Toaster } from "@/components/ui/toaster";
-import { WebSocketProvider } from "@/components/WebSocketContext";
+import { WebSocketProvider } from "@/components/generalComponents/WebSocketContext";
 
 export const metadata = {
   title: DATA.projectName,

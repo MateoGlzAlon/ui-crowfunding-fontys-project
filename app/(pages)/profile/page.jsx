@@ -6,9 +6,9 @@ import TokenManager from "@/app/apis/TokenManager";
 import getSpecificUserById from "@/components/fetchComponents/GET/getSpecificUserByIdGET";
 import getPaymentsMadeByUserGET from "@/components/fetchComponents/GET/getPaymentsMadeByUserGET";
 import { format } from "date-fns";
-import PageFrame from "@/components/PageFrame";
+import PageFrame from "@/components/generalComponents/navbar/PageFrame";
 import { useRouter } from 'next/navigation';
-import { uploadFile } from "@/components/UploadImage";
+import { uploadFile } from "@/components/awsComponents/UploadImage";
 import updateProfilePicture from "@/components/fetchComponents/POST/updateProfilePicturePOST";
 
 

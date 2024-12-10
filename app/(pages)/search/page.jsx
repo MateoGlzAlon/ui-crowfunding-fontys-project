@@ -1,11 +1,11 @@
 "use client";
-import CreateDemoprojects from "@/components/createDemoProjects";
-import CreateDemoUsers from "@/components/createDemoUsers";
-import CreateDemoPayments from "@/components/createDemoPayments";
-import CreateDemoProjectImages from "@/components/createDemoProjectImages";
-import Tests3db from "@/components/Tests3db";
-import PageFrame from "@/components/PageFrame";
-import SearchProjectList from "@/components/SearchProjectList";
+import CreateDemoprojects from "@/components/toBeRemoved/createDemoProjects";
+import CreateDemoUsers from "@/components/toBeRemoved/createDemoUsers";
+import CreateDemoPayments from "@/components/toBeRemoved/createDemoPayments";
+import CreateDemoProjectImages from "@/components/toBeRemoved/createDemoProjectImages";
+import Tests3db from "@/components/toBeRemoved/Tests3db";
+import PageFrame from "@/components/generalComponents/navbar/PageFrame";
+import SearchProjectList from "@/components/pageComponents/search/SearchProjectList";
 
 
 

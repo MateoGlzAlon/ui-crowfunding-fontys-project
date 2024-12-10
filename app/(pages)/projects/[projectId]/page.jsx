@@ -2,14 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import PageFrame from '@/components/PageFrame';
-import { DonorsList } from '@/components/DonorsList';
-import ProjectImageCarousel from '@/components/ProjectImageCarousel';
-import { ProjectProgressBar } from '@/components/ProjectProgressBar';
+import PageFrame from '@/components/generalComponents/navbar/PageFrame';
+import { DonorsList } from '@/components/pageComponents/projects/DonorsList';
+import ProjectImageCarousel from '@/components/pageComponents/projects/ProjectImageCarousel';
+import { ProjectProgressBar } from '@/components/pageComponents/projects/ProjectProgressBar';
 import NumberTicker from "@/components/magicui/number-ticker";
 import fetchProjectData from '@/components/fetchComponents/GET/fetchProjectData';
-import PaymentButton from '@/components/PaymentButton';
-import { useWebSocket } from "@/components/WebSocketContext";
+import PaymentButton from '@/components/pageComponents/projects/PaymentButton';
+import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;

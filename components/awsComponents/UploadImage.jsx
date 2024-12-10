@@ -1,5 +1,5 @@
 import axios from 'axios';
-import getSignedURLAction from '@/components/S3Actions';
+import getSignedURLAction from '@/components/awsComponents/S3Actions';
 
 const computeSHA256 = async (file) => {
     const buffer = await file.arrayBuffer();
