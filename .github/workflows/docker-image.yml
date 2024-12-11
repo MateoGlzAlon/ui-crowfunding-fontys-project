@@ -17,20 +17,39 @@ jobs:
     - name: Log in to Docker Hub
       run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-    # Step 2: Build the Docker image
+    # Step 2: Define IMAGE_TAG
     - name: Define IMAGE_TAG
       id: vars
       run: echo "IMAGE_TAG=$(date +%s)" >> $GITHUB_ENV
 
+    # Step 3: Build the Docker image with secrets
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag raisehub_fe:${{ env.IMAGE_TAG }}
+      run: |
+        docker build . \
+          --file Dockerfile \
+          --tag raisehub_fe:${{ env.IMAGE_TAG }} \
+          --build-arg AWS_REGION=${{ secrets.AWS_REGION }} \
+          --build-arg API_KEY=${{ secrets.API_KEY }} \
+          --build-arg DATABASE_URL=${{ secrets.DATABASE_URL }} \
+          --build-arg SECRET_KEY=${{ secrets.SECRET_KEY }}
 
-    # Step 3: Tag the image with the repository name
+    # Step 4: Tag the Docker image with the repository name
     - name: Tag the Docker image
       run: |
         docker tag raisehub_fe:${{ env.IMAGE_TAG }} ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:${{ env.IMAGE_TAG }}
 
-    # Step 4: Push the image to the repository
+    # Step 5: Push the Docker image
     - name: Push the Docker image
       run: |
         docker push ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:${{ env.IMAGE_TAG }}
+
+    # Step 6: Run the Docker container with secrets
+    - name: Run the Docker container
+      run: |
+        docker run -d \
+          -e AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }} \
+          -e AWS_BUCKET_REGION=${{ secrets.AWS_BUCKET_REGION }} \
+          -e AWS_ACCESS_KEY=${{ secrets.AWS_ACCESS_KEY }} \
+          -e AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} \
+          -p 3000:3000 \
+          raisehub_fe:${{ env.IMAGE_TAG }}
