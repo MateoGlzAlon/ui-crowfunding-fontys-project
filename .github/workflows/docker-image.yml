@@ -10,6 +10,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_TAG: $(date +%s)
+
     steps:
     - uses: actions/checkout@v4
 
@@ -23,12 +26,10 @@ jobs:
 
     # Step 3: Tag the image with the repository name
     - name: Tag the Docker image
-      run: |
-        IMAGE_TAG=$(date +%s)
-        docker tag raisehub_fe:$IMAGE_TAG ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:$IMAGE_TAG
+      run: |        
+        docker tag raisehub_fe:${{ env.IMAGE_TAG }} ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:${{ env.IMAGE_TAG }}
 
     # Step 4: Push the image to the repository
     - name: Push the Docker image
-      run: |
-        IMAGE_TAG=$(date +%s)
-        docker push ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:$IMAGE_TAG
+      run: |      
+        docker push ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:${{ env.IMAGE_TAG }}
