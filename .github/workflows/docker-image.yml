@@ -7,12 +7,28 @@ on:
     branches: [ "main" ]
 
 jobs:
-
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
+    # Step 1: Log in to Docker Hub
+    - name: Log in to Docker Hub
+      run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+    # Step 2: Build the Docker image
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag raisehub_fe:$(date +%s)
+
+    # Step 3: Tag the image with the repository name
+    - name: Tag the Docker image
+      run: |
+        IMAGE_TAG=$(date +%s)
+        docker tag raisehub_fe:$IMAGE_TAG ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:$IMAGE_TAG
+
+    # Step 4: Push the image to the repository
+    - name: Push the Docker image
+      run: |
+        IMAGE_TAG=$(date +%s)
+        docker push ${{ secrets.DOCKER_USERNAME }}/raisehub_frontend:$IMAGE_TAG
