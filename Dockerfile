@@ -9,10 +9,6 @@ COPY package.json ./
 
 RUN npm update && npm install
 
-# If you want yarn update and  install uncomment the bellow
-
-# RUN yarn install &&  yarn upgrade
-
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules

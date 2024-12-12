@@ -10,29 +10,82 @@ import NumberTicker from "@/components/magicui/number-ticker";
 import fetchProjectData from '@/components/fetchComponents/GET/fetchProjectData';
 import PaymentButton from '@/components/pageComponents/projects/PaymentButton';
 import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
+import deleteProjectById from '@/components/fetchComponents/DELETE/deleteProjectDELETE';
+import deleteUserById from '@/components/fetchComponents/DELETE/deleteUserDELETE';
+import TokenManager from '@/app/apis/TokenManager';
+
+// Reusable confirmation modal
+const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+            <div className="bg-white rounded-lg shadow-lg p-6 w-96">
+                <p className="text-xl font-semibold text-center">{message}</p>
+                <div className="flex justify-center gap-4 mt-6">
+                    <button
+                        onClick={onConfirm}
+                        className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Confirm
+                    </button>
+                    <button
+                        onClick={onClose}
+                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const ProjectDetails = ({ params }) => {
     const { projectId } = params;
-    console.log("projectId es: ", projectId);
     const router = useRouter();
-    const [project, setProject] = useState(null); // Correct project state
+    const [project, setProject] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+    const [isBanModalOpen, setBanModalOpen] = useState(false);
     const { setupStompClient } = useWebSocket();
+
+    const handleDeleteProject = async () => {
+        try {
+            await deleteProjectById(projectId);
+            alert("Project deleted successfully.");
+            router.push("/");
+        } catch (error) {
+            alert("Failed to delete project.");
+        } finally {
+            setDeleteModalOpen(false);
+        }
+    };
+
+    const handleBanUser = async () => {
+        try {
+            console.log("userid es: ", project.userId);
+            // Implement ban user logic here
+            await deleteUserById(project.userId);
+            alert("User banned successfully.");
+            router.push("/");
+        } catch (error) {
+            alert("Failed to ban user.");
+        } finally {
+            setBanModalOpen(false);
+        }
+    };
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
-
-                // Fetch project data
                 const data = await fetchProjectData(projectId);
                 if (!data) throw new Error("Project not found");
-
                 setProject(data);
-
             } catch (error) {
                 console.error("Error loading project data:", error);
-                router.push("/404"); // Redirect to 404 if the project is not found
+                router.push("/404");
             } finally {
                 setLoading(false);
             }
@@ -71,7 +124,7 @@ const ProjectDetails = ({ params }) => {
         );
     }
 
-    if (!project) return null; // Prevent rendering if the project is still null
+    if (!project) return null;
 
     return (
         <PageFrame>
@@ -124,15 +177,45 @@ const ProjectDetails = ({ params }) => {
                             </div>
                         </div>
 
+                        {TokenManager.getClaims().roles[0] === "admin" && (
+                            <div className="flex">
+                                <button
+                                    onClick={() => setDeleteModalOpen(true)}
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-1/2 m-5"
+                                >
+                                    Delete Project
+                                </button>
+
+                                <button
+                                    onClick={() => setBanModalOpen(true)}
+                                    className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-1/2 m-5"
+                                >
+                                    Ban User
+                                </button>
+                            </div>
+                        )}
+
                         <p className="text-3xl font-bold tracking-wide py-10">About</p>
                         <p className="text-2xl font-light text-justify">
                             {project.description}
                         </p>
                     </div>
-
-                    <div className="w-1/3"></div>
                 </div>
             </div>
+
+            {/* Modals */}
+            <ConfirmationModal
+                isOpen={isDeleteModalOpen}
+                onClose={() => setDeleteModalOpen(false)}
+                onConfirm={handleDeleteProject}
+                message="Are you sure you want to delete this project?"
+            />
+            <ConfirmationModal
+                isOpen={isBanModalOpen}
+                onClose={() => setBanModalOpen(false)}
+                onConfirm={handleBanUser}
+                message="Are you sure you want to ban this user?"
+            />
         </PageFrame>
     );
 };
