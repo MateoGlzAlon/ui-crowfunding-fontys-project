@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import { DATA } from "@/app/data";
 import { Button } from "@/components/ui/button";
 import TokenManager from "@/app/apis/TokenManager";
-import ProfileButton from "@/components/generalComponents/navbar/ProfileButton";
+import ProfileButton from "@/components/generalComponents/pageFrame/ProfileButton";
 
 import SearchBar from "./SearchBar";
 import { useWebSocket } from "@/components/generalComponents/WebSocketContext";

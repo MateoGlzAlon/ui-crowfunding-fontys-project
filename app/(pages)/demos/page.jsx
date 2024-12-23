@@ -5,7 +5,7 @@ import CreateDemoPayments from "@/components/toBeRemoved/createDemoPayments";
 import CreateDemoProjectImages from "@/components/toBeRemoved/createDemoProjectImages";
 import Tests3db from "@/components/toBeRemoved/Tests3db";
 
-const { default: PageFrame } = require("@/components/generalComponents/navbar/PageFrame");
+const { default: PageFrame } = require("@/components/generalComponents/pageFrame/PageFrame");
 
 
 

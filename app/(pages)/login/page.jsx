@@ -7,7 +7,7 @@ import Image from "next/image"; // For the placeholder image
 import AuthAPI from "@/app/apis/AuthAPI";
 import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 import getProjectIdsOwnedByUserGET from "@/components/fetchComponents/GET/getProjectIdsOwnedByUserGET";
-import PageFrame from "@/components/generalComponents/navbar/PageFrame";
+import PageFrame from "@/components/generalComponents/pageFrame/PageFrame";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");

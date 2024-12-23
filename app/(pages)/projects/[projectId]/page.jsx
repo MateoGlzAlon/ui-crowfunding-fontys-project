@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import PageFrame from '@/components/generalComponents/navbar/PageFrame';
+import PageFrame from '@/components/generalComponents/pageFrame/PageFrame';
 import { DonorsList } from '@/components/pageComponents/projects/DonorsList';
 import ProjectImageCarousel from '@/components/pageComponents/projects/ProjectImageCarousel';
 import { ProjectProgressBar } from '@/components/pageComponents/projects/ProjectProgressBar';
@@ -48,6 +48,7 @@ const ProjectDetails = ({ params }) => {
     const [loading, setLoading] = useState(true);
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [isBanModalOpen, setBanModalOpen] = useState(false);
+    const [claims, setClaims] = useState(null);
     const { setupStompClient } = useWebSocket();
 
     const handleDeleteProject = async () => {
@@ -65,7 +66,6 @@ const ProjectDetails = ({ params }) => {
     const handleBanUser = async () => {
         try {
             console.log("userid es: ", project.userId);
-            // Implement ban user logic here
             await deleteUserById(project.userId);
             alert("User banned successfully.");
             router.push("/");
@@ -83,6 +83,7 @@ const ProjectDetails = ({ params }) => {
                 const data = await fetchProjectData(projectId);
                 if (!data) throw new Error("Project not found");
                 setProject(data);
+                setClaims(TokenManager.getClaims())
             } catch (error) {
                 console.error("Error loading project data:", error);
                 router.push("/404");
@@ -177,7 +178,7 @@ const ProjectDetails = ({ params }) => {
                             </div>
                         </div>
 
-                        {TokenManager.getClaims().roles[0] === "admin" && (
+                        {claims && claims.roles[0] === "admin" && (
                             <div className="flex">
                                 <button
                                     onClick={() => setDeleteModalOpen(true)}

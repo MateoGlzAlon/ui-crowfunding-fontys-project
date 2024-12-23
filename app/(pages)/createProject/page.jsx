@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { DATA } from '@/app/data';
 import createProjectPOST from '@/components/fetchComponents/POST/createProjectPOST';
-import PageFrame from '@/components/generalComponents/navbar/PageFrame';
+import PageFrame from '@/components/generalComponents/pageFrame/PageFrame';
 import { useRouter } from 'next/navigation'
 import TokenManager from '@/app/apis/TokenManager';
 
