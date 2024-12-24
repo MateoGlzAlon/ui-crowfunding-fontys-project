@@ -2,7 +2,7 @@ import axios from "axios";
 import { DATA } from "@/app/data";
 import TokenManager from "@/app/apis/TokenManager";
 
-export default async function updateProfilePicture(userId, newPicture) {
+export default async function updateProfilePicturePOST(userId, newPicture) {
 
     console.log("la cose es : ", newPicture[0])
     try {

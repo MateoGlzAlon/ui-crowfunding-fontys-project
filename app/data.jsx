@@ -5,7 +5,6 @@ export const DATA = {
     logoWhite: "/logoWhite.svg",
     heroTitle: "Bring your favourite\nprojects to life",
     origin: "http://localhost:8080",
-    // origin: "https://handy-finally-shrimp.ngrok-free.app", //BE ngrok
     projectTypes: [
         "Education",
         "Environment",
@@ -13,5 +12,10 @@ export const DATA = {
         "Health",
         "Human Rights",
         "Sustainability",
+        "Culture",
     ],
+    //TO-DO
+    gitHubRepository: "",
+    creatorWeb: "https://glzalomateo.vercel.app",
+    documentation: "https://docs-raisehub.vercel.app",
 }

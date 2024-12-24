@@ -58,21 +58,6 @@ export default function Navbar() {
                         <span className="text-xl font-bold">{DATA.projectName}</span>
                     </Link>
 
-                    {/*   <Link href="/demos">
-                        <button className="border-2 border-black rounded-lg p-2 m-5">DEMOS</button>
-                    </Link> */}
-
-
-                    <a
-                        href="https://docs-raisehub.vercel.app/intro"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="border-2 border-black rounded-lg p-2 m-5"
-                    >
-                        DOCS
-                    </a>
-
-
                 </div>
                 <div className="flex w-1/3 h-14 items-center">
 
