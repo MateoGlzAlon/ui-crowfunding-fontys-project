@@ -23,13 +23,15 @@ export const WebSocketProvider = ({ children }) => {
             heartbeatOutgoing: 4000,
         });
 
-        projectIds.forEach((projectId) => {
-            client.onConnect = () => {
+        console.log("Despues del client")
+
+        client.onConnect = () => {
+            projectIds.forEach((projectId) => {
                 client.subscribe(`/projectws/${projectId}`, (data) => {
                     onPaymentReceived(data);
                 });
-            };
-        })
+            })
+        };
 
         client.activate();
         setStompClient(client);
