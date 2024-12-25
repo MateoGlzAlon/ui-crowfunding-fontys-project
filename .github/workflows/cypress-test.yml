@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: 18
 
+      # Step : Connect containers
+      - name: Create container network
+        run: |
+          docker network create docker_network_crowdfund          
+
       # Step 3: Pull and Run Database Docker Image
       - name: Run MySQL database service
         run: |
@@ -30,6 +35,7 @@ jobs:
             --env MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} \
             --env MYSQL_DATABASE=crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
+          docker network connect docker_network_crowdfund mysql
 
       # Step 3.1: Wait for MySQL to Start and Verify Service
       - name: Wait for MySQL Service to Start
@@ -53,6 +59,8 @@ jobs:
             -p 8080:8080 \
             --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@mysql:3306/crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
+          docker network connect docker_network_crowdfund backend  
+          
 
       # Step 4.1: Wait for Backend to Start and Verify Service
       - name: Wait for Backend Service to Start
@@ -64,11 +72,15 @@ jobs:
           done || (echo "Backend failed to start" && exit 1)
           docker logs -f backend
 
-
-      # Step 5: Install frontend dependencies
-      - name: Install frontend dependencies
+      # Step 5: Pull and Run Frontend Docker Image
+      - name: Wait for Backend Service to Start
         run: |
-          npm install
+          for i in {1..10}; do
+            curl -sSf http://localhost:8080/health && break
+            echo "Waiting for Backend to be ready..."
+            sleep 5
+          done || (echo "Backend failed to start" && exit 1)
+          docker logs -f backend      
 
       # Step 6: Start the frontend application
       - name: Start frontend server
