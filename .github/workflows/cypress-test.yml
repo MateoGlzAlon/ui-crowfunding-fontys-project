@@ -31,10 +31,19 @@ jobs:
             --env MYSQL_DATABASE=crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
 
-      # Step 3.1: Verify MySQL is running
-      - name: Check MySQL Service
+      # Step 3.1: Wait for MySQL to Start and Verify Service
+      - name: Wait for MySQL Service to Start
         run: |
-          docker exec mysql mysqladmin ping -h localhost -u root -p ${{ secrets.MYSQL_ROOT_PASSWORD }} || exit 1
+          for i in {1..10}; do
+            docker exec mysql mysqladmin ping -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} && break
+            echo "Waiting for MySQL to be ready..."
+            sleep 5
+          done || (echo "MySQL failed to start" && exit 1)
+
+      - name: Debug MySQL Logs
+        if: failure()
+        run: |
+          docker logs mysql
 
       # Step 4: Pull and Run Backend Docker Image
       - name: Run backend service
@@ -42,13 +51,17 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker run -d --name backend \
             -p 8080:8080 \
-            --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@localhost:3306/crowdfund_db \
+            --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@127.0.0.1:3306/crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
 
-      # Step 4.1: Verify backend is running
-      - name: Check Backend Service
+      # Step 4.1: Wait for Backend to Start and Verify Service
+      - name: Wait for Backend Service to Start
         run: |
-          curl -sSf http://localhost:8080/health || exit 1
+          for i in {1..10}; do
+            curl -sSf http://localhost:8080/health && break
+            echo "Waiting for Backend to be ready..."
+            sleep 5
+          done || (echo "Backend failed to start" && exit 1)
 
       # Step 5: Install frontend dependencies
       - name: Install frontend dependencies
@@ -59,18 +72,14 @@ jobs:
       - name: Start frontend server
         run: |
           npm run build
-          npm run start
+          npm run start &
         env:      
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
 
-      # Step 7: Wait for services to be ready
-      - name: Wait for frontend service
+      # Step 7: Wait for frontend service
+      - name: Wait for Frontend Service
         run: |
           npx wait-on http://localhost:3000
-
-      - name: Wait for backend service
-        run: |
-          npx wait-on http://localhost:8080
 
       # Step 8: Run Cypress tests
       - name: Run Cypress tests
