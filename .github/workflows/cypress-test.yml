@@ -43,7 +43,8 @@ jobs:
       # Step 5: Install frontend dependencies
       - name: Install frontend dependencies
         run: |
-          cd frontend
+          ls
+          cd ui-crowfunding-fontys-project
           npm install
 
       # Step 6: Start the frontend application
