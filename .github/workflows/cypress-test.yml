@@ -51,7 +51,7 @@ jobs:
           docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker run -d --name backend \
             -p 8080:8080 \
-            --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@127.0.0.1:3306/crowdfund_db \
+            --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@mysql:3306/crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
 
       # Step 4.1: Wait for Backend to Start and Verify Service
