@@ -56,7 +56,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker run -d --name backend \
-            -p 8080:8080 \            
+            -p 8080:8080 \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker network connect docker_network_crowdfund backend  
           
