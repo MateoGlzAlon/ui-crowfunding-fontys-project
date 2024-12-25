@@ -62,6 +62,8 @@ jobs:
             echo "Waiting for Backend to be ready..."
             sleep 5
           done || (echo "Backend failed to start" && exit 1)
+          docker logs -f backend
+
 
       # Step 5: Install frontend dependencies
       - name: Install frontend dependencies
