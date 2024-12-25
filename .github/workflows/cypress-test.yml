@@ -34,7 +34,7 @@ jobs:
         run: |
           docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker run -d --name backend \
-            -p 4000:4000 \
+            -p 8080:8080 \
             --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@localhost:3306/crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
 
