@@ -1,0 +1,70 @@
+name: End-to-End Tests with MySQL
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # Step 3: Pull and Run Database Docker Image
+      - name: Run MySQL database service
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
+          docker run -d --name mysql \
+            -p 3306:3306 \
+            --env MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }} \
+            --env MYSQL_DATABASE=crowdfund_db \
+            --env MYSQL_USER=${{ secrets.MYSQL_USER }} \
+            --env MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
+            ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
+
+      # Step 4: Pull and Run Backend Docker Image
+      - name: Run backend service
+        run: |
+          docker pull ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
+          docker run -d --name backend \
+            -p 4000:4000 \
+            --env DATABASE_URL=mysql://${{ secrets.MYSQL_USER }}:${{ secrets.MYSQL_PASSWORD }}@localhost:3306/crowdfund_db \
+            ${{ secrets.DOCKER_USERNAME }}/your-backend-image:latest
+
+      # Step 5: Install frontend dependencies
+      - name: Install frontend dependencies
+        run: |
+          cd frontend
+          npm install
+
+      # Step 6: Start the frontend application
+      - name: Start frontend server
+        run: |
+          cd frontend
+          npm run start &
+        env:
+          REACT_APP_API_URL: http://localhost:4000 # Set backend API URL
+
+      # Step 7: Wait for services to be ready
+      - name: Wait for services
+        run: |
+          npx wait-on http://localhost:3000
+          npx wait-on http://localhost:4000
+
+      # Step 8: Run Cypress tests
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          config-file: frontend/cypress.config.js

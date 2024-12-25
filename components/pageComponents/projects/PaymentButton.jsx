@@ -107,7 +107,7 @@ export default function PaymentButton({ projectId }) {
                 const notificationInfo = {
                     to: projectId,
                     title: "💸 - Payment received",
-                    description: `A backer has contributed ${moneyAmount} to one of your projects`
+                    description: `A backer has contributed ${moneyAmount}€ to one of your projects`
                 }
 
                 console.log("notificationInfo es: ", notificationInfo);

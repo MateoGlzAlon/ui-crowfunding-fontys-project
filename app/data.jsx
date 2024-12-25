@@ -5,6 +5,7 @@ export const DATA = {
     logoWhite: "/logoWhite.svg",
     heroTitle: "Bring your favourite\nprojects to life",
     origin: "http://localhost:8080",
+    shortOrigin: "localhost:8080",
     projectTypes: [
         "Education",
         "Environment",

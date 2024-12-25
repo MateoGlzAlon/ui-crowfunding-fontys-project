@@ -4,6 +4,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { Client } from '@stomp/stompjs';
 import { v4 as uuidv4 } from 'uuid';
 import { useToast } from "@/hooks/use-toast"
+import { DATA } from "@/app/data"
 
 
 const WebSocketContext = createContext();
@@ -17,7 +18,7 @@ export const WebSocketProvider = ({ children }) => {
 
         console.log("Jefe, el id es ", projectIds)
         const client = new Client({
-            brokerURL: 'ws://localhost:8080/ws',
+            brokerURL: `ws://${DATA.shortOrigin}/ws`,
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
