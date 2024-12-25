@@ -1,5 +1,3 @@
-name: End-to-End Tests with MySQL
-
 on:
   push:
     branches:
@@ -42,12 +40,12 @@ jobs:
 
       # Step 5: Install frontend dependencies
       - name: Install frontend dependencies
-        run: |          
+        run: |
           npm install
 
       # Step 6: Start the frontend application
       - name: Start frontend server
-        run: |          
+        run: |
           npm run start &
         env:
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
@@ -57,6 +55,15 @@ jobs:
         run: |
           npx wait-on http://localhost:3000
           npx wait-on http://localhost:8080
+
+      # Step 7.1: Verify services are healthy
+      - name: Check MySQL Service
+        run: |
+          docker exec mysql mysqladmin ping -h localhost -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} || exit 1
+
+      - name: Check Backend Service
+        run: |
+          curl -sSf http://localhost:8080/health || exit 1
 
       # Step 8: Run Cypress tests
       - name: Run Cypress tests
