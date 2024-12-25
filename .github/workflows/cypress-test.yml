@@ -1,3 +1,5 @@
+name: End-to-End Testing
+
 on:
   push:
     branches:
@@ -29,6 +31,11 @@ jobs:
             --env MYSQL_DATABASE=crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
 
+      # Step 3.1: Verify MySQL is running
+      - name: Check MySQL Service
+        run: |
+          docker exec mysql mysqladmin ping -h localhost -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} || exit 1
+
       # Step 4: Pull and Run Backend Docker Image
       - name: Run backend service
         run: |
@@ -38,6 +45,11 @@ jobs:
             --env DATABASE_URL=mysql://root:${{ secrets.MYSQL_ROOT_PASSWORD }}@localhost:3306/crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
 
+      # Step 4.1: Verify backend is running
+      - name: Check Backend Service
+        run: |
+          curl -sSf http://localhost:8080/health || exit 1
+
       # Step 5: Install frontend dependencies
       - name: Install frontend dependencies
         run: |
@@ -46,24 +58,18 @@ jobs:
       # Step 6: Start the frontend application
       - name: Start frontend server
         run: |
-          npm run start &
+          npm run start
         env:
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
 
       # Step 7: Wait for services to be ready
-      - name: Wait for services
+      - name: Wait for frontend service
         run: |
           npx wait-on http://localhost:3000
+
+      - name: Wait for backend service
+        run: |
           npx wait-on http://localhost:8080
-
-      # Step 7.1: Verify services are healthy
-      - name: Check MySQL Service
-        run: |
-          docker exec mysql mysqladmin ping -h localhost -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} || exit 1
-
-      - name: Check Backend Service
-        run: |
-          curl -sSf http://localhost:8080/health || exit 1
 
       # Step 8: Run Cypress tests
       - name: Run Cypress tests
