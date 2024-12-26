@@ -64,6 +64,13 @@ jobs:
           docker network connect docker_network_crowdfund backend  
           
 
+      # Step : 
+      - name: See networks and connections
+        run: |
+          docker network ls
+          docker network inspect docker_network_crowdfund
+
+
       # Step 4.1: Wait for Backend to Start and Verify Service
       - name: Wait for Backend Service to Start
         run: |
