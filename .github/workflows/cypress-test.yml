@@ -24,7 +24,7 @@ jobs:
       # Step : Connect containers
       - name: Create container network
         run: |
-          docker network create docker_network_crowdfund          
+          docker network create docker_network_crowdfund
 
       # Step 3: Pull and Run Database Docker Image
       - name: Run MySQL database service
@@ -61,15 +61,7 @@ jobs:
             --env MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
             --env JWT_SECRET=${{ secrets.JWT_SECRET }} \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
-          docker network connect docker_network_crowdfund backend  
-          
-
-      # Step : 
-      - name: See networks and connections
-        run: |
-          docker network ls
-          docker network inspect docker_network_crowdfund
-
+          docker network connect docker_network_crowdfund backend
 
       # Step 4.1: Wait for Backend to Start and Verify Service
       - name: Wait for Backend Service to Start
@@ -81,32 +73,25 @@ jobs:
           done || (echo "Backend failed to start" && exit 1)
           docker logs -f backend
 
-      # Step 5: Pull and Run Frontend Docker Image
-      - name: Wait for Backend Service to Start
+      # Step 5: Build and Serve the Frontend (If using Docker container for frontend)
+      - name: Build and Serve Frontend
         run: |
-          for i in {1..10}; do
-            curl -sSf http://localhost:8080/health && break
-            echo "Waiting for Backend to be ready..."
-            sleep 5
-          done || (echo "Backend failed to start" && exit 1)
-          docker logs -f backend      
-
-      # Step 6: Start the frontend application
-      - name: Start frontend server
-        run: |
+          npm install
           npm run build
-          npm run start &
-        env:      
+          npm run start & # This will start the frontend in the background
+        env:
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
 
-      # Step 7: Wait for frontend service
+      # Step 6: Wait for Frontend Service to Start
       - name: Wait for Frontend Service
         run: |
           npx wait-on http://localhost:3000
 
-      # Step 8: Run Cypress tests
+      # Step 7: Run Cypress Tests
       - name: Run Cypress tests
         uses: cypress-io/github-action@v5
         with:
           browser: chrome
           config-file: cypress.config.js
+        env:
+          CYPRESS_baseUrl: http://localhost:3000 # Point to the frontend
