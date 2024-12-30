@@ -41,12 +41,11 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
           docker network connect docker_network_crowdfund raisehub_database
 
-      # Step 3.1: Wait for MySQL to Start and Verify Service using wait-for-it
+      # Step 3.1: Wait for MySQL to be ready using dockerize
       - name: Wait for MySQL to be ready
         run: |
-          wget https://github.com/vishnubob/wait-for-it/releases/download/v2.3.0/wait-for-it.sh
-          chmod +x wait-for-it.sh
-          ./wait-for-it.sh localhost:3306 --timeout=60 --strict -- echo "MySQL is ready"
+          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://raisehub_database:3306 -timeout 60s
+          echo "MySQL is ready"
 
       # Step 4: Pull and Run Backend Docker Image
       - name: Run backend service
@@ -60,10 +59,11 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker network connect docker_network_crowdfund backend
 
-      # Step 4.1: Wait for Backend to be ready using wait-on
+      # Step 4.1: Wait for Backend to be ready using dockerize
       - name: Wait for Backend Service to be ready
         run: |
-          npx wait-on http://localhost:8080/health --timeout=60000 --delay=5000
+          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://backend:8080 -timeout 60s
+          echo "Backend is ready"
 
       # Step 5: Build and Serve the Frontend
       - name: Build and Serve Frontend
@@ -74,10 +74,11 @@ jobs:
         env:
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
 
-      # Step 6: Wait for Frontend Service to Start
+      # Step 6: Wait for Frontend Service to Start using dockerize
       - name: Wait for Frontend Service to Start
         run: |
-          npx wait-on http://localhost:3000 --timeout=60000 --delay=5000
+          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://localhost:3000 -timeout 60s
+          echo "Frontend is ready"
 
       # Step 7: Run Cypress Tests
       - name: Run Cypress tests
