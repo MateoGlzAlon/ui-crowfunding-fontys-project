@@ -1,9 +1,9 @@
-"use client";
+"use client"
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button"; // Using your existing Button component
-import Image from "next/image"; // For the placeholder image
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import AuthAPI from "@/app/apis/AuthAPI";
 import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 import getProjectIdsOwnedByUserGET from "@/components/fetchComponents/GET/getProjectIdsOwnedByUserGET";
@@ -12,6 +12,9 @@ import PageFrame from "@/components/generalComponents/pageFrame/PageFrame";
 export default function LoginPage() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");  // To store the error message
+    const [usernameError, setUsernameError] = useState(false); // To highlight the username input on error
+    const [passwordError, setPasswordError] = useState(false); // To highlight the password input on error
     const { setupStompClient } = useWebSocket();
     const router = useRouter();
 
@@ -27,6 +30,10 @@ export default function LoginPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage("");
+        setUsernameError(false);
+        setPasswordError(false);
+
         try {
             const loginResponse = await handleLogIn(username, password);
 
@@ -40,7 +47,9 @@ export default function LoginPage() {
                 // Navigate to the homepage
                 router.push("/");
             } else {
-                console.error("Login failed. Please check your credentials.");
+                setErrorMessage("Invalid username or password. Please try again.");
+                setUsernameError(true);
+                setPasswordError(true);
             }
         } catch (error) {
             console.error("Error during login submission:", error.message);
@@ -48,7 +57,6 @@ export default function LoginPage() {
     };
 
     return (
-
         <div className="min-h-screen flex bg-white">
             {/* Left Section with Image and Text */}
             <div className="flex flex-col justify-center items-center w-1/2 bg-gray-100 p-8">
@@ -79,6 +87,7 @@ export default function LoginPage() {
                 <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
                         <form className="space-y-6" onSubmit={handleSubmit}>
+                            {/* Username */}
                             <div>
                                 <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                                     Email address
@@ -92,11 +101,12 @@ export default function LoginPage() {
                                         required
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${usernameError ? 'border-red-500' : 'border-gray-300'}`}
                                     />
                                 </div>
                             </div>
 
+                            {/* Password */}
                             <div>
                                 <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                                     Password
@@ -110,12 +120,15 @@ export default function LoginPage() {
                                         required
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        className={`w-full px-3 py-2 border rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${passwordError ? 'border-red-500' : 'border-gray-300'}`}
                                     />
                                 </div>
                             </div>
 
+                            {/* Error message */}
+                            {errorMessage && <div className="text-red-500 text-sm mt-2">{errorMessage}</div>}
 
+                            {/* Submit Button */}
                             <div>
                                 <Button type="submit" variant="default" className="w-full">
                                     Log In

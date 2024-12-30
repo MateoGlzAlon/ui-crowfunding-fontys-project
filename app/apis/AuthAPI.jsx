@@ -6,7 +6,6 @@ const AuthAPI = {
     login: (username, password) => axios.post(`${DATA.origin}/tokens`, { username, password })
         .then(response => response.data.accessToken)
         .then(accessToken => TokenManager.setAccessToken(accessToken))
-        .then(console.log("Code is: ", response))
 }
 
 export default AuthAPI;

@@ -12,15 +12,14 @@ export default function RegisterPage() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [emailError, setEmailError] = useState(''); // State for email-specific errors
     const router = useRouter();
 
     function handleRegister(name, email, password) {
-
-        registerUserPOST(name, email, password, "user", `https://avatar.iran.liara.run/public/boy?username=${name}`);
-
+        return registerUserPOST(name, email, password, "user", "https://raisehub-crowdfunding-bucket.s3.eu-west-3.amazonaws.com/placeholder_raisehub.png");
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Validate passwords match
@@ -31,12 +30,23 @@ export default function RegisterPage() {
 
         // Clear error message if validation is successful
         setErrorMessage('');
+        setEmailError(''); // Reset email error message
 
         // Handle registration logic here (e.g., create user)
-        handleRegister(name, email, password);
+        const registerResponse = await handleRegister(name, email, password);
 
-        // After successful registration, redirect to the login page
-        router.push('/login');
+        console.log("REG RESPONSE: " + registerResponse);
+
+        if (registerResponse === 409) {
+            // Email is already registered
+            setEmailError("This email is already registered.");
+        } else if (registerResponse === 200) {
+            // Successful registration, redirect to login
+            router.push('/login');
+        } else {
+            // Handle other errors (e.g., server error)
+            setErrorMessage("An error occurred. Please try again.");
+        }
     };
 
     return (
@@ -104,9 +114,16 @@ export default function RegisterPage() {
                                         required
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
-                                        className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                        className={`w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm 
+                                            ${emailError ? 'border-red-500' : 'border-gray-300'}`}
                                     />
                                 </div>
+                                {/* Display email error message under email input */}
+                                {emailError && (
+                                    <div className="mt-1 text-sm text-red-500">
+                                        {emailError}
+                                    </div>
+                                )}
                             </div>
 
                             <div>
