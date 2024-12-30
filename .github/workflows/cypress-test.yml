@@ -8,7 +8,6 @@ on:
 
 jobs:
   cypress-tests:
-
     runs-on: ubuntu-latest    
 
     steps:
@@ -41,21 +40,13 @@ jobs:
             --env MYSQL_DATABASE=crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
           docker network connect docker_network_crowdfund raisehub_database
-          docker network inspect docker_network_crowdfund
 
-      # Step 3.1: Wait for MySQL to Start and Verify Service
-      - name: Wait for MySQL Service to Start
+      # Step 3.1: Wait for MySQL to Start and Verify Service using wait-for-it
+      - name: Wait for MySQL to be ready
         run: |
-          for i in {1..10}; do
-            docker exec raisehub_database mysqladmin ping -h 127.0.0.1 -u root -p${{ secrets.MYSQL_ROOT_PASSWORD }} && break
-            echo "Waiting for MySQL to be ready..."
-            sleep 5
-          done || (echo "MySQL failed to start" && exit 1)
-
-      - name: Debug MySQL Logs
-        if: failure()
-        run: |
-          docker logs raisehub_database
+          wget https://github.com/vishnubob/wait-for-it/releases/download/v2.3.0/wait-for-it.sh
+          chmod +x wait-for-it.sh
+          ./wait-for-it.sh localhost:3306 --timeout=60 --strict -- echo "MySQL is ready"
 
       # Step 4: Pull and Run Backend Docker Image
       - name: Run backend service
@@ -69,29 +60,24 @@ jobs:
             ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
           docker network connect docker_network_crowdfund backend
 
-      # Step 4.1: Wait for Backend to Start and Verify Service
-      - name: Wait for Backend Service to Start
+      # Step 4.1: Wait for Backend to be ready using wait-on
+      - name: Wait for Backend Service to be ready
         run: |
-          for i in {1..10}; do
-            curl -sSf http://localhost:8080/health && break
-            echo "Waiting for Backend to be ready..."
-            sleep 5
-          done || (echo "Backend failed to start" && exit 1)
-          docker logs -f backend
+          npx wait-on http://localhost:8080/health --timeout=60000 --delay=5000
 
-      # Step 5: Build and Serve the Frontend (If using Docker container for frontend)
+      # Step 5: Build and Serve the Frontend
       - name: Build and Serve Frontend
         run: |
           npm install
           npm run build
-          npm run start & # This will start the frontend in the background
+          npm run start & # Start frontend in background
         env:
           REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
 
       # Step 6: Wait for Frontend Service to Start
-      - name: Wait for Frontend Service
+      - name: Wait for Frontend Service to Start
         run: |
-          npx wait-on http://localhost:3000
+          npx wait-on http://localhost:3000 --timeout=60000 --delay=5000
 
       # Step 7: Run Cypress Tests
       - name: Run Cypress tests
