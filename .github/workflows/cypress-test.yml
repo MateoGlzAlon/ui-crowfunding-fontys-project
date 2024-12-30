@@ -41,6 +41,7 @@ jobs:
             --env MYSQL_DATABASE=crowdfund_db \
             ${{ secrets.DOCKER_USERNAME }}/raisehub_database:latest
           docker network connect docker_network_crowdfund raisehub_database
+          docker network inspect docker_network_crowdfund
 
       # Step 3.1: Wait for MySQL to Start and Verify Service
       - name: Wait for MySQL Service to Start
