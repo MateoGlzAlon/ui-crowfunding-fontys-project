@@ -35,7 +35,6 @@ export default function RegisterPage() {
         // Handle registration logic here (e.g., create user)
         const registerResponse = await handleRegister(name, email, password);
 
-        console.log("REG RESPONSE: " + registerResponse);
 
         if (registerResponse === 409) {
             // Email is already registered
