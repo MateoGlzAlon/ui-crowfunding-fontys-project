@@ -6,7 +6,6 @@ export default async function fetchProjectData(projectId) {
     if (projectId) {
         try {
             const response = await axios.get(`${DATA.origin}/projects/details/${projectId}`);
-            console.log("hola", response.data);
             return response.data;
         } catch (error) {
             console.error("Failed to fetch project data:", error);

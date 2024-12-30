@@ -110,7 +110,6 @@ export default function PaymentButton({ projectId }) {
                     description: `A backer has contributed ${moneyAmount}€ to one of your projects`
                 }
 
-                console.log("notificationInfo es: ", notificationInfo);
                 sendMessage(notificationInfo);
 
                 setMoneyAmount("");

@@ -24,20 +24,12 @@ export default async function createProjectPOST(projectData, files) {
         }
     }
 
-    console.log("files es: ", files);
-    console.log("fileurls es: ", fileURLs);
-
     const projectId = response.data.id;
-
-    console.log("hola jefe");
 
     // Attach images to the project
     await Promise.all(
         fileURLs.map((imageURL, index) => {
             const imageOrder = index + 1; // Correctly define imageOrder here
-            console.log("projectId es: ", projectId);
-            console.log("imageUrl es: ", imageURL);
-            console.log("imageOrder es: ", imageOrder);
 
             axios.post(`${DATA.origin}/projects/images`, {
                 projectId: projectId,
@@ -50,8 +42,6 @@ export default async function createProjectPOST(projectData, files) {
             );
         })
     );
-
-    console.log("The project created was: ", response.data);
 
     return projectId;
 }

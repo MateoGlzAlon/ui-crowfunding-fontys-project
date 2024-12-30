@@ -10,6 +10,5 @@ export default async function getProfilePictureGET(userId) {
         }
     )
 
-    console.log("Response is:  ", response.data)
     return response.data;
 }

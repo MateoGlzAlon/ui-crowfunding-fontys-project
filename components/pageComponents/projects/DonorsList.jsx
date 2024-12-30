@@ -38,7 +38,6 @@ export function DonorsList({ className, projectId }) {
     useEffect(() => {
         const fetchData = async () => {
             if (projectId) {
-                console.log(`Fetching donations for project ID: ${projectId}`);
                 const data = await fetchDonationsListData(projectId);
                 setDonations(data);
             }

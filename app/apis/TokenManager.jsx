@@ -15,7 +15,6 @@ const TokenManager = {
         const claims = jwtDecode(token); // Decode the token using the default export
         sessionStorage.setItem("claims", JSON.stringify(claims));
 
-        console.log("Claims: ", claims);
         return claims;
     },
 

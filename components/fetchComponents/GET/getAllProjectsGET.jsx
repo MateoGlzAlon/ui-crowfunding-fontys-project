@@ -24,8 +24,6 @@ async function getAllProjectsGET({
 
         const response = await axios.get(`${DATA.origin}/projects/filters/pagination?${queryParams}`);
 
-        console.log("filter xd is: ", response.data)
-
         return response.data;
     } catch (error) {
         console.error("Failed to get all projects: ", error);

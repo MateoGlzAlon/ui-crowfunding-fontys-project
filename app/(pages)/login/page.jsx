@@ -17,7 +17,6 @@ export default function LoginPage() {
 
     const handleLogIn = async (username, password) => {
         try {
-            console.log("Logging in with username:", username);
             const response = await AuthAPI.login(username, password);
             return response;
         } catch (error) {
@@ -29,12 +28,9 @@ export default function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log("Submitting login form...");
             const loginResponse = await handleLogIn(username, password);
 
             if (loginResponse) {
-                console.log("Login successful:", loginResponse);
-
                 // Fetch the user's project IDs
                 const projectIds = await getProjectIdsOwnedByUserGET(username);
 

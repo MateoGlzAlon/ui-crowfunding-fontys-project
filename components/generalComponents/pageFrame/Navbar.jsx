@@ -18,20 +18,6 @@ export default function Navbar() {
     const router = useRouter();
     const { sendMessage } = useWebSocket();
 
-
-    function handleSendMessage() {
-
-        const notificationInfo = {
-            to: 3,
-            title: "Someone contributed to your project",
-            description: `A backer has contributed 50€ to this project`
-        }
-
-        console.log("notificationInfo es: ", notificationInfo);
-        sendMessage(notificationInfo);
-
-    }
-
     // Function to check and set the login token and claims
     const checkLoginToken = () => {
         const token = TokenManager.getAccessToken(); // Retrieve the token

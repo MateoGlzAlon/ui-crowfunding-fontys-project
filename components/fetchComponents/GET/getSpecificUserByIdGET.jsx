@@ -10,6 +10,5 @@ export default async function getSpecificUserById(userId) {
         }
     )
 
-    console.log("Response is:  ", response.data)
     return response.data;
 }

@@ -76,7 +76,6 @@ export default function Profile() {
             if (uploadedFile?.url) {
                 await updateProfilePicture(user.id, uploadedFile.url);
                 setUser((prev) => ({ ...prev, profilePicture: uploadedFile.url }));
-                console.log("Profile picture updated successfully!");
             } else {
                 console.warn("File upload failed.");
             }

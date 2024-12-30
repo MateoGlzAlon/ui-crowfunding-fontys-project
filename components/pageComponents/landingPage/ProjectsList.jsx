@@ -12,7 +12,6 @@ const ProjectsList = ({ title, endpoint }) => {
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(`Fetching projects from endpoint: ${endpoint}`);
             const data = await fetchProjectListData(endpoint);
             setProjects(data);
         };

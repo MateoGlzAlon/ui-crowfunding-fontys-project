@@ -16,15 +16,12 @@ export const WebSocketProvider = ({ children }) => {
 
     const setupStompClient = (projectIds) => {
 
-        console.log("Jefe, el id es ", projectIds)
         const client = new Client({
             brokerURL: `ws://${DATA.shortOrigin}/ws`,
             reconnectDelay: 5000,
             heartbeatIncoming: 4000,
             heartbeatOutgoing: 4000,
         });
-
-        console.log("Despues del client")
 
         client.onConnect = () => {
             projectIds.forEach((projectId) => {
@@ -44,8 +41,6 @@ export const WebSocketProvider = ({ children }) => {
             return;
         }
 
-        console.log("Sending message:", newMessage);
-
         const payload = {
             id: uuidv4(),
             to: newMessage.to,
@@ -61,7 +56,6 @@ export const WebSocketProvider = ({ children }) => {
 
     const onPaymentReceived = (data) => {
         const toastMsg = JSON.parse(data.body);
-        console.log("Payment received: ", toastMsg);
 
         toast({
             title: `${toastMsg.title}`,

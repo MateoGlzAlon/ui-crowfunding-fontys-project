@@ -53,7 +53,6 @@ function CreateProjectPage() {
             console.error('Error creating project with data:', updatedFormData, error);
         }
 
-        console.log(updatedFormData);
     };
 
     return (

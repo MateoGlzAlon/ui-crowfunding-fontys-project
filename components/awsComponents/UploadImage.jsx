@@ -26,12 +26,7 @@ export const uploadFile = async (file) => {
             throw new Error(`Failed to fetch signed URL: ${signedURLResult.failure}`);
         }
 
-        console.log("signedURLResult es: ", signedURLResult)
-
         const url = signedURLResult.success.url;
-
-        console.log("url es", url)
-
 
         // Upload the file to S3 using the signed URL
         await axios.put(url, file, {

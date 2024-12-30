@@ -65,7 +65,6 @@ const ProjectDetails = ({ params }) => {
 
     const handleBanUser = async () => {
         try {
-            console.log("userid es: ", project.userId);
             await deleteUserById(project.userId);
             alert("User banned successfully.");
             router.push("/");

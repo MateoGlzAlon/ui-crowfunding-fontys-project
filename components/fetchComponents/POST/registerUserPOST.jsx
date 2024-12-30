@@ -13,6 +13,5 @@ export default async function registerUserPOST(fullName, email, password, role, 
 
     });
 
-    console.log("The user created was: ", response.data);
 
 }

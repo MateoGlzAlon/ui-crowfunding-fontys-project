@@ -33,8 +33,6 @@ export default function RegisterPage() {
         setErrorMessage('');
 
         // Handle registration logic here (e.g., create user)
-        console.log("Name:", name, "Email:", email, "Password:", password);
-
         handleRegister(name, email, password);
 
         // After successful registration, redirect to the login page

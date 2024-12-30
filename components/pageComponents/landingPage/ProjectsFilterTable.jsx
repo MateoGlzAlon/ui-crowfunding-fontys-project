@@ -26,8 +26,6 @@ export default function ProjectFilterTable() {
                 size: 6, // Number of projects per page
             });
 
-            console.log("data es: ", data)
-
             if (data) {
                 setProjects(data.content || data); // Assuming the API returns a "content" key for projects
                 setTotalPages(data.totalPages || 1); // Assuming the API returns a "totalPages" key

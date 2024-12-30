@@ -12,13 +12,5 @@ export default async function createPaymentPOST(paymentData) {
         }
     );
 
-    console.log("Response es: ", response);
-    console.log("Token manager: ", TokenManager.getAccessToken());
-
-
-
-    console.log("The payment created was: ", response.data);
-
-
     return response;
 }
