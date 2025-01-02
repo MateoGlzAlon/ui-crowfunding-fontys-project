@@ -74,7 +74,7 @@ jobs:
       # Step 6: Wait for Frontend Service to Start using dockerize
       - name: Wait for Frontend Service to Start
         run: |
-          sleep 30
+          sleep 15
           echo "Frontend is ready"
 
       # Step 7: Run Cypress Tests

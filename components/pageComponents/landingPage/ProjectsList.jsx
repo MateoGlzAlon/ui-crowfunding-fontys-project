@@ -34,7 +34,8 @@ const ProjectsList = ({ title, endpoint }) => {
                         <div
                             key={project.id}
                             onClick={() => router.push(`/projects/${project.id}`)}
-                            className="block cursor-pointer bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100 rounded-lg"
+                            id="project-card"
+                            className="block cursor-pointer bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100  rounded-lg"
                         >
                             <div className="w-full h-48 overflow-hidden rounded-lg">
                                 <img

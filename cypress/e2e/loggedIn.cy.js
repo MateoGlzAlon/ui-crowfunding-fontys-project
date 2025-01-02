@@ -9,29 +9,28 @@ describe('Logged in tests', () => {
     });
 
     it('Visit profile', () => {
-        cy.get('.w-10').click()
+        cy.get('#user-avatar').click()
         cy.contains('My Profile').click()
     })
 
 
     it('Visit a project', () => {
-        cy.get(':nth-child(2) > .container > .flex > :nth-child(1)').click()
+        cy.get('#project-card').click()
         cy.url().should('include', '/projects/')
     })
 
 
     it('Make a payment', () => {
-        cy.get(':nth-child(2) > .container > .flex > :nth-child(1)').click()
+        cy.get('#project-card').click()
         cy.get('#inputMoneyAmount').type('125')
         cy.contains('Pay').click()
-        //TO-DO: Review the database it is using
-        //cy.contains('Confirm').click()
+        cy.contains('Confirm').click()
     })
 
 
     it('Search projects', () => {
-        cy.get(':nth-child(2) > .flex > .w-full').click().type('gard')
-        cy.contains('Search').click()
+        cy.get('#search-input').click().type('gard')
+        cy.get('#search-submit').click()
         cy.contains('Garden')
     })
 
