@@ -74,7 +74,7 @@ jobs:
       # Step 6: Wait for Frontend Service to Start using dockerize
       - name: Wait for Frontend Service to Start
         run: |
-          sleep 200
+          sleep 30
           echo "Frontend is ready"
 
       # Step 7: Run Cypress Tests
@@ -84,4 +84,4 @@ jobs:
           browser: chrome
           config-file: cypress.config.js
         env:
-          CYPRESS_baseUrl: http://localhost:3000 # Point to the frontend
+          CYPRESS_baseUrl: http://localhost:3000

@@ -4,7 +4,7 @@ describe('Logged in tests', () => {
         cy.visit('http://localhost:3000')
         cy.contains('Log in').click()
         cy.get('#username').click().type('user@example.com')
-        cy.get('#password').click().type('pass_1')
+        cy.get('#password').click().type('pass1')
         cy.contains('Log In').click()
     });
 
