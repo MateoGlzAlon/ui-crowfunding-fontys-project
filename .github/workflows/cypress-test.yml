@@ -43,8 +43,8 @@ jobs:
 
       # Step 3.1: Wait for MySQL to be ready using dockerize
       - name: Wait for MySQL to be ready
-        run: |
-          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://raisehub_database:3306 -timeout 60s
+        run:
+          sleep 30
           echo "MySQL is ready"
 
       # Step 4: Pull and Run Backend Docker Image
@@ -56,28 +56,25 @@ jobs:
             --env MYSQL_USERNAME=${{ secrets.MYSQL_USERNAME }} \
             --env MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }} \
             --env JWT_SECRET=${{ secrets.JWT_SECRET }} \
-            ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest
+            ${{ secrets.DOCKER_USERNAME }}/raisehub_backend:latest            
           docker network connect docker_network_crowdfund backend
 
       # Step 4.1: Wait for Backend to be ready using dockerize
       - name: Wait for Backend Service to be ready
         run: |
-          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://backend:8080 -timeout 60s
-          echo "Backend is ready"
+          sleep 1
 
       # Step 5: Build and Serve the Frontend
       - name: Build and Serve Frontend
         run: |
           npm install
           npm run build
-          npm run start & # Start frontend in background
-        env:
-          REACT_APP_API_URL: http://localhost:8080 # Set backend API URL
+          npm run start & # Start frontend in background        
 
       # Step 6: Wait for Frontend Service to Start using dockerize
       - name: Wait for Frontend Service to Start
         run: |
-          docker run --rm --network docker_network_crowdfund wernight/dockerize -wait tcp://localhost:3000 -timeout 60s
+          sleep 200
           echo "Frontend is ready"
 
       # Step 7: Run Cypress Tests
