@@ -43,7 +43,7 @@ jobs:
 
       # Step 3.1: Wait for MySQL to be ready using dockerize
       - name: Wait for MySQL to be ready
-        run:
+        run: |
           sleep 30
           echo "MySQL is ready"
 
