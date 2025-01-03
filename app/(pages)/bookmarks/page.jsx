@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import getProjectsCreatedByUserGET from "@/components/fetchComponents/GET/getProjectsCreatedByUserGET";
 import getSpecificUserById from "@/components/fetchComponents/GET/getSpecificUserByIdGET";
 import TokenManager from "@/app/apis/TokenManager";
 import PageFrame from "@/components/generalComponents/pageFrame/PageFrame";
 import { useRouter } from "next/navigation";
+import getProjectsBookmarkedByUserGET from "@/components/fetchComponents/GET/getProjectsBookmarkedByUser";
 
 export default function Bookmarks() {
     const [projects, setProjects] = useState([]);
@@ -19,11 +19,13 @@ export default function Bookmarks() {
         try {
             const [userData, userProjects] = await Promise.all([
                 getSpecificUserById(userId),
-                getProjectsCreatedByUserGET(userId),
+                getProjectsBookmarkedByUserGET(),
             ]);
 
             setUser(userData || {});
             setProjects(userProjects || []);
+
+            console.log("User Data:", userData);
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -63,37 +65,39 @@ export default function Bookmarks() {
                     </div>
                 </div>
 
-                {Array.isArray(projects) && projects.map((project) => (
-                    <div
-                        key={project.id}
-                        onClick={() => router.push(`/projects/${project.id}`)}
-                        id="project-card"
-                        className="block cursor-pointer bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100  rounded-lg"
-                    >
-                        <div className="w-full h-48 overflow-hidden rounded-lg">
-                            <img
-                                src={project.imageCover}
-                                alt={project.name}
-                                className="w-full h-full object-cover"
-                            />
+                <div className="flex">
+                    {Array.isArray(projects) && projects.map((project) => (
+                        <div
+                            key={project.id}
+                            onClick={() => router.push(`/projects/${project.id}`)}
+                            id="project-card"
+                            className="block cursor-pointer bg-transparent p-3 w-full sm:w-full md:w-1/3 lg:w-1/5 transform transition hover:scale-105 hover:bg-slate-100  rounded-lg"
+                        >
+                            <div className="w-full h-48 overflow-hidden rounded-lg">
+                                <img
+                                    src={project.imageCover}
+                                    alt={project.name}
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                            {/*<p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>*/}                            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
+                                <div
+                                    className="bg-green-500 h-2.5 rounded-full"
+                                    style={{
+                                        width: `${project.moneyRaised >= project.fundingGoal
+                                            ? '100%'
+                                            : `${(project.moneyRaised / project.fundingGoal) * 100}%`
+                                            }`,
+                                    }}
+                                ></div>
+                            </div>
+                            <h3 className="text-base font-bold mt-4">{project.name}</h3>
+                            <p className="text-sm text-gray-700 mt-2">
+                                ${project.moneyRaised} raised of ${project.fundingGoal}
+                            </p>
                         </div>
-                        {/*<p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>*/}                            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
-                            <div
-                                className="bg-green-500 h-2.5 rounded-full"
-                                style={{
-                                    width: `${project.moneyRaised >= project.fundingGoal
-                                        ? '100%'
-                                        : `${(project.moneyRaised / project.fundingGoal) * 100}%`
-                                        }`,
-                                }}
-                            ></div>
-                        </div>
-                        <h3 className="text-base font-bold mt-4">{project.name}</h3>
-                        <p className="text-sm text-gray-700 mt-2">
-                            ${project.moneyRaised} raised of ${project.fundingGoal}
-                        </p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </PageFrame>
     );
