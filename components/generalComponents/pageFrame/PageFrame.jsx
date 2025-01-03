@@ -4,15 +4,18 @@ import Footer from "./Footer";
 
 function PageFrame({ children }) {
     return (
-        <main>
+        <div className="min-h-screen flex flex-col">
+            {/* Navbar */}
             <Navbar />
 
-            <div className="mx-6 pt-16">
-                {children}
-            </div>
+            {/* Main Content */}
+            <main className="flex-grow">
+                <div className="mx-6 pt-16">{children}</div>
+            </main>
 
+            {/* Footer */}
             <Footer />
-        </main>
+        </div>
     );
 }
 

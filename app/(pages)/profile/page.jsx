@@ -1,4 +1,4 @@
-"use client";
+"use client"
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import getProjectsCreatedByUserGET from "@/components/fetchComponents/GET/getProjectsCreatedByUserGET";
@@ -149,16 +149,16 @@ export default function Profile() {
                 </div>
 
                 {/* Grid for Projects and Payments */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-10">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
                     {/* Projects Section */}
-                    <div>
-                        <h2 className="text-xl font-bold text-gray-800 mb-6">Projects Created</h2>
+                    <div className="bg-white p-4 rounded-lg shadow-md">
+                        <h2 className="text-xl font-bold text-gray-800 mb-4 h-10 items-center">Projects Created</h2>
                         <div className="space-y-4">
                             {projects.length > 0 ? (
                                 projects.map((project) => (
                                     <div
                                         key={project.id}
-                                        className="flex items-center border rounded-lg p-4 bg-gray-50 hover:cursor-pointer"
+                                        className="flex items-center border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer"
                                         onClick={() => router.push(`/projects/${project.id}`)}
                                     >
                                         <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">
@@ -184,8 +184,8 @@ export default function Profile() {
                     </div>
 
                     {/* Payments Section */}
-                    <div>
-                        <div className="flex justify-between items-center mb-6">
+                    <div className="bg-white p-4 rounded-lg shadow-md">
+                        <div className="flex justify-between items-center mb-4">
                             <h2 className="text-xl font-bold text-gray-800">Payments Made ({totalPayments}€)</h2>
                             <select
                                 className="border px-4 py-2 rounded bg-gray-50"
@@ -202,7 +202,7 @@ export default function Profile() {
                                 payments.map((payment) => (
                                     <div
                                         key={payment.id}
-                                        className="flex items-center border rounded-lg p-4 bg-gray-50 hover:cursor-pointer"
+                                        className="flex items-center border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer"
                                         onClick={() => router.push(`/projects/${payment.projectId}`)}
                                     >
                                         <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">

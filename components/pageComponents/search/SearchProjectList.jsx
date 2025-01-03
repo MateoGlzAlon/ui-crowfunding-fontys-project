@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import getAllProjectsGET from "@/components/fetchComponents/GET/getAllProjectsGET";
 import { useRouter, useSearchParams } from "next/navigation";
 import { DATA } from "@/app/data";
@@ -61,7 +61,7 @@ export default function SearchProjectList() {
                 <h2 className="text-4xl font-bold mb-8 text-center">Project Listings</h2>
 
                 {/* Filter and Sort Options */}
-                <div className="flex justify-end gap-4 mb-8">
+                <div className="flex justify-end gap-4 mb-8 w-2/3 mx-auto">
                     <select
                         className="p-2 border border-gray-300 rounded-md shadow-sm"
                         value={sortBy}
@@ -101,11 +101,11 @@ export default function SearchProjectList() {
                 </div>
 
                 {/* Projects List */}
-                <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-6 w-2/3 mx-auto">
                     {projects.map((project) => (
                         <div
                             key={project.id}
-                            className="flex items-start p-4 border rounded-lg hover:bg-gray-100 hover:scale-[103%] transition-transform hover:cursor-pointer"
+                            className="flex items-start p-4 border rounded-lg hover:bg-gray-100 hover:scale-[103%] transition-transform cursor-pointer"
                             onClick={() => router.push(`/projects/${project.id}`)}
                         >
                             <div className="w-32 h-32 rounded-md overflow-hidden flex-shrink-0 mr-4">
@@ -115,7 +115,7 @@ export default function SearchProjectList() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="flex flex-col justify-start items-start space-y-4 h-full">
+                            <div className="flex flex-col justify-start items-start space-y-4 h-full ">
                                 <h3 className="text-xl font-bold text-gray-800">{project.name}</h3>
 
                                 <p className="text-sm text-gray-600">
@@ -125,14 +125,24 @@ export default function SearchProjectList() {
                                 <div className="text-sm font-medium text-gray-800">
                                     {project.moneyRaised} € raised of {project.fundingGoal} €
                                 </div>
+                                <div className="w-full bg-gray-300 rounded-full h-2.5 mb-[1rem]">
+                                    <div
+                                        className="bg-green-500 h-2.5 rounded-full"
+                                        style={{
+                                            width: `${project.moneyRaised >= project.fundingGoal
+                                                ? "100%"
+                                                : `${(project.moneyRaised / project.fundingGoal) * 100}%`
+                                                }`,
+                                        }}
+                                    ></div>
+                                </div>
                             </div>
-
                         </div>
                     ))}
                 </div>
 
                 {/* Pagination */}
-                <div className="flex justify-between items-center mt-8">
+                <div className="flex justify-between items-center mt-8 w-2/3 mx-auto">
                     <button
                         onClick={handlePrevPage}
                         disabled={currentPage === 1}

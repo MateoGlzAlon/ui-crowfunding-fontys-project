@@ -72,14 +72,22 @@ export default function ProfileButton() {
 
             {/* Dropdown Menu */}
             {isOpen && (
-                <div className="absolute right-0 mt-2 w-64 rounded-lg shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 z-50">
+                <div className="absolute right-0 mt-2 w-40 rounded-lg shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 z-50">
                     <ul className="py-2">
                         <li>
                             <button
-                                className="flex items-center w-full px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                                className="flex items-center w-full px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-b-2"
                                 onClick={() => router.push("/profile")}
                             >
                                 My Profile
+                            </button>
+                        </li>
+                        <li>
+                            <button
+                                className="flex items-center w-full px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors border-b-2"
+                                onClick={() => router.push("/bookmarks")}
+                            >
+                                Bookmarks
                             </button>
                         </li>
                         <li>

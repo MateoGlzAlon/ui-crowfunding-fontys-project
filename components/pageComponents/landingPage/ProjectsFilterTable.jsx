@@ -63,48 +63,60 @@ export default function ProjectFilterTable() {
                 <h2 className="text-4xl font-bold mb-8 text-center">Project Listings</h2>
 
                 {/* Filter and Sort Options */}
-                <div className="flex justify-end gap-4 mb-8">
-                    <p>Filters</p>
-                    <select
-                        className="p-2 border border-gray-300 rounded-md shadow-sm"
-                        value={sortBy}
-                        onChange={(e) => handleFilterChange(setSortBy, e.target.value)}
-                    >
-                        <option value="dateCreatedDesc">Date Created(new first)</option>
-                        <option value="dateCreatedAsc">Date Created(old first)</option>
+                <div className="flex justify-end gap-6 mb-8 flex-wrap text-right">
+                    {/* Filter for Sort By */}
+                    <div className="flex flex-col w-56">
+                        <label className="mb-2 text-sm font-medium text-gray-700 ">Sort by</label>
+                        <select
+                            className="p-3 bg-white border border-gray-300 rounded-md shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            value={sortBy}
+                            onChange={(e) => handleFilterChange(setSortBy, e.target.value)}
+                        >
+                            <option value="dateCreatedDesc">Date Created (Newest first)</option>
+                            <option value="dateCreatedAsc">Date Created (Oldest first)</option>
+                            <option value="percentageFundedDesc">Percentage Funded (Highest first)</option>
+                            <option value="percentageFundedAsc">Percentage Funded (Lowest first)</option>
+                        </select>
+                    </div>
 
-                        <option value="percentageFundedDesc">Percentage Funded(highest first)</option>
-                        <option value="percentageFundedAsc">Percentage Funded(lowest first)</option>
-                    </select>
-                    <select
-                        className="p-2 border border-gray-300 rounded-md shadow-sm"
-                        onChange={(e) => {
-                            const range = e.target.value.split("-");
-                            handleFilterChange(setMinPercentageFunded, Number(range[0]));
-                            handleFilterChange(setMaxPercentageFunded, Number(range[1]));
-                        }}
-                    >
-                        <option value="0-100">Filter by Percentage Funded</option>
-                        <option value="0-25">0-25%</option>
-                        <option value="25-50">25-50%</option>
-                        <option value="50-75">50-75%</option>
-                        <option value="75-100">75-100%</option>
-                        <option value="100-99999999">Fully funded</option>
-                    </select>
-                    <select
-                        className="p-2 border border-gray-300 rounded-md shadow-sm"
-                        onChange={(e) => handleFilterChange(setType, e.target.value || null)}
-                    >
-                        <option value="">Filter by Type</option>
+                    {/* Filter for Percentage Funded */}
+                    <div className="flex flex-col w-56">
+                        <label className="mb-2 text-sm font-medium text-gray-700">Percentage Funded</label>
+                        <select
+                            className="p-3 bg-white border border-gray-300 rounded-md shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onChange={(e) => {
+                                const range = e.target.value.split("-");
+                                handleFilterChange(setMinPercentageFunded, Number(range[0]));
+                                handleFilterChange(setMaxPercentageFunded, Number(range[1]));
+                            }}
+                        >
+                            <option value="0-100">Any</option>
+                            <option value="0-25">0-25%</option>
+                            <option value="25-50">25-50%</option>
+                            <option value="50-75">50-75%</option>
+                            <option value="75-100">75-100%</option>
+                            <option value="100-99999999">Fully Funded</option>
+                        </select>
+                    </div>
 
-                        {(DATA.projectTypes || []).map((type) => (
-                            <option key={type} value={type}>
-                                {type}
-                            </option>
-                        ))}
-
-                    </select>
+                    {/* Filter for Project Type */}
+                    <div className="flex flex-col w-56">
+                        <label className="mb-2 text-sm font-medium text-gray-700">Type</label>
+                        <select
+                            className="p-3 bg-white border border-gray-300 rounded-md shadow-sm text-sm hover:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            onChange={(e) => handleFilterChange(setType, e.target.value || null)}
+                        >
+                            <option value="">Any</option>
+                            {(DATA.projectTypes || []).map((type) => (
+                                <option key={type} value={type}>
+                                    {type}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
                 </div>
+
+
 
                 {/* Projects Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
