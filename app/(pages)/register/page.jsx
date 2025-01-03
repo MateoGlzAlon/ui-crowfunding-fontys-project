@@ -35,11 +35,10 @@ export default function RegisterPage() {
         // Handle registration logic here (e.g., create user)
         const registerResponse = await handleRegister(name, email, password);
 
-
-        if (registerResponse === 409) {
+        if (registerResponse.status === 409) {
             // Email is already registered
             setEmailError("This email is already registered.");
-        } else if (registerResponse === 200) {
+        } else if (registerResponse.status === 200) {
             // Successful registration, redirect to login
             router.push('/login');
         } else {

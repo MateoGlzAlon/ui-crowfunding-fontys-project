@@ -13,6 +13,7 @@ import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 import deleteProjectById from '@/components/fetchComponents/DELETE/deleteProjectDELETE';
 import deleteUserById from '@/components/fetchComponents/DELETE/deleteUserDELETE';
 import TokenManager from '@/app/apis/TokenManager';
+import isProjectBookmarked from '@/components/fetchComponents/GET/isBookmarkedGET';
 
 // Reusable confirmation modal
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
@@ -45,6 +46,7 @@ const ProjectDetails = ({ params }) => {
     const { projectId } = params;
     const router = useRouter();
     const [project, setProject] = useState(null);
+    const [bookmarked, setBookmarked] = useState(false);
     const [loading, setLoading] = useState(true);
     const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
     const [isBanModalOpen, setBanModalOpen] = useState(false);
@@ -80,9 +82,12 @@ const ProjectDetails = ({ params }) => {
             try {
                 setLoading(true);
                 const data = await fetchProjectData(projectId);
+                const isBookmarked = await isProjectBookmarked(projectId);
                 if (!data) throw new Error("Project not found");
                 setProject(data);
+                setBookmarked(isBookmarked);
                 setClaims(TokenManager.getClaims())
+
             } catch (error) {
                 console.error("Error loading project data:", error);
                 router.push("/404");
@@ -133,8 +138,8 @@ const ProjectDetails = ({ params }) => {
                     {project.name}
                 </div>
 
-                <div className="flex flex-wrap lg:flex-nowrap h-[500px]">
-                    <div className="flex-shrink-0 lg:w-2/3 px-10">
+                <div className="flex px-16 h-[500px]">
+                    <div className="w-2/3 px-6">
                         <ProjectImageCarousel projectImages={project.images} />
                     </div>
 
@@ -162,7 +167,7 @@ const ProjectDetails = ({ params }) => {
 
                 <div className="px-16 flex">
                     <div className="w-2/3">
-                        <div className="border-y-4 border-gray-200 mr-10 my-6 py-4 flex items-center gap-4">
+                        <div className="border-y-4 border-gray-200 mx-6 my-6 py-4 flex items-center gap-4">
                             <div className="w-1/5 flex items-center justify-center">
                                 <img
                                     src={project.ownerProfilePicture}
@@ -199,6 +204,17 @@ const ProjectDetails = ({ params }) => {
                         <p className="text-2xl font-light text-justify">
                             {project.description}
                         </p>
+                    </div>
+
+                    <div className="w-1/3 my-6 justify-center">
+                        {/* Button for Bookmark Action */}
+                        <button
+                            //onClick={setBookmark}
+                            className={`px- py-2 rounded-md text-white font-semibold transition-all duration-300 ease-in-out ${bookmarked ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'
+                                } w-full`}
+                        >
+                            {bookmarked ? '⭐ Bookmarked' : '❌ Not Bookmarked'}
+                        </button>
                     </div>
                 </div>
             </div>
