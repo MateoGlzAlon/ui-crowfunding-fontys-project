@@ -82,10 +82,12 @@ const ProjectDetails = ({ params }) => {
             try {
                 setLoading(true);
                 const data = await fetchProjectData(projectId);
-                const isBookmarked = await isProjectBookmarked(projectId);
                 if (!data) throw new Error("Project not found");
+                if (claims) {
+                    const isBookmarked = await isProjectBookmarked(projectId);
+                    setBookmarked(isBookmarked);
+                }
                 setProject(data);
-                setBookmarked(isBookmarked);
                 setClaims(TokenManager.getClaims())
 
             } catch (error) {
@@ -207,14 +209,19 @@ const ProjectDetails = ({ params }) => {
                     </div>
 
                     <div className="w-1/3 my-6 justify-center">
-                        {/* Button for Bookmark Action */}
-                        <button
-                            //onClick={setBookmark}
-                            className={`px- py-2 rounded-md text-white font-semibold transition-all duration-300 ease-in-out ${bookmarked ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'
-                                } w-full`}
-                        >
-                            {bookmarked ? '⭐ Bookmarked' : '❌ Not Bookmarked'}
-                        </button>
+
+                        {claims ? (
+                            <button
+                                // onClick={setBookmark} // Toggle bookmark state when clicked
+                                className={`px-6 py-2 rounded-md text-white font-semibold transition-all duration-300 ease-in-out ${bookmarked ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'} w-full`}
+                            >
+                                {bookmarked ? '⭐ Bookmarked' : '❌ Not Bookmarked'}
+                            </button>
+                        ) : (
+                            <></>
+                        )}
+
+
                     </div>
                 </div>
             </div>
@@ -232,7 +239,7 @@ const ProjectDetails = ({ params }) => {
                 onConfirm={handleBanUser}
                 message="Are you sure you want to ban this user?"
             />
-        </PageFrame>
+        </PageFrame >
     );
 };
 
