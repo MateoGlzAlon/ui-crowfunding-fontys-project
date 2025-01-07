@@ -14,6 +14,8 @@ import deleteProjectById from '@/components/fetchComponents/DELETE/deleteProject
 import deleteUserById from '@/components/fetchComponents/DELETE/deleteUserDELETE';
 import TokenManager from '@/app/apis/TokenManager';
 import isProjectBookmarked from '@/components/fetchComponents/GET/isBookmarkedGET';
+import removeBookmark from '@/components/fetchComponents/DELETE/removeBookmarkDELETE';
+import addBookmark from '@/components/fetchComponents/POST/addBookmarkPOST';
 
 // Reusable confirmation modal
 const ConfirmationModal = ({ isOpen, onClose, onConfirm, message }) => {
@@ -77,18 +79,44 @@ const ProjectDetails = ({ params }) => {
         }
     };
 
+    async function toggleBookmark() {
+
+        if (bookmarked) {
+            console.log("true book")
+            await removeBookmark(projectId, TokenManager.getClaims().userId);
+
+        } else {
+            console.log("false book")
+            const bookmarkdata = {
+                projectId: projectId,
+                userId: TokenManager.getClaims().userId
+            }
+
+            const bkresponse = await addBookmark(bookmarkdata);
+            console.log("response ", bkresponse)
+        }
+
+        const isBookmarked = await isProjectBookmarked(projectId);
+        setBookmarked(isBookmarked);
+
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true);
                 const data = await fetchProjectData(projectId);
                 if (!data) throw new Error("Project not found");
-                if (claims) {
+                setProject(data);
+
+                // Fetch claims from TokenManager
+                const fetchedClaims = TokenManager.getClaims();
+                setClaims(fetchedClaims);  // This sets the 'claims' state
+
+                if (fetchedClaims) {
                     const isBookmarked = await isProjectBookmarked(projectId);
                     setBookmarked(isBookmarked);
                 }
-                setProject(data);
-                setClaims(TokenManager.getClaims())
 
             } catch (error) {
                 console.error("Error loading project data:", error);
@@ -212,7 +240,7 @@ const ProjectDetails = ({ params }) => {
 
                         {claims ? (
                             <button
-                                // onClick={setBookmark} // Toggle bookmark state when clicked
+                                onClick={toggleBookmark} // Toggle bookmark state when clicked
                                 className={`px-6 py-2 rounded-md text-white font-semibold transition-all duration-300 ease-in-out ${bookmarked ? 'bg-green-500 hover:bg-green-600' : 'bg-gray-500 hover:bg-gray-600'} w-full`}
                             >
                                 {bookmarked ? '⭐ Bookmarked' : '❌ Not Bookmarked'}
