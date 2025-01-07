@@ -26,6 +26,7 @@ describe('Logged in tests', () => {
 
     it('Make a payment', () => {
         cy.get('#project-card').click();
+        cy.get('#inputMoneyAmount').should('be.visible');
         cy.get('#inputMoneyAmount')
             .type('125')
             .should('have.value', '125');
