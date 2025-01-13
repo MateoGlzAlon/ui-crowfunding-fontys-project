@@ -12,8 +12,5 @@ export default async function isProjectBookmarked(projectId) {
         }
     );
 
-    console.log("response es bbok ", response.data);
-    console.log("userid: ", userId, " projectid: ", projectId);
-
     return response.data;
 }

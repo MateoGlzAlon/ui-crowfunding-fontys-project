@@ -29,10 +29,10 @@ export default function ProjectFilterTable() {
             });
 
             if (data) {
-                setProjects(data.content || data); // Assuming the API returns a "content" key for projects
-                setTotalPages(data.totalPages || 1); // Assuming the API returns a "totalPages" key
+                setProjects(data.content || data);
+                setTotalPages(data.totalPages || 1);
             }
-            setLoading(false); // Set loading to false after data is fetched
+            setLoading(false);
         };
 
         fetchData();
@@ -158,7 +158,7 @@ export default function ProjectFilterTable() {
                                     </p>
                                 </div>
 
-                                <div className="w-full bg-gray-300 rounded-full h-2.5 mb-[1rem]">
+                                <div className="w-full overflow-hidden bg-gray-300 rounded-full h-2.5 mb-[1rem]">
                                     <div
                                         className="bg-green-500 h-2.5 rounded-full"
                                         style={{

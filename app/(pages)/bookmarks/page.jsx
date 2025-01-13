@@ -24,8 +24,6 @@ export default function Bookmarks() {
 
             setUser(userData || {});
             setProjects(userProjects || []);
-
-            console.log("User Data:", userData);
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
@@ -105,7 +103,8 @@ export default function Bookmarks() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            {/*<p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>*/}                            <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
+                            {/*<p>{format(new Date(project.dateCreated), 'dd/MM/yyyy')}</p>*/}
+                            <div className="w-full overflow-hidden bg-gray-300 rounded-full h-2.5 mt-4">
                                 <div
                                     className="bg-green-500 h-2.5 rounded-full"
                                     style={{

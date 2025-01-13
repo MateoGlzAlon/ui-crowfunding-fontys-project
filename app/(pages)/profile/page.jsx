@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
 import getProjectsCreatedByUserGET from "@/components/fetchComponents/GET/getProjectsCreatedByUserGET";
@@ -22,6 +22,9 @@ export default function Profile() {
     const [previewImage, setPreviewImage] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [userId, setUserId] = useState(null);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [totalPages, setTotalPages] = useState(1);
+    const pageSize = 5;
     const fileInputRef = useRef(null);
     const router = useRouter();
 
@@ -43,21 +46,27 @@ export default function Profile() {
                 getProjectsCreatedByUserGET(userId),
             ]);
 
-            const userPayments = await getPaymentsMadeByUserGET(timeFilter);
+            const userPayments = await getPaymentsMadeByUserGET(timeFilter, currentPage, pageSize);
             const userTotalPayments = await getTotalPaymentsGET(userId, timeFilter);
 
             setUser(userData || {});
             setProjects(userProjects || []);
-            setPayments(userPayments || []);
+            setPayments(userPayments.data.content || []); // Fix: Set payments from userPayments.content
             setTotalPayments(userTotalPayments || 0);
+            const calculatedPages = Math.ceil((userPayments.data.totalElements || 0) / pageSize);
+            setTotalPages(calculatedPages || 1);
+
         } catch (error) {
             console.error("Error fetching user data:", error);
         }
-    }, [userId, timeFilter]);
+    }, [userId, timeFilter, currentPage]); // Include currentPage to re-fetch data on page change
 
     useEffect(() => {
         fetchUserData();
     }, [fetchUserData]);
+
+    const handleNextPage = () => setCurrentPage((prev) => prev + 1);
+    const handlePreviousPage = () => setCurrentPage((prev) => Math.max(prev - 1, 0));
 
     // Handle File Change for Profile Picture
     const handleFileChange = (e) => {
@@ -88,10 +97,11 @@ export default function Profile() {
     // Handle Time Filter Change
     const handleFilterChange = (e) => {
         setTimeFilter(e.target.value);
+        setCurrentPage(0); // Reset to the first page when the filter changes
     };
 
     if (!user) {
-        return <>
+        return (
             <div className="flex items-center justify-center h-screen">
                 <div className="flex flex-col items-center">
                     <svg
@@ -117,7 +127,7 @@ export default function Profile() {
                     <p className="mt-4 text-xl font-semibold">Loading profile</p>
                 </div>
             </div>
-        </>
+        );
     }
 
     return (
@@ -210,52 +220,80 @@ export default function Profile() {
                     </div>
 
                     {/* Payments Section */}
-                    <div className="bg-white p-4 rounded-lg shadow-md">
-                        <div className="flex justify-between items-center mb-4">
-                            <h2 className="text-xl font-bold text-gray-800">Payments Made ({totalPayments}€)</h2>
-                            <select
-                                className="border px-4 py-2 rounded bg-gray-50"
-                                value={timeFilter}
-                                onChange={handleFilterChange}
-                            >
-                                <option value="This_month">This month</option>
-                                <option value="This_year">This Year</option>
-                                <option value="All_time">All Time</option>
-                            </select>
+                    <div className="bg-white p-4 rounded-lg shadow-md flex flex-col h-full">
+                        <div>
+                            <div className="flex justify-between items-center mb-4">
+                                <h2 className="text-xl font-bold text-gray-800">Payments Made ({totalPayments}€)</h2>
+                                <select
+                                    className="border px-4 py-2 rounded bg-gray-50"
+                                    value={timeFilter}
+                                    onChange={handleFilterChange}
+                                >
+                                    <option value="This_month">This month</option>
+                                    <option value="This_year">This Year</option>
+                                    <option value="All_time">All Time</option>
+                                </select>
+                            </div>
+                            <div className="space-y-4">
+                                {payments.length > 0 ? (
+                                    payments.map((payment) => (
+                                        <div
+                                            key={payment.id}
+                                            className="flex items-center border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer"
+                                            onClick={() => router.push(`/projects/${payment.projectId}`)}
+                                        >
+                                            <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">
+                                                <img
+                                                    src={payment.projectCoverImage || "/placeholder.jpg"}
+                                                    alt="Project"
+                                                    className="h-full object-cover"
+                                                />
+                                            </div>
+                                            <div className="flex-grow">
+                                                <h3 className="text-lg font-semibold text-gray-800">{payment.projectName}</h3>
+                                                <p className="text-gray-600">
+                                                    <strong>Owner: </strong> {payment.projectOwnerName}
+                                                </p>
+                                                <p className="text-gray-600">
+                                                    {format(new Date(payment.paymentDate), "dd/MM/yyyy")}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-xl font-bold text-gray-800">{payment.amountFunded}€</p>
+                                                <p className="text-gray-600">contributed</p>
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <p className="text-gray-600">No payments made yet.</p>
+                                )}
+                            </div>
                         </div>
-                        <div className="space-y-4">
-                            {payments.length > 0 ? (
-                                payments.map((payment) => (
-                                    <div
-                                        key={payment.id}
-                                        className="flex items-center border rounded-lg p-4 bg-gray-50 hover:bg-gray-100 cursor-pointer"
-                                        onClick={() => router.push(`/projects/${payment.projectId}`)}
-                                    >
-                                        <div className="w-20 h-20 bg-gray-300 rounded-lg mr-4 overflow-hidden">
-                                            <img
-                                                src={payment.projectCoverImage || "/placeholder.jpg"}
-                                                alt="Project"
-                                                className="h-full object-cover"
-                                            />
-                                        </div>
-                                        <div className="flex-grow">
-                                            <h3 className="text-lg font-semibold text-gray-800">{payment.projectName}</h3>
-                                            <p className="text-gray-600">
-                                                <strong>Owner: </strong> {payment.projectOwnerName}
-                                            </p>
-                                            <p className="text-gray-600">
-                                                {format(new Date(payment.paymentDate), "dd/MM/yyyy")}
-                                            </p>
-                                        </div>
-                                        <div className="text-right">
-                                            <p className="text-xl font-bold text-gray-800">{payment.amountFunded}€</p>
-                                            <p className="text-gray-600">contributed</p>
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <p className="text-gray-600">No payments made yet.</p>
-                            )}
+                        {/* Pagination Buttons Fixed at the Bottom */}
+                        <div className="flex justify-between items-center mt-auto bottom-0 bg-white p-4">
+                            <button
+                                onClick={handlePreviousPage}
+                                disabled={currentPage === 0}
+                                className={`px-4 py-2 rounded-md ${currentPage === 0
+                                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                    : "bg-blue-600 text-white hover:bg-blue-700"
+                                    }`}
+                            >
+                                Previous
+                            </button>
+                            <span>
+                                Page {currentPage + 1} of {totalPages}
+                            </span>
+                            <button
+                                onClick={handleNextPage}
+                                disabled={currentPage === totalPages - 1}
+                                className={`px-4 py-2 rounded-md ${currentPage === totalPages - 1
+                                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                    : "bg-blue-600 text-white hover:bg-blue-700"
+                                    }`}
+                            >
+                                Next
+                            </button>
                         </div>
                     </div>
                 </div>

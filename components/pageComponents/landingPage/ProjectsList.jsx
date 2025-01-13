@@ -59,7 +59,7 @@ const ProjectsList = ({ title, endpoint }) => {
                                         onError={(e) => (e.target.src = '/default-placeholder.png')}
                                     />
                                 </div>
-                                <div className="w-full bg-gray-300 rounded-full h-2.5 mt-4">
+                                <div className="w-full overflow-hidden bg-gray-300 rounded-full h-2.5 mt-4 ">
                                     <div
                                         className="bg-green-500 h-2.5 rounded-full"
                                         style={{

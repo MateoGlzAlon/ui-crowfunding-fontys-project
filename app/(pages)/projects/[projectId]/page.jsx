@@ -82,18 +82,15 @@ const ProjectDetails = ({ params }) => {
     async function toggleBookmark() {
 
         if (bookmarked) {
-            console.log("true book")
             await removeBookmark(projectId, TokenManager.getClaims().userId);
 
         } else {
-            console.log("false book")
             const bookmarkdata = {
                 projectId: projectId,
                 userId: TokenManager.getClaims().userId
             }
 
             const bkresponse = await addBookmark(bookmarkdata);
-            console.log("response ", bkresponse)
         }
 
         const isBookmarked = await isProjectBookmarked(projectId);

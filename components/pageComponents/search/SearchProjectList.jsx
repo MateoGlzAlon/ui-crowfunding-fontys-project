@@ -125,7 +125,7 @@ export default function SearchProjectList() {
                                 <div className="text-sm font-medium text-gray-800">
                                     {project.moneyRaised} € raised of {project.fundingGoal} €
                                 </div>
-                                <div className="w-full bg-gray-300 rounded-full h-2.5 mb-[1rem]">
+                                <div className="w-full overflow-hidden bg-gray-300 rounded-full h-2.5 mb-[1rem]">
                                     <div
                                         className="bg-green-500 h-2.5 rounded-full"
                                         style={{
