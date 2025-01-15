@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button'; // Using your existing Button component
 import Image from 'next/image';
+import { DATA } from '@/app/data';
 
 import registerUserPOST from '@/components/fetchComponents/POST/registerUserPOST';
 
@@ -53,14 +54,14 @@ export default function RegisterPage() {
             <div className="flex flex-col justify-center items-center lg:w-1/2 w-full bg-gray-100 p-8">
                 <Image
                     src="/logoColor.svg" // Replace with your image path
-                    alt="RaiseHub Logo"
+                    alt={`${DATA.projectName} Logo`}
                     onClick={() => router.push('/')}
                     width={400}
                     height={400}
                     className="mb-6 cursor-pointer"
                 />
                 <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push('/')} >
-                    RaiseHub
+                    {DATA.projectName}
                 </h1>
                 <p className="mt-4 text-lg text-gray-600">Join the community and bring your favorite projects to life!</p>
             </div>

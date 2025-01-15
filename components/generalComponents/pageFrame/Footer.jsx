@@ -32,7 +32,7 @@ export default function Footer() {
                     </a>
                 </div>
                 <p className="mt-4 text-gray-500">
-                    © {new Date().getFullYear()} RaiseHub. All rights reserved.
+                    © {new Date().getFullYear()} {DATA.projectName}. All rights reserved.
                 </p>
             </div>
         </footer>

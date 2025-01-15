@@ -62,14 +62,14 @@ export default function LoginPage() {
             <div className="flex flex-col justify-center items-center w-1/2 bg-gray-100 p-8">
                 <Image
                     src="/logoColor.svg" // Replace with your image path
-                    alt="RaiseHub"
+                    alt={`${DATA.projectName} Logo`}
                     width={400}
                     height={400}
                     onClick={() => router.push("/")}
                     className="mb-6 cursor-pointer"
                 />
                 <h1 className="text-4xl font-extrabold text-gray-900" onClick={() => router.push("/")}>
-                    RaiseHub
+                    {DATA.projectName}
                 </h1>
                 <p className="mt-4 text-lg text-gray-600">
                     Join the community and bring your favorite projects to life!
