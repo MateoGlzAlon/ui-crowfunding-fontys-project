@@ -7,7 +7,7 @@ import Image from "next/image";
 import AuthAPI from "@/app/apis/AuthAPI";
 import { useWebSocket } from "@/components/generalComponents/WebSocketContext";
 import getProjectIdsOwnedByUserGET from "@/components/fetchComponents/GET/getProjectIdsOwnedByUserGET";
-import PageFrame from "@/components/generalComponents/pageFrame/PageFrame";
+import { DATA } from "@/app/data";
 
 export default function LoginPage() {
     const [username, setUsername] = useState("");
