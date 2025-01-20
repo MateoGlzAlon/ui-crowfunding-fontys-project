@@ -6,7 +6,7 @@ import ProjectsList from './ProjectsList';
 const NewProjectsList = () => {
 
     return (
-        <ProjectsList title="New Projects" endpoint="new" />
+        <ProjectsList title="New Fundraising Projects" endpoint="new" />
     );
 };
 
